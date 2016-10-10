@@ -1,0 +1,16 @@
+JavaCard est une technologie permettant de faire tourner des applets
+Java sur des \textit{smartcards}, des cartes à puce (comme par exemple
+des cartes bancaires ou des cartes SIM). Le but premier de JavaCard
+est la sécurité: il est très simple d'utiliser des algorithmes de
+chiffrement comme AES, Triple DES ou encore RSA.
+
+Les applets JavaCard développés pour des \textit{smartcards} sont un
+exemple concret du besoin de sécurité dans des projets
+informatiques. En effet, un applet mal sécurisé peut potentiellement
+être utilisé à des fins non prévues par le programmeur, ce qui peut
+avoir des effets néfastes, par exemple dans le cas d'un système de
+paiement. Notre projet a pour but de générer un automate représentant
+un applet JavaCard de manière automatique, pour ensuite le comparer à
+un automate de référence. Il sera donc possible de savoir les actions
+qui font passer un applet d'un état à un autre et de remarquer
+simplement les changements d'état non prévus.
