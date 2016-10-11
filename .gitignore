@@ -3,3 +3,6 @@
 *.log
 *~
 _region_.tex
+.directory
+*.bbl
+*.blg
