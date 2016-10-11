@@ -1,6 +1,5 @@
 *.aux
 *.dvi
-*.pdf
 *.log
 *~
 _region_.tex
