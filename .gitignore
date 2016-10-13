@@ -6,3 +6,4 @@ _region_.tex
 .directory
 *.bbl
 *.blg
+*.backup
