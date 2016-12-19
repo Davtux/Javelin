@@ -1,0 +1,21 @@
+\chapter{Bandera : génération de modèles à partir de code source Java}
+
+Bandera est un logiciel permettant d'analyser un projet Java et d'en
+extraire un modèle utilisable par un vérificateur de code. Il a été
+développé suite à la collaboration de chercheurs de l'Université
+d'Hawaï et de l'Université d'État du Kansas.
+
+Ce logiciel n'est plus maintenu depuis 2005, néanmoins il peut être
+intéressant de voir les décisions prises par ses développeurs car
+notre projet semble être similaire à ce logiciel.
+
+\section{Transformation du code source}
+
+Afin de transformer du code Java en un langage utilisable par des
+vérificateurs, Bandera passe par un certain nombre de langages
+intermédiaires. Il commence par traduire le programme en Jimple, un
+langage utilisé par le framework Soot, et établit des correspondances
+entre le code Java et le code Soot. Ceci permet au logiciel de
+retrouver le n\oe{}ud Java correspondant à n'importe quel n\oe{}ud
+dans Jimple.
+
