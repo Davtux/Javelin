@@ -3,7 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel} 
-\usepackage[ bottom=35mm]{geometry}
+\usepackage[top=35mm, bottom=35mm, left=25mm, right=25mm]{geometry}
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{multirow}  
@@ -102,13 +102,14 @@
     \glossarystyle{altlist}
     \printglossary[type=\acronymtype]
     \printglossary
+    
+    \clearpage 
+    \bibliographystyle{plain}
+    \bibliography{bibliographie}
+    \addcontentsline{toc}{section}{Références}
 
     %\newpage
 	%\renewcommand{\glsnamefont}[1]{\makefirstuc{#1}}
     %\printglossary
-	
-	%\clearpage 
-	%\bibliographystyle{plain}
-	%\bibliography{bibliographie}
-	%\addcontentsline{toc}{section}{Références}
+
 \end{document}
