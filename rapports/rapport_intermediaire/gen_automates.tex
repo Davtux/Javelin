@@ -18,10 +18,10 @@ Dans cette partie nous allons présenter l'outil qui nous permettra de créer l'
 \paragraph{}
 Soot propose plusieurs représentation intermédiaire du code. Chaque représentation intermédiaire correspond à un niveau d'abstraction.
 \begin{itemize}
-	\item Baf :
-	\item Jimple :
-	\item Shimple : 
-	\item Grimp :
+	\item \textbf{Baf} : est une abstraction du bytecode Java. Il peut être utilisé pour de l'analyse ou de l'optimisation de bytecode.
+	\item \textbf{Jimple} : est la représentation principale de Soot. C'est une abstraction à trois addresses, c'est-à-dire qu'une instruction peut contenir deux opérandes. Le jeux d'instruction est naussi réduit (15 instruction contre plus de 200 en bytecode).
+	\item \textbf{Shimple} : est proche de Jimple avec un nœud supplémentaire qui permet d'effectué de l'optimisation en supprimant les instruction qui ne sont jamais exécuter.
+	\item \textbf{Grimp} : est également basé sur Jimple en supprimant les valeurs intermédiaires.
 \end{itemize}
 
 
