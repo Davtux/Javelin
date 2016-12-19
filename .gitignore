@@ -1,3 +1,7 @@
+*.gls
+*.acr
+*.glg
+*.alg
 *.kilepr
 *.aux
 *.dvi
