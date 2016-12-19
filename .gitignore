@@ -1,3 +1,4 @@
+*.kilepr
 *.aux
 *.dvi
 *.log
