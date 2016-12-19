@@ -1,6 +1,9 @@
 *.aux
 *.dvi
 *.log
+*.out
+*.acn
+*.toc
 *~
 _region_.tex
 .directory

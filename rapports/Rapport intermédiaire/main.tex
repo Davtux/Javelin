@@ -1,0 +1,83 @@
+\documentclass[a4paper, 12pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel} 
+\usepackage[top=35mm, bottom=35mm, left=25mm, right=25mm]{geometry}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{multirow}  
+\usepackage{subfigure}
+\usepackage{verbatim}
+\usepackage{url}
+\usepackage{algorithmic, algorithm} 
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usepackage{framed}
+\usepackage{tcolorbox}
+\usepackage{etoolbox}
+\usepackage{hyperref}
+
+\definecolor{vert}{RGB}{56, 155, 34}
+\definecolor{rouge}{RGB}{157, 29, 29}
+
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+}
+
+\title{Analyse d'applets JavaCard et réalisation d'automates}
+\author{Romain \bsc{Barrat} \\
+  Simon \bsc{Garrelou} \\
+  Clément \bsc{Jarrige} \\
+  Marouan \bsc{Sami} \\
+  ~\\
+  Encadrant : Jean-Louis \bsc{Lanet}}
+
+\date{11 octobre 2016}
+
+
+\setcounter{secnumdepth}{3}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+ \lhead{\leftmark}
+ \rhead{}
+
+
+
+\begin{document}
+	\input{./title.tex}
+
+	\newpage
+	~
+	\thispagestyle{empty}
+	
+	\newpage
+	\input{./introduction.tex}
+	\newpage
+	\tableofcontents
+
+	\newpage
+	\input{./conclusion.tex}
+
+	%\newpage
+	%\renewcommand{\glsnamefont}[1]{\textmd{#1}}
+    %\setglossarystyle{altlist}
+    %\printglossary[type=acronym]
+
+    %\newpage
+	%\renewcommand{\glsnamefont}[1]{\makefirstuc{#1}}
+    %\printglossary
+	
+	%\clearpage 
+	%\bibliographystyle{plain}
+	%\bibliography{bibliographie}
+	%\addcontentsline{toc}{section}{Références}
+\end{document}
