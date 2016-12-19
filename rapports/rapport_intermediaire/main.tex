@@ -53,6 +53,24 @@
  \lhead{\leftmark}
  \rhead{}
 
+ 
+%création du glossaire
+%Création des doubles entrées acronyme-glossaire
+\usepackage{xparse}
+
+\usepackage[acronym]{glossaries}
+
+\makeglossaries
+
+\DeclareDocumentCommand{\newdualentry}{ O{} O{} m m m m } {
+  \newglossaryentry{gls-#3}{name={#5},text={#5\glsadd{#3}},
+    description={#6},#1
+  }
+  \newacronym[see={[Glossary:]{gls-#3}},#2]{#3}{#4}{#5\glsadd{gls-#3}}
+}
+
+\input{./glossaire.tex}
+
 
 
 \begin{document}
@@ -78,10 +96,12 @@
         
 	\include{./conclusion}
 
-	%\newpage
-	%\renewcommand{\glsnamefont}[1]{\textmd{#1}}
-    %\setglossarystyle{altlist}
-    %\printglossary[type=acronym]
+    %Glossaire des Acronymes
+    %\printglossary[type=\acronymtype]
+    %Glossaire
+    \glossarystyle{altlist}
+    \printglossary[type=\acronymtype]
+    \printglossary
 
     %\newpage
 	%\renewcommand{\glsnamefont}[1]{\makefirstuc{#1}}
