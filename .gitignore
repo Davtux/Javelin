@@ -4,6 +4,8 @@
 *.out
 *.acn
 *.toc
+*.synctex.gz
+*.glo
 *~
 _region_.tex
 .directory
