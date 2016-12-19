@@ -34,11 +34,14 @@
 }
 
 \title{Analyse d'applets JavaCard et réalisation d'automates}
-\author{Romain \bsc{Barrat} \\
-  Simon \bsc{Garrelou} \\
-  Clément \bsc{Jarrige} \\
-  Marouan \bsc{Sami} \\
-  ~\\
+\author{Romain \bsc{Barrat}
+  \and
+  Simon \bsc{Garrelou}
+  \and
+  Clément \bsc{Jarrige}
+  \and
+  Marouan \bsc{Sami} \and
+  ~\and
   Encadrant : Jean-Louis \bsc{Lanet}}
 
 \date{11 octobre 2016}
@@ -59,13 +62,21 @@
 	~
 	\thispagestyle{empty}
 	
-	\newpage
-	\input{./introduction.tex}
+	\include{./introduction.tex}
 	\newpage
 	\tableofcontents
 
-	\newpage
-	\input{./conclusion.tex}
+        \include{bandera.tex}
+
+        \include{jdart.tex}
+
+        \include{gen_automates.tex}
+
+        \include{graphes.tex}
+
+        \include{gantt.tex}
+        
+	\include{./conclusion.tex}
 
 	%\newpage
 	%\renewcommand{\glsnamefont}[1]{\textmd{#1}}
