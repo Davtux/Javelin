@@ -9,20 +9,27 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
   Dans cette première partie, nous allons nous concentrer sur le choix du format que nous utiliserons pour stocker et réutiliser nos graphes après leur création dans l'application.
   Nous allons pour cela, passer par un tableau comparatif des diverses solutions.
   
+
+  \paragraph{Liste des formats de représentation de graphes}
+  La liste ci-dessous contient tous les formats de représentation de graphes à comparer : 
+  \begin{itemize}
+   \item CSV : est un type de fichier très répendu, il représente les informations sous formes de tableaux et est facilement lisible via la plupart des programmes. 
+   \item XML : est surement le type de fichier le plus répendu, stockant les donées sous forme de balises, il est très utilisé pour toutes les applications webs et orientées objets. 
+   \item JSON : le petit nouveau, il est le type de fichier favoris de tous les langages orientés objets car il permet un stockage très simple de tous les types de données, des plus simples aux plus complexes. 
+   \item bmp : est un format d'image propriétaire lancé par Microsoft, il est assez répendu.
+   \item jpg : est un autre format d'image, plus répendu que le bmp.
+  \end{itemize}
+
+  
   \paragraph{Liste des éléments déterminants le choix}
   Avant de pouvoir comparer les différents types de stockage des graphes, il nous faut déterminer une grille de critères nous permettant de classer les différentes solutions en lice.
   
   La solution retenue devra donc respecter les points suivants : 
   \begin{itemize}
-   \item 
-  \end{itemize}
-
-  \paragraph{Liste des formats de représentation de graphes}
-  La liste ci-dessous contient tous les formats de représentation de graphes à comparer : 
-  \begin{itemize}
-   \item CSV : 
-   \item XML : 
-   \item JSON :
+   \item utiliser un format libre de données.
+   \item assurer la portabilité des information en étant lisible par le plus grand nombre d'applications.
+   \item être simple de lecture et de traitement, tirer facilement un graphe sous forme graphique des données stockées.
+   \item facilement modifiable : si on souhaite rajouter des éléments au graphe
    \item 
   \end{itemize}
 
@@ -30,15 +37,29 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
   \paragraph{Choix du format}
   
   
-  \begin{table}
-   \begin{tabular}{|c|c|c|}
-    \hline
-    Format & Avantages & Inconvéniants \\
-    \hline
-    \hline
-    toot & toot & toot \\
-    \hline
-   \end{tabular}
+  \begin{table}[H]
+  \centering
+    \begin{tabular}{p{3.5cm} p{0.50cm} p{0.5cm} p{0.50cm} p{0.5cm} p{0.50cm} p{0.5cm}}
+
+	& \makebox[0cm][l]{\rotatebox{45}{ Format libre }} &
+	\makebox[0cm][l]{\rotatebox{45}{ Inter Langages }} &
+	\makebox[0cm][l]{\rotatebox{45}{ Convertible en images }} &
+	\makebox[0cm][l]{\rotatebox{45}{ coucou }} &
+	\makebox[0cm][l]{\rotatebox{45}{ coucou }} &
+	\makebox[0cm][l]{\rotatebox{45}{ coucou }}\\
+	    
+    \end{tabular}
+    
+    \begin{tabular}{|p{3.5cm} | p{0.50cm} | p{0.5cm} | p{0.50cm} | p{0.5cm} | p{0.50cm} | p{0.5cm}| }
+      
+      \hline  
+      \textbf{CVS} & x & x & x & x & x & x\\ \hline
+      \textbf{XML} & x & x & x & x & x & x\\ \hline
+      \textbf{JSon} & x & x & x & x & x & x\\ \hline
+      \textbf{bmp} & x & x & x & x & x & x\\ \hline
+      \textbf{jpg} & x & x & x & x & x & x\\ 
+      \hline
+    \end{tabular}
 
   \end{table}
   
