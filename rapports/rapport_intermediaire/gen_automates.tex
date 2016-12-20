@@ -22,9 +22,9 @@ Soot propose plusieurs représentation intermédiaire du code. Chaque représent
 \paragraph{Jimple} est la représentation principale de Soot. C'est une représentation à trois addresses, c'est-à-dire qu'une instruction peut contenir deux opérandes. Par exemple l'instruction suivant : 
 $$ a = (b + 1) * c - d$$
 Devient : 
-$$ \$i0 = b + 1$$
-$$ \$i1 = \$i0 * c$$
-$$ a = \$i1 - d$$
+$$ \$i_0 = b + 1$$
+$$ \$i_1 = \$i_0 * c$$
+$$ a = \$i_1 - d$$
 où \$i0 et \$i1 sont des variables intermédiaires.
 
 
