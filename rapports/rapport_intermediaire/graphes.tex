@@ -1,7 +1,7 @@
 \chapter{Représentation des graphes}
 \paragraph{}
 
-\cite{CoursGaborit2016}
+\cite{CoursClavier2010}
 
 Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les automates générés dans la partie précédente. Pour cela, les graphes nous ont été imposés. Dans cette partie, nous vous présenteront donc les moyens que nous avons à disposition pour réaliser le stockage de graphes et nous les compareront afin d'en selectionner le meriileur.
 
@@ -19,6 +19,7 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
    \item CSV : est un type de fichier très répendu, il représente les informations sous formes de tableaux et est facilement lisible via la plupart des programmes. 
    \item XML : est surement le type de fichier le plus répendu, stockant les donées sous forme de balises, il est très utilisé pour toutes les applications webs et orientées objets. 
    \item JSON : le petit nouveau, il est le type de fichier favoris de tous les langages orientés objets car il permet un stockage très simple de tous les types de données, des plus simples aux plus complexes. 
+   \item svg : basé sur le XML, ce format est conçu pour supporter les images vectorielles.
    \item bmp : est un format d'image propriétaire lancé par Microsoft, il est assez répendu.
    \item jpg : est un autre format d'image, plus répendu que le bmp.
   \end{itemize}
@@ -33,7 +34,7 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
    \item assurer la portabilité des information en étant lisible par le plus grand nombre d'applications.
    \item être simple de lecture et de traitement, tirer facilement un graphe sous forme graphique des données stockées.
    \item facilement modifiable : si on souhaite rajouter des éléments au graphe
-   \item 
+   \item supporter le langage objet nativement, car l'automate généré sera représenté sous forme d'objet et les graphes le seront également.
   \end{itemize}
 
   
@@ -42,30 +43,37 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
   
   \begin{table}[H]
   \centering
-    \begin{tabular}{p{3.5cm} p{0.50cm} p{0.5cm} p{0.50cm} p{0.5cm} p{0.50cm} p{0.5cm}}
+    \begin{tabular}{p{3.5cm} p{0.50cm} p{0.5cm} p{0.50cm} p{0.5cm} p{0.50cm}}
 
 	& \makebox[0cm][l]{\rotatebox{45}{ Format libre }} &
 	\makebox[0cm][l]{\rotatebox{45}{ Inter Langages }} &
-	\makebox[0cm][l]{\rotatebox{45}{ Convertible en images }} &
-	\makebox[0cm][l]{\rotatebox{45}{ coucou }} &
-	\makebox[0cm][l]{\rotatebox{45}{ coucou }} &
-	\makebox[0cm][l]{\rotatebox{45}{ coucou }}\\
+	\makebox[0cm][l]{\rotatebox{45}{ COnversion en image simple}} &
+	\makebox[0cm][l]{\rotatebox{45}{ Evolution simple }} &
+	\makebox[0cm][l]{\rotatebox{45}{ Support objet natif }}\\
 	    
     \end{tabular}
     
-    \begin{tabular}{|p{3.5cm} | p{0.50cm} | p{0.5cm} | p{0.50cm} | p{0.5cm} | p{0.50cm} | p{0.5cm}| }
+    \begin{tabular}{|p{3.5cm} | p{0.50cm} | p{0.5cm} | p{0.50cm} | p{0.5cm} | p{0.50cm} |}
       
       \hline  
-      \textbf{CVS} & x & x & x & x & x & x\\ \hline
-      \textbf{XML} & x & x & x & x & x & x\\ \hline
-      \textbf{JSon} & x & x & x & x & x & x\\ \hline
-      \textbf{bmp} & x & x & x & x & x & x\\ \hline
-      \textbf{jpg} & x & x & x & x & x & x\\ 
+      \textbf{CVS} & x & x & x & x &  \\ \hline
+      \textbf{XML} & x & x & x & x & x \\ \hline
+      \textbf{JSon} & x & x & x & x & x \\ \hline
+      \textbf{svg} & x & x & x &  & x \\ \hline
+      \textbf{bmp} & x & x & x &  &  \\ \hline
+      \textbf{jpg} & x & x & x &  &  \\ 
       \hline
     \end{tabular}
 
   \end{table}
   
+  \paragraph{Choix final}
+  Après comparaison, nous voyons que deux formats peuvent correspondre à notre attente : l'XML et le JSon, nous allons donc nous baser sur ces résultats pour rechercher un outil nous permettant de représenter les graphes en un de ces formats.
 
+  \section{Outils existants}
+  
+  
+  dracula graph
+  jgraph
   
   
