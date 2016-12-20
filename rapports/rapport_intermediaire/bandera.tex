@@ -7,7 +7,7 @@ d'Hawaï et de l'Université d'État du Kansas.
 
 Ce logiciel n'est plus maintenu depuis 2005, néanmoins il peut être
 intéressant de voir les décisions prises par ses développeurs pour
-réaliser ce programme, car notre projet est en essence très similaire.
+réaliser ce programme, en effet notre projet est en essence très similaire.
 
 Nous allons donc étudier son fonctionnement afin de comprendre comment
 il fonctionne et possiblement s'en inspirer pour notre propre projet.
@@ -15,16 +15,16 @@ il fonctionne et possiblement s'en inspirer pour notre propre projet.
 \section{Postulat de base}
 
 Les développeurs de Bandera partent d'un constat : des programmes de
-vérification de modèle existent déjà, et permettent de comparer un
+vérification de modèle existent déjà, ils permettent de comparer un
 modèle représentant un programme à un modèle de
 référence. Malheureusement, créer ce modèle à la main est un travail
 long, fastidieux et sujet à des erreurs humaines. De plus, chaque
-vérificateur attends le modèle dans son propre langage ou format de
+vérificateur attend le modèle dans son propre langage ou format de
 fichier, ce qui signifie que pour vérifier un programme avec plusieurs
 vérificateurs, il faut effectuer ce travail plusieurs fois.
 
 Leur but était donc d'écrire un programme permettant d'éliminer
-l'humain de l'équation en analysant le code source et générant des
+l'humain de l'équation en analysant le code source et en générant des
 fichiers lisibles par les vérificateurs. 
 
 \section{Transformation du code source}
@@ -32,7 +32,7 @@ fichiers lisibles par les vérificateurs.
 Afin de transformer du code Java en un langage utilisable par des
 vérificateurs, Bandera passe par un certain nombre de langages
 intermédiaires. Il commence par traduire le programme en Jimple, un
-langage utilisé par le framework Soot, et établit des correspondances
+langage utilisé par le framework Soot et établit des correspondances
 entre le code Java et le code Soot. Ceci permet au logiciel de
 retrouver le n\oe{}ud Java correspondant à n'importe quel n\oe{}ud
 dans Jimple.
