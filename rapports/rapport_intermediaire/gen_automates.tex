@@ -1,9 +1,9 @@
-\chapter{Génération d'un automates}
+\chapter{Génération d'un automate}
 
 \paragraph{}
-Dans cette partie nous allons présenter l'outil qui nous permettra de créer l'automate d'une applet afin de pouvoir le comparer à l'automate fourni dans les spécifications de l'application.
+Dans cette partie nous allons présenter l'outil qui nous permettra de créer l'automate d'une applet afin de pouvoir le comparer à l'automate fourni dans les spécifications de l'application. Dans nos recherche nous avons trouvé k'outil Soot \cite{Soot}.
 
-\section{Soot}
+\section{Présentation de Soot}
 
 \paragraph{}
 À l'origine Soot est framework qui pour but d'optimiser du code. Soot a été produit par le groupe de recherche Sable de l'université de McGill. Concrètement ce framework permet de :
@@ -17,13 +17,29 @@ Dans cette partie nous allons présenter l'outil qui nous permettra de créer l'
 
 \paragraph{}
 Soot propose plusieurs représentation intermédiaire du code. Chaque représentation intermédiaire correspond à un niveau d'abstraction.
-\begin{itemize}
-	\item \textbf{Baf} : est une abstraction du bytecode Java. Il peut être utilisé pour de l'analyse ou de l'optimisation de bytecode.
-	\item \textbf{Jimple} : est la représentation principale de Soot. C'est une abstraction à trois addresses, c'est-à-dire qu'une instruction peut contenir deux opérandes. Le jeux d'instruction est naussi réduit (15 instruction contre plus de 200 en bytecode).
-	\item \textbf{Shimple} : est proche de Jimple avec un nœud supplémentaire qui permet d'effectué de l'optimisation en supprimant les instruction qui ne sont jamais exécuter.
-	\item \textbf{Grimp} : est également basé sur Jimple en supprimant les valeurs intermédiaires.
-\end{itemize}
 
+\paragraph{Baf} est une représentation simplifiée du bytecode Java. Il permet de manipuler du bytecode plus simplement.
+\paragraph{Jimple} est la représentation principale de Soot. C'est une représentation à trois addresses, c'est-à-dire qu'une instruction peut contenir deux opérandes. Par exemple l'instruction suivant : 
+$$ a = (b + 1) * c - d$$
+Devient : 
+$$ \$i0 = b + 1$$
+$$ \$i1 = \$i0 * c$$
+$$ a = \$i1 - d$$
+où \$i0 et \$i1 sont des variables intermédiaires.
+
+
+Le jeux d'instruction est aussi réduit (15 instruction contre plus de 200 en bytecode).
+\paragraph{Shimple} est une représentation de type \gls{SSA}, c'est une représentation qui interdit la réaffectation d'une variable, des versions de variables sont utilisé pour remplir de critère. Par exemple le code suivant :
+$$ y = 1 $$
+$$ y = 2 $$
+$$ x = y $$
+Devient :
+$$ y_1 = 1 $$
+$$ y_2 = 2 $$
+$$ x_1 = y_2 $$ 
+Cela permet de voir que la première instruction est inutile. Shimple permet donc d'éliminer du code mort, de contrôler la propagation de constante...
+
+\paragraph{Grimp} est une représentation basé sur Jimple, elle n'utilise pas de variables intermédiaire ce qui la rapproche plus du langage Java. Elle est utiliée pour de la décomplilation ou pour de l'inspection de code.
 
 \section{}
 
