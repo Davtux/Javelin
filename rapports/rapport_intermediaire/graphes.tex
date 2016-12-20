@@ -3,7 +3,7 @@
 
 \cite{CoursClavier2010}
 
-Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les automates générés dans la partie précédente. Pour cela, les graphes nous ont été imposés. Dans cette partie, nous vous présenteront donc les moyens que nous avons à disposition pour réaliser le stockage de graphes et nous les compareront afin d'en selectionner le meriileur.
+Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les automates générés dans la partie précédente. Pour cela, les graphes nous ont été imposés. Dans cette partie, nous vous présenteront donc les moyens que nous avons à disposition pour réaliser le stockage de graphes et nous les compareront afin d'en selectionner le meilleur.
 
 \section{Différents format de représentation}
   \paragraph{}
@@ -36,18 +36,14 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
    \item facilement modifiable : si on souhaite rajouter des éléments au graphe
    \item supporter le langage objet nativement, car l'automate généré sera représenté sous forme d'objet et les graphes le seront également.
   \end{itemize}
-
   
-  \paragraph{Choix du format}
-  
-  
-  \begin{table}[H]
+  \begin{table}[!h]{Tableau comparatif des formats de fichiers}
   \centering
     \begin{tabular}{p{3.5cm} p{0.50cm} p{0.5cm} p{0.50cm} p{0.5cm} p{0.50cm}}
 
 	& \makebox[0cm][l]{\rotatebox{45}{ Format libre }} &
 	\makebox[0cm][l]{\rotatebox{45}{ Inter Langages }} &
-	\makebox[0cm][l]{\rotatebox{45}{ COnversion en image simple}} &
+	\makebox[0cm][l]{\rotatebox{45}{ Conversion en image simple}} &
 	\makebox[0cm][l]{\rotatebox{45}{ Evolution simple }} &
 	\makebox[0cm][l]{\rotatebox{45}{ Support objet natif }}\\
 	    
@@ -64,16 +60,38 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
       \textbf{jpg} & x & x & x &  &  \\ 
       \hline
     \end{tabular}
-
   \end{table}
   
   \paragraph{Choix final}
-  Après comparaison, nous voyons que deux formats peuvent correspondre à notre attente : l'XML et le JSon, nous allons donc nous baser sur ces résultats pour rechercher un outil nous permettant de représenter les graphes en un de ces formats.
+  Après comparaison, nous voyons que deux formats peuvent correspondre à notre attente : l'XML et le JSon, nous allons donc nous baser sur ces résultats pour rechercher un outil nous permettant de représenter les graphes à l'aide d'un de ces formats.
 
   \section{Outils existants}
   
+  \paragraph{}
+  Après avoir déterminé les formats de fichiers les plus appropriés, il nous faut encore trouver un outil servant à représenter et dessiner les graphes ou, si nous n'en trouvons pas un qui conviendrait, se servir d'un outil pour base afin de le modifier en implémentant les fonctions recherchées.
   
-  dracula graph
-  jgraph
+  \paragraph{Fonctionnalités demandées et contraintes imposées}
+  Pour répondre à tous nos besoins, la solution retenue devra implémenter les fonctionnalités suivantes : 
+  \begin{itemize}
+  	\item Proposer une sortie simple à comprendre pour l'utilisateur
+  	\item Être intégrable à notre application finale
+  	\item Dessiner un graphe à partir d'un fichier source
+  \end{itemize}
+  
+  \paragraph{}
+  La solution retenue devra également répondre aux contraintes suivantes : 
+  \begin{itemize}
+  	\item Posséder une licence libre afin de pouvoir apporter d'éventuelles modifications au code source.
+  	\item 
+  \end{itemize}
+
+  \paragraph{Solutions possibles}
+  \begin{itemize}
+  	\item \textbf{Dracula \footnote{Dracula : https://www.graphdracula.net/}}
+  	\item \textbf{JGraph\footnote{JGraph : https://www.jgraph.com/}}
+  	\item \textbf{GraphStream\footnote{GraphStream : http://graphstream-project.org/}}
+  	\item 
+  \end{itemize}
+
   
   
