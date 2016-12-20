@@ -12,6 +12,9 @@
 *.toc
 *.synctex.gz
 *.glo
+*.tmp
+*.tui
+*.mp
 *~
 _region_.tex
 .directory
