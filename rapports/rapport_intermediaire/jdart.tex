@@ -11,19 +11,33 @@
   \section{Exploration des chemins et l'execution concolique}
     \paragraph{Java Path Finder: Exploration des chemins}
       \gls{JPF} est un outil de verification du modéle d'état pour le bytecode Java,
-      ce qui rent \gls{JPF} est en fait une \gls{VM} qui execute le programme donné en entrée autant de fois que nécessaire
+      donc \gls{JPF} est en fait une \gls{VM} qui execute le programme donné en entrée autant de fois que nécessaire
       afin d'explorer chaque chemin qu'il contient.
-      Tout au long de ce processus, \gls{JPF} collecte les anomalies rencontrés tel que l'interblocage des threads ou des exceptions non traités puis
+      Tout au long de ce processus, \gls{JPF} collecte les anomalies rencontrés tel que l'interblocage des threads ou les exceptions non traités puis
       il génére un rapport contenant les traces qui méne à ces anomalies.
       \begin{figure}
 	\centering
-	  \includegraphics[width=1\textwidth]{images/jpf-model.png}
+	  \includegraphics[width=0.5\textwidth]{images/jpf-model.png}
 	\caption{modéle d'opération de \gls{JPF}}
       \end{figure}
+      \gls{JPF} ne se limite pas à simplement detecter les erreurs d'un programme, en effet il effectue la vérification du modéle,
+      C'est un outil qui permet de simuler le non-determinisme. Certain aspect ne peuvent pas être controller par de simples testes
+      et exigent l'assistance d'une \gls{VM}.
+      Cependant, en essayant d'explorer et executer tous les chemins au sein d'un programme, le nombre d'execution nécessaire peut
+      croître d'une maniére exponentielle (On parle du problème d'explosion d'état). Pour resoudre ce problème, \gls{JPF} réalise une
+      correspondance d'état, c'est un mecanisme qui permet de comparer l'état actuel en un n\oe{}ud à des états déjà connus, dans le cas où l'état
+      a été verifié \gls{JPF} est capable d'éffectuer un retour arrière à la position précedente la plus proche où un chemin inexploré existe et 
+      restaure l'état du programme à tester à cette position.
+      \begin{figure}
+	\centering
+	  \includegraphics[width=0.5\textwidth]{images/jpf-model-checking.png}
+	\caption{vérification du modéle}
+      \end{figure}
+      \nocite{JPF}
   \section{La VM JAVA, La VM du JPF et la JavaCard VM}
   \section{Tester des applets JavaCard}
   \paragraph{}
     Java Path Finder connu comme le couteau Suisse de la verification Java,
     est en effet un des outis de teste les plus evolués pour les applications Java,
     grâce à son extensibilité et à son abilité de supporter et interger de nouvelle extensions.
-    Cependant, la majorité des extensions ne sont pas destinés à être executer sur des systemes Java Card.
+    Cependant, la majorité des extensions ne sont pas destinés à être executer sur des systemes JavaCard.
