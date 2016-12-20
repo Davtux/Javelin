@@ -73,37 +73,82 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
   \begin{itemize}
   	\item Proposer une sortie simple à comprendre pour l'utilisateur
   	\item Dessiner un graphe à partir d'un fichier source
-  	\item 
   \end{itemize}
   
   \paragraph{}
   La solution retenue devra également répondre aux contraintes suivantes : 
   \begin{itemize}
   	\item Posséder une licence libre afin de pouvoir apporter d'éventuelles modifications au code source.
-  	\item Être intégrable à notre application finale
-  	\item 
+  	\item Être intégrable à notre application finale.
+  	\item Être facilement maintenable dans le futur.
   \end{itemize}
 
-  \paragraph{Quelques solutions possibles et leur description}
+  \begin{longtable}{|c|p{2cm}|p{2cm}|p{8cm}|}
+    \caption{Quelques solutions possibles et leur description}\\
+    \hline
+    \textbf{Nom} & \textbf{Langage} & \textbf{Licence} & \textbf{Description} \\
+    \hline \hline
+    
+    \endfirsthead
+    \hline
+    \textbf{Nom} & \textbf{Langage} & \textbf{Licence} & \textbf{Description} \\
+    \hline \hline
+    
+    \endhead
+	
+    \textbf{Dracula \footnote{Dracula : https://www.graphdracula.net/}} & JavaScript & MIT & Dracula est une bibliothèque très simple à utiliser par les utilisateurs, des options de drag-and-drop y sont présentes. Côté développeur, les fonctions d'ajout de noeuds et de gestion globales des graphes ont été implantées ainsi que certains algorithmes commums (Dijksta, divers parcours...)\\
+    \hline
+    \textbf{Graph\footnote{Graph :  https://github.com/clue/graph}}& PHP & MIT &  Graph est une bibliothèque créée pour représenter des graphes, l'utilisation de PHP permet de créer un affichage minimaliste et simple en réalisation en raison de l'utilisation des navigateurs webs. Cependant, il est nécessaire de mettre en place un serveur PHP, et ceci est une opération trop lourde pour être utilisée à grande échelle.\\
+    \hline
+    \textbf{MXGraph\footnote{MXGraph : https://www.jgraph.com/}}& JavaScript &  Apache 2.0 & MXGraph utilise un rendu SVG pour représenter les graphes, ce qui est un gros avantage, car si les graphes obtenus sont très complexes, il est toujours possible de zommer sur une zone sans perdre en lisibilité.\\
+    \hline
+    \textbf{JGraphx\footnote{JGraphx : https://github.com/jgraph/jgraphx}}&Java& BSD 3 & JGraphx est développé par les mêmes personnes que MWGraph, mais contrairement à ce dernier, JGraphx utilise Java Swing comme sortie. Java Swing étant en fin de vie et très difficile à adapter, cette solution est à écarter. \\
+    \hline 
+    \textbf{GraphStream\footnote{GraphStream : http://graphstream-project.org/}}& Java & LGPL v3.0 & GraphStream est une bibliothèque Java avec une sortie très poussée prévue pour gérer de gros graphes. Cette solution est donc accessible pour l'utilisateur, du côté développeur, le fait que la bibliothèque soit développée en Java est un gros avantage pour l'intégration à l'application. \\
+    \hline
+  \end{longtable}
+  
+  \paragraph{Choix de la bibliothèque}
+  
+    \begin{table}[!h]{Tableau comparatif des bibliothèque}
+      
+      \centering
+    
+    \begin{tabular}{p{3.5cm} p{0.50cm} p{0.5cm} p{0.50cm} p{0.5cm} p{0.5cm} p{0.5cm} }
 
-  \begin{table}
-  	\begin{tabular}{|c|p{2cm}|p{2cm}|p{8cm}|}
-	  \hline
-	  Nom & Langage & licence & description \\
-	  \hline \hline
-	  \textbf{Dracula \footnote{Dracula : https://www.graphdracula.net/}} & JavaScript & MIT & Dracula est une bibliothèque très simple à utiliser par les utilisateurs, des options de drag-and-drop y sont présentes. Côté développeur, les fonctions d'ajout de noeuds et de gestion globales des graphes ont été implantées ainsi que certains algorithmes commums (Dijksta, divers parcours...)\\
-	  \hline
-	  \textbf{MXGraph\footnote{MXGraph : https://www.jgraph.com/}}& JavaScript &  Apache 2.0 & MXGraph utilise un rendu SVG pour représenter les graphes, ce qui est un gros avantage, car si les graphes obtenus sont très complexes, il est toujours possible de zommer sur une zone sans perdre en lisibilité.\\
-	  \hline
-	  \textbf{JGraphx\footnote{JGraphx : https://github.com/jgraph/jgraphx}}&Java& BSD 3 & JGraphx est développé par les mêmes personnes que MWGraph, contrairement \\
-	  \hline 
-	  \textbf{GraphStream\footnote{GraphStream : http://graphstream-project.org/}}& Java & & \\
-	  \hline
-	  \textbf{Graph\footnote{Graph :  https://github.com/clue/graph}}& PHP & & \\
-	  \hline
-  	\end{tabular}
+	& \makebox[0cm][l]{\rotatebox{45}{ Format libre }} &
+	\makebox[0cm][l]{\rotatebox{45}{ Intégration simple }} &
+	\makebox[0cm][l]{\rotatebox{45}{ User friendly}} &
+	\makebox[0cm][l]{\rotatebox{45}{ Dessin à partir d'un fichier }} &
+	\makebox[0cm][l]{\rotatebox{45}{ Maintenabilité }}&
+	\makebox[0cm][l]{\rotatebox{45}{ Classement }}\\
+	    
+    \end{tabular}
+    
+    \begin{tabular}{|p{3.5cm} | p{0.50cm} | p{0.5cm} | p{0.50cm} | p{0.5cm} | p{0.5cm}| p{0.5cm}|}
+      
+      \hline  
+      \textbf{Dracula} 		& x & x & \textcolor{green}{+} & N/I & \textcolor{green}{+} & 2\\ \hline
+      \textbf{Graph} 		& x & \textcolor{red}{-} & \textcolor{red}{-} & N/I & \textcolor{red}{-}& 4\\ \hline
+      \textbf{MXGraph} 		& x & x & x & N/I & \textcolor{green}{+}& 3\\ \hline
+      \textbf{JGraphx} 		& x & \textcolor{red}{-} & \textcolor{red}{-} & N/I & \textcolor{red}{-}& 4\\ \hline
+      \textbf{GraphStream} 	& x & \textcolor{green}{+} & \textcolor{green}{+} & N/I & \textcolor{green}{+}& \textbf{1}\\ 
+      \hline
+    \end{tabular}
+    
+    \begin{tabular}{c c c}
+    &&\\
+    x : normal & + = avantage & - = inconvéniant\\
+    N/I : non-implémenté & \textcolor{green}{vert} = avantage & \textcolor{red}{rouge} = inconvéniant\\
+    \end{tabular}
 
   \end{table}
+  
+  \paragraph{Conclusion}
+  La solution retenue est la solution GraphStream, qui semble être la plus convenir aux attentes. Dans tous les cas, nous aurons à implémenter l'importation de graphes à partir de fichiers.
+  
+  Si au cours du developpement nous nous rendons compte de l'impossibilité de nous interfacer avec GraphStream, nous aurons la possibilité de migrer vers Dracula qui est le second choix le plus intéressant.
+  
 
   \section{Outils d'analyse existants}
 
