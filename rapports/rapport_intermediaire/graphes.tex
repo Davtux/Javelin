@@ -40,7 +40,7 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
     \begin{tabular}{p{3.5cm} p{0.50cm} p{0.5cm} p{0.50cm} p{0.5cm} p{0.50cm}}
 
 	& \makebox[0cm][l]{\rotatebox{45}{ Format libre }} &
-	\makebox[0cm][l]{\rotatebox{45}{ Inter Langages }} &
+	\makebox[0cm][l]{\rotatebox{45}{ Inter langages }} &
 	\makebox[0cm][l]{\rotatebox{45}{ Conversion en image simple}} &
 	\makebox[0cm][l]{\rotatebox{45}{ Evolution simple }} &
 	\makebox[0cm][l]{\rotatebox{45}{ Support objet natif }}\\
@@ -50,20 +50,20 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
     \begin{tabular}{|p{3.5cm} | p{0.50cm} | p{0.5cm} | p{0.50cm} | p{0.5cm} | p{0.50cm} |}
       
       \hline  
-      \textbf{CVS} & x & x & x & x &  \\ \hline
+      \textbf{CSV} & x & x & x & x &  \\ \hline
       \textbf{XML} & x & x & x & x & x \\ \hline
-      \textbf{JSon} & x & x & x & x & x \\ \hline
-      \textbf{svg} & x & x & x &  & x \\ \hline
-      \textbf{bmp} & x & x & x &  &  \\ \hline
-      \textbf{jpg} & x & x & x &  &  \\ 
+      \textbf{JSON} & x & x & x & x & x \\ \hline
+      \textbf{SVG} & x & x & x &  & x \\ \hline
+      \textbf{BMP} & x & x & x &  &  \\ \hline
+      \textbf{JPG} & x & x & x &  &  \\ 
       \hline
     \end{tabular}
   \end{table}
   
   \paragraph{Choix final}
-  Après comparaison, nous voyons que deux formats peuvent correspondre à notre attente : l'XML et le JSon, nous allons donc nous baser sur ces résultats pour rechercher un outil nous permettant de représenter les graphes à l'aide d'un de ces formats.
+  Après comparaison, nous voyons que deux formats peuvent correspondre à notre attente : l'XML et le JSON, nous allons donc nous baser sur ces résultats pour rechercher un outil nous permettant de représenter les graphes à l'aide d'un de ces formats.
 
-  \section{Outils existants}
+  \section{Outils de représentation existants}
   
   \paragraph{}
   Après avoir déterminé les formats de fichiers les plus appropriés, il nous faut encore trouver un outil servant à représenter et dessiner les graphes ou, si nous n'en trouvons pas un qui conviendrait, se servir d'un outil pour base afin de le modifier en implémentant les fonctions recherchées.
@@ -72,24 +72,40 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
   Pour répondre à tous nos besoins, la solution retenue devra implémenter les fonctionnalités suivantes : 
   \begin{itemize}
   	\item Proposer une sortie simple à comprendre pour l'utilisateur
-  	\item Être intégrable à notre application finale
   	\item Dessiner un graphe à partir d'un fichier source
+  	\item 
   \end{itemize}
   
   \paragraph{}
   La solution retenue devra également répondre aux contraintes suivantes : 
   \begin{itemize}
   	\item Posséder une licence libre afin de pouvoir apporter d'éventuelles modifications au code source.
+  	\item Être intégrable à notre application finale
   	\item 
   \end{itemize}
 
-  \paragraph{Solutions possibles}
-  \begin{itemize}
-  	\item \textbf{Dracula \footnote{Dracula : https://www.graphdracula.net/}}
-  	\item \textbf{JGraph\footnote{JGraph : https://www.jgraph.com/}}
-  	\item \textbf{GraphStream\footnote{GraphStream : http://graphstream-project.org/}}
-  	\item 
-  \end{itemize}
+  \paragraph{Quelques solutions possibles et leur description}
+
+  \begin{table}
+  	\begin{tabular}{|c|p{2cm}|p{2cm}|p{8cm}|}
+	  \hline
+	  Nom & Langage & licence & description \\
+	  \hline \hline
+	  \textbf{Dracula \footnote{Dracula : https://www.graphdracula.net/}} & JavaScript & MIT & Dracula est une bibliothèque très simple à utiliser par les utilisateurs, des options de drag-and-drop y sont présentes. Côté développeur, les fonctions d'ajout de noeuds et de gestion globales des graphes ont été implantées ainsi que certains algorithmes commums (Dijksta, divers parcours...)\\
+	  \hline
+	  \textbf{MXGraph\footnote{MXGraph : https://www.jgraph.com/}}& JavaScript &  Apache 2.0 & MXGraph utilise un rendu SVG pour représenter les graphes, ce qui est un gros avantage, car si les graphes obtenus sont très complexes, il est toujours possible de zommer sur une zone sans perdre en lisibilité.\\
+	  \hline
+	  \textbf{JGraphx\footnote{JGraphx : https://github.com/jgraph/jgraphx}}&Java& BSD 3 & JGraphx est développé par les mêmes personnes que MWGraph, contrairement \\
+	  \hline 
+	  \textbf{GraphStream\footnote{GraphStream : http://graphstream-project.org/}}& Java & & \\
+	  \hline
+	  \textbf{Graph\footnote{Graph :  https://github.com/clue/graph}}& PHP & & \\
+	  \hline
+  	\end{tabular}
+
+  \end{table}
+
+  \section{Outils d'analyse existants}
 
   
   
