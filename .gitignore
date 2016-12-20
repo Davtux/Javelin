@@ -1,7 +1,12 @@
+*.gls
+*.acr
+*.glg
+*.alg
 *.kilepr
 *.aux
 *.dvi
 *.log
+*.ist
 *.out
 *.acn
 *.toc
