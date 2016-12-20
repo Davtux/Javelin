@@ -1,6 +1,6 @@
 \chapter{Bandera : génération de modèles à partir de code source Java}
 
-Bandera est un logiciel permettant d'analyser un projet Java et d'en
+Bandera~\cite{bandera1} est un logiciel permettant d'analyser un projet Java et d'en
 extraire un modèle utilisable par un vérificateur de code. Il a été
 développé suite à la collaboration de chercheurs de l'Université
 d'Hawaï et de l'Université d'État du Kansas.
@@ -9,8 +9,8 @@ Ce logiciel n'est plus maintenu depuis 2005, néanmoins il peut être
 intéressant de voir les décisions prises par ses développeurs pour
 réaliser ce programme, car notre projet est en essence très similaire.
 
-Nous allons donc étudier son fonctionnement, qui est détaillé dans
-l'article~\cite{bandera1}.
+Nous allons donc étudier son fonctionnement afin de comprendre comment
+il fonctionne et possiblement s'en inspirer pour notre propre projet.
 
 \section{Postulat de base}
 
@@ -23,6 +23,10 @@ vérificateur attends le modèle dans son propre langage ou format de
 fichier, ce qui signifie que pour vérifier un programme avec plusieurs
 vérificateurs, il faut effectuer ce travail plusieurs fois.
 
+Leur but était donc d'écrire un programme permettant d'éliminer
+l'humain de l'équation en analysant le code source et générant des
+fichiers lisibles par les vérificateurs. 
+
 \section{Transformation du code source}
 
 Afin de transformer du code Java en un langage utilisable par des
@@ -34,11 +38,12 @@ retrouver le n\oe{}ud Java correspondant à n'importe quel n\oe{}ud
 dans Jimple.
 
 L'arrière-plan (\textit{backend}) de Bandera s'occupe de traduire le
-code Java en \gls{bir}, un langage bas niveau qui abstrait les
+code Jimple en \gls{bir}, un langage bas niveau qui abstrait les
 concepts communs à de nombreux logiciels de vérification de modèle. Le
 but ce ce langage intermédiaire est de pouvoir ensuite exporter le
 \gls{bir} dans différents langages spécialisés pouvant être utilisés
-par les vérificateurs de modèles.
+par les vérificateurs de modèles. La traduction est faite par
+\gls{birc}.
 
 Ce fonctionnement est schématisé dans la figure~\ref{fig:bir_jimple}.
 
