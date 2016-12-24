@@ -25,9 +25,11 @@ vérificateurs, il faut effectuer ce travail plusieurs fois.
 
 Leur but était donc d'écrire un programme permettant d'éliminer
 l'humain de l'équation en analysant le code source et en générant des
-fichiers lisibles par les vérificateurs. 
+fichiers lisibles par les vérificateurs.
 
-\section{Transformation du code source}
+\section{Fonctionnement de Bandera}
+
+\subsection{Transformation du code source}
 
 Afin de transformer du code Java en un langage utilisable par des
 vérificateurs, Bandera passe par un certain nombre de langages
@@ -55,7 +57,7 @@ Ce fonctionnement est schématisé dans la figure~\ref{fig:bir_jimple}.
 \end{figure}
 
 
-\section{Découpage (\textit{slicing}) du programme}
+\subsection{Découpage (\textit{slicing}) du programme}
 
 Dans le but de ne garder que les instructions intéressantes, Bandera
 effectue un découpage des instructions. Pour un programme $P$, des
@@ -76,3 +78,23 @@ juste pour la version complète de $P$.
 Découper un programme permet aussi de simplifier le travail du
 vérificateur de modèle en réduisant le nombre d'instructions à
 vérifier.
+
+\subsection{Abstraction des variables}
+
+Bandera est capable de considérer des variables et méthodes comme
+\textit{abstraites}, ce qui signifie que leur valeur concrète n'est
+pas spécifiée. Cette abstraction permet de réduire la taille du modèle
+et de simplifier le travail du vérifieur.
+
+Cette abstraction est effectuée par le \gls{babs}, un composant
+spécialisé de Bandera. Lorsqu'une variable est définie abstraite, elle
+n'est plus représentée par sa valeur mais par certaines
+propriétées. Ces propriétés dépendent de la spécification, par exemple
+si une variable de type \verb|ArrayList| est abstraite et qu'on ne
+fait que vérifier si une valeur est contenue dedans, elle peut être
+remplacée par l'abstraction
+$\{ ElementPresentDansListe, ElementAbsentDansListe \}$. Dans ce cas précis, le \gls{babs} remplacera toutes les actions effectuées sur l'\verb|ArrayList| par des versions abstraites manipulant des symboles représentant des deux valeurs possibles, $ElementPresentDansListe$ et $ElementAbsentDansListe$.
+
+Si une opération impossible à représenter par ces deux valeurs est
+demandée, par exemple \verb|ArrayList.size()|, alors l'abstraction
+renvoie une valeur spéciale notée $\top$.
