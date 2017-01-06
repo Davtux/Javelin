@@ -17,9 +17,13 @@
 \usepackage{xcolor}
 \usepackage{textcomp}
 \usepackage{framed}
+\usepackage{tikz}
 \usepackage{tcolorbox}
 \usepackage{etoolbox}
 \usepackage{hyperref}
+\usepackage{minted}
+
+
 
 \definecolor{vert}{RGB}{56, 155, 34}
 \definecolor{rouge}{RGB}{157, 29, 29}
@@ -84,6 +88,8 @@
 	\newpage
 	\tableofcontents
 
+	\include{objet}
+	
         \include{bandera}
 
         \include{jdart}
@@ -91,6 +97,8 @@
         \include{gen_automates}
 
         \include{graphes}
+        
+        \include{perspective}
 
         \include{gantt}
         
