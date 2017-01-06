@@ -1,0 +1,38 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{process}\PYG{o}{(}\PYG{n}{APDU} \PYG{n}{apdu}\PYG{o}{)} \PYG{k+kd}{throws} \PYG{n}{ISOException} \PYG{o}{\PYGZob{}}
+  \PYG{k+kt}{byte}\PYG{o}{[]} \PYG{n}{buffer} \PYG{o}{=} \PYG{n}{apdu}\PYG{o}{.}\PYG{n+na}{getBuffer}\PYG{o}{();}
+
+  \PYG{k}{if}\PYG{o}{(}\PYG{n}{buffer}\PYG{o}{[}\PYG{n}{ISO7816}\PYG{o}{.}\PYG{n+na}{OFFSET\PYGZus{}CLA}\PYG{o}{]} \PYG{o}{!=} \PYG{o}{(}\PYG{k+kt}{byte}\PYG{o}{)} \PYG{l+m+mh}{0x80}\PYG{o}{)}
+    \PYG{n}{ISOException}\PYG{o}{.}\PYG{n+na}{throwIt}\PYG{o}{(}\PYG{n}{ISO7816}\PYG{o}{.}\PYG{n+na}{SW\PYGZus{}CLA\PYGZus{}NOT\PYGZus{}SUPPORTED}\PYG{o}{);}
+
+  \PYG{k+kt}{short} \PYG{n}{octetsLus}\PYG{o}{;}
+
+  \PYG{k}{switch}\PYG{o}{(}\PYG{n}{buffer}\PYG{o}{[}\PYG{n}{ISO7816}\PYG{o}{.}\PYG{n+na}{OFFSET\PYGZus{}INS}\PYG{o}{])\PYGZob{}}
+  \PYG{k}{case} \PYG{o}{(}\PYG{k+kt}{byte}\PYG{o}{)} \PYG{l+m+mh}{0x34}\PYG{o}{:}
+      \PYG{n}{octetsLus} \PYG{o}{=} \PYG{n}{apdu}\PYG{o}{.}\PYG{n+na}{setIncomingAndReceive}\PYG{o}{();}
+      \PYG{k}{if}\PYG{o}{(}\PYG{n}{octetsLus} \PYG{o}{!=} \PYG{o}{(}\PYG{k+kt}{short}\PYG{o}{)} \PYG{l+m+mi}{0}\PYG{o}{)}
+	\PYG{n}{ISOException}\PYG{o}{.}\PYG{n+na}{throwIt}\PYG{o}{(}\PYG{n}{ISO7816}\PYG{o}{.}\PYG{n+na}{SW\PYGZus{}WRONG\PYGZus{}LENGTH}\PYG{o}{);}
+      \PYG{k}{if}\PYG{o}{(}\PYG{n}{buffer}\PYG{o}{[}\PYG{n}{ISO7816}\PYG{o}{.}\PYG{n+na}{OFFSET\PYGZus{}P1}\PYG{o}{]} \PYG{o}{!=} \PYG{o}{(}\PYG{k+kt}{byte}\PYG{o}{)} \PYG{l+m+mh}{0x00}
+	  \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{buffer}\PYG{o}{[}\PYG{n}{ISO7816}\PYG{o}{.}\PYG{n+na}{OFFSET\PYGZus{}P2}\PYG{o}{]} \PYG{o}{!=} \PYG{o}{(}\PYG{k+kt}{byte}\PYG{o}{)} \PYG{l+m+mh}{0x00} \PYG{o}{)}
+	\PYG{n}{ISOException}\PYG{o}{.}\PYG{n+na}{throwIt}\PYG{o}{(}\PYG{n}{ISO7816}\PYG{o}{.}\PYG{n+na}{SW\PYGZus{}INCORRECT\PYGZus{}P1P2}\PYG{o}{);}
+      \PYG{n}{Util}\PYG{o}{.}\PYG{n+na}{setShort}\PYG{o}{(}\PYG{n}{buffer}\PYG{o}{,} \PYG{o}{(}\PYG{k+kt}{short}\PYG{o}{)} \PYG{l+m+mi}{0}\PYG{o}{,} \PYG{n}{balance}\PYG{o}{);}
+      \PYG{n}{apdu}\PYG{o}{.}\PYG{n+na}{setOutgoingAndSend}\PYG{o}{((}\PYG{k+kt}{short}\PYG{o}{)}\PYG{l+m+mi}{0} \PYG{o}{,} \PYG{o}{(}\PYG{k+kt}{short}\PYG{o}{)}\PYG{l+m+mi}{2}\PYG{o}{);}
+      \PYG{k}{return}\PYG{o}{;}
+    \PYG{k}{case} \PYG{o}{(}\PYG{k+kt}{byte}\PYG{o}{)} \PYG{l+m+mh}{0x38}\PYG{o}{:}
+      \PYG{n}{octetsLus} \PYG{o}{=} \PYG{n}{apdu}\PYG{o}{.}\PYG{n+na}{setIncomingAndReceive}\PYG{o}{();}
+      \PYG{k}{if}\PYG{o}{(}\PYG{n}{octetsLus} \PYG{o}{!=} \PYG{o}{(}\PYG{k+kt}{short}\PYG{o}{)}\PYG{l+m+mi}{2}\PYG{o}{)}
+	\PYG{n}{ISOException}\PYG{o}{.}\PYG{n+na}{throwIt}\PYG{o}{(}\PYG{n}{ISO7816}\PYG{o}{.}\PYG{n+na}{SW\PYGZus{}WRONG\PYGZus{}LENGTH}\PYG{o}{);}
+      \PYG{k}{if}\PYG{o}{(}\PYG{n}{buffer}\PYG{o}{[}\PYG{n}{ISO7816}\PYG{o}{.}\PYG{n+na}{OFFSET\PYGZus{}P1}\PYG{o}{]} \PYG{o}{!=} \PYG{o}{(}\PYG{k+kt}{byte}\PYG{o}{)}\PYG{l+m+mh}{0x00}
+	  \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{buffer}\PYG{o}{[}\PYG{n}{ISO7816}\PYG{o}{.}\PYG{n+na}{OFFSET\PYGZus{}P2}\PYG{o}{]} \PYG{o}{!=} \PYG{o}{(}\PYG{k+kt}{byte}\PYG{o}{)}\PYG{l+m+mh}{0x00}\PYG{o}{)}
+	\PYG{n}{ISOException}\PYG{o}{.}\PYG{n+na}{throwIt}\PYG{o}{(}\PYG{n}{ISO7816}\PYG{o}{.}\PYG{n+na}{SW\PYGZus{}INCORRECT\PYGZus{}P1P2}\PYG{o}{);}
+      \PYG{k+kt}{short} \PYG{n}{delMont} \PYG{o}{=} \PYG{n}{Util}\PYG{o}{.}\PYG{n+na}{getShort}\PYG{o}{(}\PYG{n}{buffer}\PYG{o}{,} \PYG{o}{(}\PYG{k+kt}{short}\PYG{o}{)}\PYG{l+m+mi}{5}\PYG{o}{);}
+      \PYG{k}{if}\PYG{o}{(}\PYG{n}{balance} \PYG{o}{\PYGZlt{}} \PYG{n}{delMont}\PYG{o}{)}
+	\PYG{n}{ISOException}\PYG{o}{.}\PYG{n+na}{throwIt}\PYG{o}{(}\PYG{n}{ISO7816}\PYG{o}{.}\PYG{n+na}{SW\PYGZus{}COMMAND\PYGZus{}NOT\PYGZus{}ALLOWED}\PYG{o}{);}
+      \PYG{n}{balance} \PYG{o}{\PYGZhy{}=} \PYG{n}{delMont}\PYG{o}{;}
+      \PYG{k}{return}\PYG{o}{;}
+  \PYG{k}{default}\PYG{o}{:}
+      \PYG{n}{ISOException}\PYG{o}{.}\PYG{n+na}{throwIt}\PYG{o}{(}\PYG{n}{ISO7816}\PYG{o}{.}\PYG{n+na}{SW\PYGZus{}INS\PYGZus{}NOT\PYGZus{}SUPPORTED}\PYG{o}{);}
+  \PYG{o}{\PYGZcb{}}
+
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}
