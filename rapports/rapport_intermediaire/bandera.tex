@@ -93,7 +93,11 @@ propriétées. Ces propriétés dépendent de la spécification, par exemple
 si une variable de type \verb|ArrayList| est abstraite et qu'on ne
 fait que vérifier si une valeur est contenue dedans, elle peut être
 remplacée par l'abstraction
-$\{ ElementPresentDansListe, ElementAbsentDansListe \}$. Dans ce cas précis, le \gls{babs} remplacera toutes les actions effectuées sur l'\verb|ArrayList| par des versions abstraites manipulant des symboles représentant des deux valeurs possibles, $ElementPresentDansListe$ et $ElementAbsentDansListe$.
+$\{ ElementPresentDansListe, ElementAbsentDansListe \}$. Dans ce cas
+précis, le \gls{babs} remplacera toutes les actions effectuées sur
+l'\verb|ArrayList| par des versions abstraites manipulant des symboles
+représentant des deux valeurs possibles, $ElementPresentDansListe$ et
+$ElementAbsentDansListe$.
 
 Si une opération impossible à représenter par ces deux valeurs est
 demandée, par exemple \verb|ArrayList.size()|, alors l'abstraction
