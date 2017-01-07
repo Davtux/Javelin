@@ -20,8 +20,6 @@ Ensuite nous pouvons construire un automate montrant les états et les commandes
 
 \paragraph{}
 Le programme suivant est la partie métier d’un applet simplifiée de gestion bancaire. Cet applet propose deux fonctionnalités : consulter son solde avec le code 0x34 ou retirer de l’argent avec le code 0x38. Une protection basique est en place pour empêcher l’utilisateur de retirer plus d’argent que son compte n’en possède.
->>>>>>> 0171a4635f9ebe9a9377cfd5ee7f99fbfc1e9f43
-
 
 \begin{minted}[fontsize=\footnotesize]{java}
 public void process(APDU apdu) throws ISOException {
