@@ -52,12 +52,14 @@ public void process(APDU apdu) throws ISOException {
 }
 \end{minted}
 
+Une fois l'application analysée par le programme d'analyse concolique, on souhaite obtenir un graphe de la forme : 
 
+~
 
 \begin{tikzpicture}[very thick,top color=white,bottom color=gray]
 \node[anchor=west,draw] (A) at (0,0) {buffer[0] == 0x80 \textbf{throw}};
 \node[anchor=west,draw] (B) at (1,-1) {buffer[1] == 0x34};
-\node[anchor=west, draw] (C) at (2,-2) {APDU.setIncomingAndReceive() != 0 \textbf{throw}};
+\node[anchor=west,draw] (C) at (2,-2) {APDU.setIncomingAndReceive() != 0 \textbf{throw}};
 \node[anchor=west,draw] (D) at (3,-3) {buffer[2] != 0 and buffer[3] != 0 \textbf{throw}};
 \node[anchor=west,draw] (E) at (4,-4) {Fin};
 \node[anchor=west,draw] (F) at (1.1,-5) {buffer[1] == 0x38};
@@ -78,7 +80,5 @@ public void process(APDU apdu) throws ISOException {
 \draw (H.west) |- (I.west);
 \draw (I.west) |- (J.west);
 \draw (B.west) |- (K.west);
-
-
 
 \end{tikzpicture}
