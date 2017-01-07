@@ -113,10 +113,10 @@ Une fois le graphe extrait, nous souhaitons créer un automate représentant le 
 \draw[->] (B) [left] -- node [align=center, above, sloped]  {Buffer[1] != 0x34 \&\& Buffer[1] != 0x38} (E);
 \draw[->] (B) [right]  -- node [align=end, above, rotate=90]  {Buffer[1] == 0x34} (C);
 \draw[->] (B) [right] -| node [near end , align=center, below, rotate=90]  {Buffer[1] == 0x38}    (D);
-\draw[->] (C) [loop below] |- node [align=center]  {Buffer[2] != 0 \&\& Buffer[3] != 0 \\ Balance < delMont} (E);
+\draw[->] (C) [loop below] |- node [align=center]  {Buffer[2] != 0 \&\& Buffer[3] != 0 } (E);
 \draw[->] (C) [loop below] -| node [align=center]  {} (F);
-\draw[->] (D) [right] --  node [align=center]  {} (F);
-\draw[->] (D) [right] |-  (E);
+\draw[->] (D) [right] --  (F);
+\draw[->] (D) [right] |-   node [near start, align=center, rotate=90, below] {Balance < delMont}  (E);
 \end{tikzpicture}
 \caption{Exemple d'automate à générer}
 \end{figure}
