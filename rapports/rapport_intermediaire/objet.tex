@@ -4,14 +4,11 @@ Le but de ce projet est de pouvoir extraire un automate à partir du code source
 
 \section{Intérêt de l'extraction d'automates à partir de code source}
 
-
-
 \paragraph{Un objectif de sécurité}En effet, une application pour une carte à puce est souvent liée à un domaine en rapport à la sécurité (passeport de sécurité par exemple), à la banque (carte bancaire) ou bien encore à la téléphonie (carte SIM). Tout ces domaines d'application sont liés intimement à des données pouvant être très sensibles ou à garder à la seule connaissance de l'utilisateur légitime.
 
 Exporter une application sous forme de graphe permet de vérifier la présence éventuelle de faille de sécurité.
 
 \paragraph{Une autre utilisation possible}Comme nous l'avons dit ci-dessus, un tel outil peut être employé à la sécurisation de code et ainsi aider le développeur à générer une application la plus solide possible. Un autre aspect peut être celui de l'attaque. Il est tout à fait raisonné de penser qu'entre les mains d'experts, ce genre d'outil peut aider les chercheurs à trouver de nouvelles failles et ainsi les révéler pour les corriger.
-
 
 \section{Mise en pratique sur une applet simple}
 
@@ -97,3 +94,14 @@ Une fois l'application analysée par le programme d'analyse concolique, on souha
 
 \paragraph{}
 Une fois le graphe extrait, nous souhaitons créer un automate représentant le fonctionnement de l'application, en voici un exemple en lien avec le graphe précédent :
+
+
+\section{Etat de l'art}
+\paragraph{}
+L’abstraction de code n’est pas nouveau dans le domaine du développement d’application. Il existe déjà de nombreux outils pour différents langages. Par exemple pour le Java il existe Bandera qui effectue tout un travail d’analyse. Cependant ce principe n’a jamais été appliqué à l’API de JavaCard. 
+
+\paragraph{}
+Notre travail consistera avant tout à utiliser des techniques voir des outils déjà existants mais en les adaptant pour qu’ils puissent analyser une applet JavaCard.
+
+C’est dans ce but que nous allons vous présenter un état de l’art qui représente une importante partie de la suite de ce rapport.
+
