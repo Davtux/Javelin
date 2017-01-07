@@ -62,7 +62,7 @@
 				L'étape suivante consiste à nier une sous formule et donc nous arrivons à créer un nouveau vecteur de valeurs concrétes en utilisant un
 				solveur de contraintes.
 
-				Ce vecteur sera utilisé pour une nouvelle exécution du programme qui permettra d'éxplorer un nouveau chemin.
+				Ce vecteur sera utilisé pour une nouvelle exécution du programme ce qui permettra d'éxplorer un nouveau chemin.
 				Cette procedure peut être répéter jusqu'à ce que tous les chemins possibles du système à tester sont explorés.
 				
 			\begin{figure}[H]
@@ -72,7 +72,7 @@
 			\end{figure}
 				
 			\paragraph{}
-				L'execution concolique résout un grand problème qui occure généralement au cours de l'exécution concolique,
+				L'execution concolique résout un grand problème qui se déclanche généralement au cours de l'exécution concolique,
 				puisque l'espace de recherche est réduit significativement de façon à ce que le problème d'explosion d'espace de recherche
 				ne peut plus se réaliser car les formules logiques générées par l'execution symbolique indiquera quelle valeur concrète
 				doit être fournie pour satisfaire la condition concernée.
@@ -95,8 +95,27 @@
 				\caption{Architecture de JDart}
 			\end{figure}
 				
+			\paragraph{}
+				Plus concrètement, la figure~\ref{fig:jdart_sample} montre le résultat d'une portion de code Java executé avec JDart.
+				La portion de code admet deux paramétres primitives et deux simples testes sur ces paramétres, ainsi que la sortie correspondante
+				de JDart.
+				
+			\begin{figure}[H]
+				\centering
+					\includegraphics[scale=0.5]{images/jdart_exemple.png}
+				\caption{\label{fig:jdart_sample} Exemple d'un programme executé avec JDart}
+			\end{figure}
+			
+			\paragraph{}
+				L'arbre des contraintes contient un n\oe{}ud pour chaque condition dans ce fragment de code et deux feuilles.
+				Le chemin qui aboutie à une erreur est marqué par la classe qui le déclanche.
+				Nous n'avons pas affiché les valeurs concréte qui permettent de parcourir ces chemins, néanmoins, JDart peut être configurer
+				de façon à ce qu'il affiche ces valeurs ou générer des testes unitaires basés sur ces valeurs.
       
 	\section{La VM JAVA, la VM du JPF et la VM JavaCard}
+		\paragraph{}
+			Nous avons définie \gls{JPF} comme étant une machine virtuelle qui exécute un code Java et analyse son \textit{\gls{bytecode}},
+			
 	\section{Tester des applets JavaCard}
 	\paragraph{}
 		Java Path Finder est connu comme le couteau suisse de la vérification Java,
