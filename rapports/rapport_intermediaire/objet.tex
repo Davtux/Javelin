@@ -101,7 +101,7 @@ Une fois le graphe extrait, nous souhaitons créer un automate représentant le 
 \node[state] (B) at (5,0)  {A};
 \node[state] (C) at (5,-6) {B};
 \node[state] (D) at (8,-4) {C};
-\node[state, accepting, align=center] (E) at (0,-11) {Throw I/O \\ Exception};
+\node[state, accepting, align=center] (E) at (0,-8) {Throw I/O \\ Exception};
 \node[state, accepting] (F) at (6,-4) {Fin};
 
 
@@ -113,7 +113,7 @@ Une fois le graphe extrait, nous souhaitons créer un automate représentant le 
 \draw[->] (C) [loop below] |- node [align=center]  {Buffer[2] != 0 \&\& Buffer[3] != 0} (E);
 \draw[->] (C) [loop below] -| node [align=center]  {} (F);
 \draw[->] (D) [right] --  node [align=center]  {} (F);
-\draw[->] (D) [right] |- node [near start, align=center, rotate=90, below]  {Buffer[2] != 0 \&\& Buffer[3] != 0}  node [near start, align=center, rotate=90, above] {balance < delMont} (E);
+\draw[->] (D) [right] |-  (E);
       
 
 
