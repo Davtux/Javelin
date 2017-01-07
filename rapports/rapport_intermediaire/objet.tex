@@ -96,8 +96,11 @@ Une fois l'application analysée par le programme d'analyse concolique, on souha
 Une fois le graphe extrait, nous souhaitons créer un automate représentant le fonctionnement de l'application, en voici un exemple en lien avec le graphe précédent :
 
 
+\begin{figure}[H]
+\centering
+
 \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=5 cm, scale = 1, transform shape]
-\node[initial, state] (A) at (0,0) {Départ};
+\node[state] (A) at (0,0) {Départ};
 \node[state] (B) at (5,0)  {A};
 \node[state] (C) at (5,-6) {B};
 \node[state] (D) at (8,-4) {C};
@@ -110,14 +113,14 @@ Une fois le graphe extrait, nous souhaitons créer un automate représentant le 
 \draw[->] (B) [left] -- node [align=center, above, sloped]  {Buffer[1] != 0x34 \&\& Buffer[1] != 0x38} (E);
 \draw[->] (B) [right]  -- node [align=end, above, rotate=90]  {Buffer[1] == 0x34} (C);
 \draw[->] (B) [right] -| node [near end , align=center, below, rotate=90]  {Buffer[1] == 0x38}    (D);
-\draw[->] (C) [loop below] |- node [align=center]  {Buffer[2] != 0 \&\& Buffer[3] != 0} (E);
+\draw[->] (C) [loop below] |- node [align=center]  {Buffer[2] != 0 \&\& Buffer[3] != 0 \\ Balance < delMont} (E);
 \draw[->] (C) [loop below] -| node [align=center]  {} (F);
 \draw[->] (D) [right] --  node [align=center]  {} (F);
 \draw[->] (D) [right] |-  (E);
-      
-
-
 \end{tikzpicture}
+\caption{Exemple d'automate à générer}
+\end{figure}
+
 
 \section{État de l'art}
 
