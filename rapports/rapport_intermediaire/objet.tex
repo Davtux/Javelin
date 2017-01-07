@@ -57,17 +57,17 @@ Une fois l'application analysée par le programme d'analyse concolique, on souha
 ~
 
 \begin{tikzpicture}[very thick,top color=white,bottom color=gray]
-\node[anchor=west,draw] (A) at (0,0) {buffer[0] == 0x80 \textbf{throw}};
+\node[anchor=west,draw] (A) at (0,0) {buffer[0] != 0x80 \textbf{throw ISOException}};
 \node[anchor=west,draw] (B) at (1,-1) {buffer[1] == 0x34};
-\node[anchor=west,draw] (C) at (2,-2) {APDU.setIncomingAndReceive() != 0 \textbf{throw}};
-\node[anchor=west,draw] (D) at (3,-3) {buffer[2] != 0 and buffer[3] != 0 \textbf{throw}};
+\node[anchor=west,draw] (C) at (2,-2) {APDU.setIncomingAndReceive() == 0 \textbf{throw ISOException}};
+\node[anchor=west,draw] (D) at (3,-3) {buffer[2] != 0 and buffer[3] != 0 \textbf{throw ISOException}};
 \node[anchor=west,draw] (E) at (4,-4) {Fin};
 \node[anchor=west,draw] (F) at (1.1,-5) {buffer[1] == 0x38};
-\node[anchor=west,draw] (G) at (2,-6) {APDU.setIncomingAndReceive() != 0 \textbf{throw}};
-\node[anchor=west,draw] (H) at (3,-7) {buffer[2] != 0 and buffer[3] != 0 \textbf{throw}};
-\node[anchor=west,draw] (I) at (4,-8) {Util.getShort(buffer, (short)5); < balance \textbf{throw}};
+\node[anchor=west,draw] (G) at (2,-6) {APDU.setIncomingAndReceive() == 0 \textbf{throw ISOException}};
+\node[anchor=west,draw] (H) at (3,-7) {buffer[2] != 0 and buffer[3] != 0 \textbf{throw ISOException}};
+\node[anchor=west,draw] (I) at (4,-8) {Util.getShort(buffer, (short)5) < balance \textbf{throw ISOException}};
 \node[anchor=west,draw] (J) at (5,-9) {Fin};
-\node[anchor=west,draw] (K) at (1.1,-10) {default \textbf{throw}};
+\node[anchor=west,draw] (K) at (1.1,-10) {default \textbf{throw ISOException}};
 
 
 \draw (A.west) |- (B.west);
