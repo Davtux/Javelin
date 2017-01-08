@@ -1,9 +1,9 @@
 \chapter{Bandera : génération de modèles à partir de code source Java}
 
-Bandera~\cite{bandera1} est un logiciel permettant d'analyser un projet Java et d'en
-extraire un modèle utilisable par un vérificateur de code. Il a été
-développé suite à la collaboration de chercheurs de l'Université
-d'Hawaï et de l'Université d'État du Kansas.
+Bandera~\cite{bandera1} est un logiciel permettant d'analyser un
+projet Java et d'en extraire un modèle utilisable par un vérificateur
+de code. Il a été développé suite à la collaboration de chercheurs de
+l'Université d'Hawaï et de l'Université d'État du Kansas.
 
 Ce logiciel n'est plus maintenu depuis 2005, néanmoins il peut être
 intéressant de voir les décisions prises par ses développeurs pour
@@ -102,3 +102,16 @@ $ElementAbsentDansListe$.
 Si une opération impossible à représenter par ces deux valeurs est
 demandée, par exemple \verb|ArrayList.size()|, alors l'abstraction
 renvoie une valeur spéciale notée $\top$.
+
+\section{Interêt et limites}
+
+Bandera est un outil très puissant et complexe qui gère même l'analyse
+de threads Java. Les développeurs de Bandera ont choisi de ne pas
+utiliser JDart pour effectuer l'analyse afin de pouvoir modifier plus
+simplement le moteur d'analyse lorsque de nouvelles avancées seront
+disponibles.
+
+Sachant que l'API JavaCard ne gère pas les threads et que nous
+utiliseront JDart, il sera plus simple pour nous d'analyser le code
+source des applets.
+
