@@ -152,9 +152,36 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
 
   \section{Outils d'analyse existants}
 
+  \paragraph{}
+  Après avoir réussi à représenter les graphes extraits des sorties de JDart, il nou faut encore un outil capable d'analyser les graphes afin de pouvoir simplifier leur conversion en automates.
   
-  http://bioinformatics.oxfordjournals.org/content/21/24/4432.short
-  https://graph-tool.skewed.de/
-  https://gephi.org/publications/gephi-bastian-feb09.pdf
-  https://github.com/count0/graph-tool
+  \paragraph{}
+  Pour cette tâche, trois solutions ont été retenues, nous allons, dans cette partie réaliser un bref comparatif de chacune d'entre elles afin de déterminer laquelle permet de répondre au mieux à nos attentes.
+  
+  \begin{longtable}{|c|p{2cm}|p{2cm}|p{8cm}|}
+    \caption{Quelques solutions possibles et leur description}\\
+    \hline
+    \textbf{Nom} & \textbf{Langage} & \textbf{Licence} & \textbf{Description} \\
+    \hline \hline
+    
+    \endfirsthead
+    \hline
+    \textbf{Nom} & \textbf{Langage} & \textbf{Licence} & \textbf{Description} \\
+    \hline \hline
+    
+    \endhead
+	
+    \textbf{Medusa (I) \footnote{Medusa :  http://bioinformatics.oxfordjournals.org/content/21/24/4432.short}} & Java & Inconnue & Medusa est un outil de traitement des graphes destiné à décomposer et reconnaitre des proteïnes ou des gênes. Il est composé d'une interface graphique et d'un coeur tous deux codés en Java. Cependant, il a l'air compliqué, à priori, d'adapter cet outil à notre type d'utilisation.\\
+    \hline
+    \textbf{Graph-Tool \footnote{Graph-Tool : https://graph-tool.skewed.de/}}& Python/C++ & GPLv3 &  Graph-Tool est un outil très complet d'analyse et de génération de graphes, même si la partie génération n'est pas celle qui nous intéresse le plus, la partie analyse reste néanmoins assez étoffée. Elle permet, en autres, de calculer l'isomorphisme d'un graphe, l'arbre couvrant minimal, les composantes connexes. \\
+    \hline
+    \textbf{Gephi \footnote{Gephi :  https://gephi.org/publications/gephi-bastian-feb09.pdf}}& Java &  GPLv3 & Gephi est un logiciel Open Source implémentant une interface graphique ainsi qu'un coeur en Java. Il permet de réaliser de nombreuses représentations de graphe ainsi que d'appliquer de nombreux calculs sur ces derniers. L'interface grahique n'étant pas notre priorité dans cette partie, il reste à noter qu'il nous sera toujours possible de nous en inspirer pour l'adapter. \\
+    \hline
+    \textbf{Medusa (II) \footnote{Medusa :  https://github.com/JianlongZhong/Medusa}}& Cuda/C++ &  BSD 3 & Homonyme du premier logiciel présenté, il est tout de même très différent de ce dernier : de par le langage utilisé pour le développé, CUDA à la place de Java, d'une part. Par son objectif beaucoup plus adaptatif et polyvalent, d'autre part. \\
+    \hline
+  \end{longtable}
+  
+  \paragraph{Bilan post-présentation}
+  Après la présentation des différentes solutions possibles, il semble logique d'éliminer  Medusa (I) pour des raisons d'adaptabilité trop complexe à mettre en place.
+  
   
