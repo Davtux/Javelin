@@ -1,3 +1,24 @@
 \chapter{Tâches futures et planification}
+
+\shorthandoff{:!}
+\begin{figure}[H]
+  \centering
+  \begin{ganttchart}[
+    vgrid,hgrid,
+    title height=1
+    ]{2}{31}
+    \gantttitle{Janvier}{6}  \gantttitle{Février}{6} \gantttitle{Mars}{6} \gantttitle{Avril}{6} \gantttitle{Mai}{6} \\
+    \gantttitlelist{6,11,16,21,26,31}{1} \gantttitlelist{3,8,13,18,23,28}{1} \gantttitlelist{6,11,16,21,26,31}{1} \gantttitlelist{5,10,15,20,25,30}{1} \gantttitlelist{6,11,16,21,26,31}{1} \\
+    \ganttgroup{Group 1}{2}{7} \\
+    \ganttbar{Task 1}{2}{2} \\
+    \ganttlinkedbar{Task 2}{3}{7} \ganttnewline
+    \ganttmilestone{Milestone}{7} \ganttnewline
+    \ganttbar{Final Task}{8}{12}
+    \ganttlink{elem2}{elem3}
+    \ganttlink{elem3}{elem4}
+  \end{ganttchart}
+\caption{Planning prévisionnel du second semestre}
+\end{figure}
+
 \section{Quelles tâches à effectuer au semestre prochain ?}
 \section{Tableau de planification des tâches}
