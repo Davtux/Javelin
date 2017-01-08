@@ -11,7 +11,7 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
   Nous allons pour cela, passer par un tableau comparatif des diverses solutions.
   
 
-  \paragraph{Liste des formats de représentation de graphes}
+  \subsection{Liste des formats de représentation de graphes}
   La liste ci-dessous contient tous les formats de représentation de graphes à comparer : 
   \begin{itemize}
    \item CSV : est un type de fichier très répendu, il représente les informations sous formes de tableaux et est facilement lisible via la plupart des programmes. 
@@ -23,7 +23,7 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
   \end{itemize}
 
   
-  \paragraph{Liste des éléments déterminants le choix}
+  \subsection{Liste des éléments déterminants le choix}
   Avant de pouvoir comparer les différents types de stockage des graphes, il nous faut déterminer une grille de critères nous permettant de classer les différentes solutions en lice.
   
   La solution retenue devra donc respecter les points suivants : 
@@ -50,17 +50,17 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
     \begin{tabular}{|p{3.5cm} | p{0.50cm} | p{0.5cm} | p{0.50cm} | p{0.5cm} | p{0.50cm} |}
       
       \hline  
-      \textbf{CSV}	& x & x & x & x &  \\ \hline
-      \textbf{XML} 	& x & x & x & x & x \\ \hline
-      \textbf{JSON} 	& x & x & x & x & x \\ \hline
-      \textbf{SVG} 	& x & x & x &	& x \\ \hline
-      \textbf{BMP} 	& x & x & x &  	&  \\ \hline
-      \textbf{JPG} 	& x & x & x &  	&  \\ 
+      \textbf{CSV}	& x & x & x & x &	\\ \hline
+      \textbf{XML} 	& x & x & x & x & x 	\\ \hline
+      \textbf{JSON} 	& x & x & x & x & x 	\\ \hline
+      \textbf{SVG} 	& x & x & x &	& x 	\\ \hline
+      \textbf{BMP} 	& x & x & x &  	&  	\\ \hline
+      \textbf{JPG} 	& x & x & x &  	&  	\\ 
       \hline
     \end{tabular}
   \end{table}
   
-  \paragraph{Choix final}
+  \subsection{Bilan}
   Après comparaison, nous voyons que deux formats peuvent correspondre à notre attente : l'XML et le JSON, nous allons donc nous baser sur ces résultats pour rechercher un outil nous permettant de représenter les graphes à l'aide d'un de ces formats.
 
   \section{Outils de représentation existants}
@@ -68,7 +68,7 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
   \paragraph{}
   Après avoir déterminé les formats de fichiers les plus appropriés, il nous faut encore trouver un outil servant à représenter et dessiner les graphes ou, si nous n'en trouvons pas un qui conviendrait, se servir d'un outil pour base afin de le modifier en implémentant les fonctions recherchées.
   
-  \paragraph{Fonctionnalités demandées et contraintes imposées}
+  \subsection{Fonctionnalités demandées et contraintes imposées}
   Pour répondre à tous nos besoins, la solution retenue devra implémenter les fonctionnalités suivantes : 
   \begin{itemize}
   	\item Proposer une sortie simple à comprendre pour l'utilisateur
@@ -84,7 +84,7 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
   \end{itemize}
 
   \begin{longtable}{|c|p{2cm}|p{2cm}|p{8cm}|}
-    \caption{Quelques solutions possibles et leur description}\\
+    \caption{Quelques solutions possibles de représentation de graphe et leur description}\\
     \hline
     \textbf{Nom} & \textbf{Langage} & \textbf{Licence} & \textbf{Description} \\
     \hline \hline
@@ -108,7 +108,7 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
     \hline
   \end{longtable}
   
-  \paragraph{Choix de la bibliothèque}
+  \subsection{Comparaison des bibliothèques disponibles}
   
     \begin{table}[!h]{Tableau comparatif des bibliothèques}
       
@@ -144,7 +144,7 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
 
   \end{table}
   
-  \paragraph{Conclusion}
+  \subsection{Bilan}
   La solution retenue est la solution GraphStream, qui semble être la plus convenir aux attentes. Dans tous les cas, nous aurons à implémenter l'importation de graphes à partir de fichiers.
   
   Si au cours du developpement nous nous rendons compte de l'impossibilité de nous interfacer avec GraphStream, nous aurons la possibilité de migrer vers Dracula qui est le second choix le plus intéressant.
@@ -154,12 +154,13 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
 
   \paragraph{}
   Après avoir réussi à représenter les graphes extraits des sorties de JDart, il nou faut encore un outil capable d'analyser les graphes afin de pouvoir simplifier leur conversion en automates.
-  
+
+  \subsection{Description des solutions en lice}
   \paragraph{}
   Pour cette tâche, trois solutions ont été retenues, nous allons, dans cette partie réaliser un bref comparatif de chacune d'entre elles afin de déterminer laquelle permet de répondre au mieux à nos attentes.
   
   \begin{longtable}{|c|p{2cm}|p{2cm}|p{8cm}|}
-    \caption{Quelques solutions possibles et leur description}\\
+    \caption{Quelques solutions d'analyse de graphe possibles et leur description}\\
     \hline
     \textbf{Nom} & \textbf{Langage} & \textbf{Licence} & \textbf{Description} \\
     \hline \hline
@@ -183,5 +184,50 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
   
   \paragraph{Bilan post-présentation}
   Après la présentation des différentes solutions possibles, il semble logique d'éliminer  Medusa (I) pour des raisons d'adaptabilité trop complexe à mettre en place.
+  
+  \subsection{Comparaison des solutions possible}
+  
+  \paragraph{}
+  Il nous reste donc à départager les trois solutions restantes : 
+  \begin{itemize}
+  	\item Graph-Tool
+  	\item Gephi
+  	\item Medusa
+  \end{itemize}
+
+    
+    \begin{table}[!h]{Avantage des différents outils en fonction des autres}
+      
+      \centering
+    
+    \begin{tabular}{p{3.5cm}  p{3.50cm}  p{3.5cm}  p{3.50cm} }
+
+	& \textbf{Graph-Tool} 		& \textbf{Gephi} 	& \textbf{Medusa}	\\ 
+    	
+    \end{tabular}
+
+    
+    \begin{tabular}{|p{3.5cm} | p{3.50cm} | p{3.5cm} | p{3.50cm} |}
+      
+      \hline
+      \textbf{Graph-Tool} 	& & Graph-Tool plus simple à intégré car codé en Java. 	
+				  & Graph-Tool plus simple à intégré car codé en Java. 	\\ \hline
+      \textbf{Gephi} 		& x 				
+			      & & x 			\\ \hline
+      \textbf{Medusa} 		& x 				
+				& \textcolor{red}{-} 	
+				& \\ \hline
+    \end{tabular}
+    
+    \begin{tabular}{c c c}
+    &&\\
+    x : normal & + = avantage & - = inconvénient\\
+    N/I : non-implémenté & \textcolor{green}{vert} = avantage & \textcolor{red}{rouge} = inconvénient\\
+    \end{tabular}
+
+  \end{table}
+  
+  
+  \subsection{Bilan}
   
   
