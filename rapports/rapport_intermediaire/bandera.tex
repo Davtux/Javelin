@@ -56,38 +56,6 @@ plupart détaillés dans ce chapitre~:
   n'est pas nécessaire à la compréhension de son fonctionnement.
 \end{description}
 
-\subsection{Transformation du code source}
-\label{sec:bandera_source}
-
-\paragraph{}
-Afin de transformer du code Java en un langage utilisable par des
-vérificateurs, Bandera passe par un certain nombre de langages
-intermédiaires. Il commence par traduire le programme en Jimple, un
-langage utilisé par le framework Soot et établit des correspondances
-entre le code Java et le code Soot. Ceci permet au logiciel de
-retrouver le n\oe{}ud Java correspondant à n'importe quel n\oe{}ud
-dans Jimple.
-
-\paragraph{}
-L'arrière-plan (\textit{backend}) de Bandera s'occupe de traduire le
-code Jimple en \gls{bir}, un langage bas niveau qui abstrait les
-concepts communs à de nombreux logiciels de vérification de modèle. Le
-but ce ce langage intermédiaire est de pouvoir ensuite exporter le
-\gls{bir} dans différents langages spécialisés pouvant être utilisés
-par les vérificateurs de modèles. La traduction est faite par
-\gls{birc}.
-
-\paragraph{}
-Ce fonctionnement est schématisé dans la figure~\ref{fig:bir_jimple}.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[scale=0.5]{images/bandera_bir_jimple.png}
-  \caption{\label{fig:bir_jimple} Transformation du code source en
-    langages intermédiaires}
-\end{figure}
-
-
 \subsection{Découpage (\textit{slicing}) du programme}
 \label{sec:bandera_slicing}
 
@@ -143,6 +111,37 @@ Si une opération impossible à représenter par ces deux valeurs est
 demandée, par exemple \verb|ArrayList.size()|, alors l'abstraction
 renvoie une valeur spéciale notée $\top$.
 
+\subsection{Transformation du code source}
+\label{sec:bandera_source}
+
+\paragraph{}
+Afin de transformer du code Java en un langage utilisable par des
+vérificateurs, Bandera passe par un certain nombre de langages
+intermédiaires. Il commence par traduire le programme en Jimple, un
+langage utilisé par le framework Soot et établit des correspondances
+entre le code Java et le code Soot. Ceci permet au logiciel de
+retrouver le n\oe{}ud Java correspondant à n'importe quel n\oe{}ud
+dans Jimple.
+
+\paragraph{}
+L'arrière-plan (\textit{backend}) de Bandera s'occupe de traduire le
+code Jimple en \gls{bir}, un langage bas niveau qui abstrait les
+concepts communs à de nombreux logiciels de vérification de modèle. Le
+but ce ce langage intermédiaire est de pouvoir ensuite exporter le
+\gls{bir} dans différents langages spécialisés pouvant être utilisés
+par les vérificateurs de modèles. La traduction est faite par
+\gls{birc}.
+
+\paragraph{}
+Ce fonctionnement est schématisé dans la figure~\ref{fig:bir_jimple}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{images/bandera_bir_jimple.png}
+  \caption{\label{fig:bir_jimple} Transformation du code source en
+    langages intermédiaires}
+\end{figure}
+
 \section{Interêt et limites}
 
 \paragraph{}
@@ -159,3 +158,12 @@ Sachant que l'API JavaCard ne gère pas les threads et que nous
 utiliseront JDart pour effectuer l'analyse, il sera plus simple pour
 nous de travailler sur le code source des applets afin d'en extraire
 un modèle.
+
+\paragraph{}
+Il apparaît que Bandera est un projet très intéressant pour la
+vérification formelle de code. Cependant, la plupart des
+fonctionnalités qui nous intéressent --- l'analyse du code, des
+changements des variables, etc. --- sont aussi réalisables en
+utilisant l'outil JDart, qui sera présenté dans la prochaine
+section. Celui-ci est encore maintenu et est plus orienté vers les
+développeurs, il sera donc plus simple à intégrer à notre projet.
