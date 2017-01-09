@@ -56,6 +56,18 @@ plupart détaillés dans ce chapitre~:
   n'est pas nécessaire à la compréhension de son fonctionnement.
 \end{description}
 
+\paragraph{}
+La Figure~\ref{fig:desc_bandera_site}, issue du site officiel de
+Bandera, détaille l'utilisation de Bandera et son fonctionnement.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{images/bandera_desc.png}
+  \caption{\label{fig:desc_bandera_site} Schéma de fonctionnement de Bandera}
+   Source: \url{http://bandera.projects.cs.ksu.edu}
+\end{figure}
+
+
 \subsection{Découpage (\textit{slicing}) du programme}
 \label{sec:bandera_slicing}
 
@@ -109,7 +121,10 @@ $ElementAbsentDansListe$.
 \paragraph{}
 Si une opération impossible à représenter par ces deux valeurs est
 demandée, par exemple \verb|ArrayList.size()|, alors l'abstraction
-renvoie une valeur spéciale notée $\top$.
+renvoie une valeur spéciale notée $\top$. Cette valeur est ensuite
+propagée dans le reste du programme, et Bandera s'occupe d'informer le
+constructeur de modèle qu'il sera nécessaire d'implémenter un test
+non-déterministe quand cette variable sera utilisée.
 
 \subsection{Transformation du code source}
 \label{sec:bandera_source}
@@ -130,7 +145,11 @@ concepts communs à de nombreux logiciels de vérification de modèle. Le
 but ce ce langage intermédiaire est de pouvoir ensuite exporter le
 \gls{bir} dans différents langages spécialisés pouvant être utilisés
 par les vérificateurs de modèles. La traduction est faite par
-\gls{birc}.
+\gls{birc}. Cette étape intermédiaire est très importante dans la
+«~philosophie~» Bandera~: en effet, pour pouvoir exporter le résultat
+de l'analyse vers un nouveau vérificateur de modèle, il est seulement
+nécessaire d'écrire un greffon pour Bandera convertissant le langage
+\gls{bir} en un fichier utilisable par ce nouveau vérificateur.
 
 \paragraph{}
 Ce fonctionnement est schématisé dans la figure~\ref{fig:bir_jimple}.
@@ -152,6 +171,13 @@ l'analyse afin de pouvoir modifier plus simplement le moteur d'analyse
 lorsque de nouvelles avancées seront disponibles. JDart est pourtant
 un outil très puissant et toujours maintenu permettant d'analyser des
 applications Java.
+
+\paragraph{}
+Un des grands points forts de Bandera est de pouvoir exporter le
+résultat de son analyse vers de nombreux vérificateurs de
+modèle. C'est d'ailleurs son utilisation première, cette application
+ayant été développée pour être compatible avec le plus de
+vérificateurs possibles.
 
 \paragraph{}
 Sachant que l'API JavaCard ne gère pas les threads et que nous
