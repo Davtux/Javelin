@@ -115,6 +115,20 @@
 	\section{La VM JAVA, la VM du JPF et la VM JavaCard}
 		\paragraph{}
 			Nous avons définie \gls{JPF} comme étant une machine virtuelle qui exécute un code Java et analyse son \textit{\gls{bytecode}},
+			Pour pouvoir exécuter le programme à tester, la machine virtuelle Java \textit{(Host VM)} ainsi que la machine virtuelle de \gls{JPF}
+			coopérent et intercommunique.
+			L'architecture globale est assez complexe, ce n'est pas toujours simple de savoir sur quel niveau chaque partie de code est exécuté.
+			Ce qui rent l'architecture plus compliqué c'est le fait que la plupart des librairies standards sont exécutés par les deux machines
+			virtuelles dans des instances différentes.
+			La figure~\ref{fig:jdart_layers} illustre les différents niveaux et leurs associations avec les librairies Java.
+			
+			\begin{figure}[H]
+				\centering
+					\includegraphics[scale=0.5]{images/layersJDart.png}
+				\caption{\label{fig:jdart_layers} Exemple d'un programme executé avec JDart}
+			\end{figure}
+			
+			
 			
 	\section{Tester des applets JavaCard}
 	\paragraph{}
