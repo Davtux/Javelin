@@ -152,9 +152,9 @@ dans Jimple.
 L'arrière-plan (\textit{backend}) de Bandera s'occupe de traduire le
 code Jimple en \gls{bir}, un langage bas niveau qui abstrait les
 concepts communs à de nombreux logiciels de vérification de modèle. Le
-but ce ce langage intermédiaire est de pouvoir ensuite exporter le
+but de ce langage intermédiaire est de pouvoir ensuite exporter le
 \gls{bir} dans différents langages spécialisés pouvant être utilisés
-par les vérificateurs de modèles. La traduction est faite par
+par les vérificateurs de modèle. La traduction est faite par
 \gls{birc}. Cette étape intermédiaire est très importante dans la
 «~philosophie~» Bandera~: en effet, pour pouvoir exporter le résultat
 de l'analyse vers un nouveau vérificateur de modèle, il est seulement
@@ -236,7 +236,7 @@ vérificateurs possibles.
 
 \paragraph{}
 Afin de nous simplifier la tâche, nous avons décidé d'utiliser JDart,
-qui sera présenté dans la prochaine section. Cet outil génère des
+qui sera présenté dans le prochain chapitre. Cet outil génère des
 fichiers pour Java PathFinder en utilisant la méthode de l'exécution
 concolique.
 
@@ -251,8 +251,7 @@ Il apparaît que Bandera est un projet très intéressant pour la
 vérification formelle de code. Cependant, la plupart des
 fonctionnalités qui nous intéressent --- l'analyse du code, des
 changements des variables, etc. --- sont aussi réalisables en
-utilisant l'outil JDart, qui sera présenté dans la prochaine
-section. Celui-ci est encore maintenu et est plus orienté vers les
+utilisant l'outil JDart. Celui-ci est encore maintenu et est plus orienté vers les
 développeurs, il sera donc plus simple à intégrer à notre projet.
 
 \paragraph{}
@@ -262,5 +261,5 @@ modification de code source Java ainsi que de bytecode. Celui-ci
 pourrait nous être utile conjointement avec JDart pour extraire les
 variables participant aux changements d'état d'un applet JavaCard et
 les annoter. En effet, les variables à analyser par JDart doivent être
-annotées par un \verb|@Symbolic|, ce framework nous permettrais
+annotées par un \verb|@Symbolic|, ce framework nous permettrait
 d'effectuer ceci automatiquement.
