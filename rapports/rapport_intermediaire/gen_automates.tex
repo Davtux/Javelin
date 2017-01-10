@@ -108,9 +108,9 @@ source, seulement on explicite toutes les branche du code.
 \begin{figure}[H]
 	\centering	
 	\includegraphics[scale=0.5]{images/jdart_exemple.png}
-	\caption{\label{fig:jdart_sample} Exemple d'un programme exécuté avec 
-JDart}
-	\end{figure}
+	\caption{\label{fig:jdart_sample} Exemple de sortie JDart}
+	\label{fig:exemple_out_jdart}
+\end{figure}
 \end{itemize}
 
 Dans cet exemple les deux états "OK" ne corresponde à aucune instruction dans 
@@ -122,8 +122,161 @@ fin.
 
 \paragraph{}
 Maintenant que nous comprenons mieux la structure des données que génère JDart 
-nous pouvons construire l'automate qui en résulte.
+nous pouvons construire l'automate qui en résulte. Nous allons ici présenter un 
+algorithme qui permettra de construire un arbre à partir d'un arbre des 
+contraintes puis nous l'appliquerons un à exemple.
 
+\subsection{Algorithme}
+
+\paragraph{}
+Pour rappel un automate se compose d'une liste d'états et de transition qui 
+permettent de se déplacer un état à un autre, il y a également un état initial 
+et une liste d'état finaux.
+
+
+Pour construire notre automate nous devons d'abord ajouter un état initial qui 
+correspond à l'entrée du programme ou de la fonction analysée. Les états finaux 
+sont le cas valide et les cas d'erreur, on pourra ajouté plusieurs états 
+d'erreur en fonction des exception levé.
+
+\paragraph{}
+Pour la suite nous utiliseront la structure de donné suivant pour représenter 
+un automate :
+
+$$A = ( E, q, F, \delta )$$
+où $E$ est la liste des états, $q$ l'état initial, F la liste des états finaux 
+et $\delta$ la liste des transition. Nous représenterons les transition de la 
+manière suivante : $(etatDepart, etiquette, etatArrive)$.
+
+
+Les noeud de l'arbre de contrainte seront définit tel que :
+$$ N = (decision, enfantVrai, enfantFaux)$$
+
+
+\paragraph{}
+Ensuite il faut effectuer un parcours en profondeur de l'arbre jusqu'à 
+atteindre un état final.
+Cela donne l'algorithme récursif suivant :
+
+\begin{verbatim}
+Fonction ConstruireAutomate(ArbreContrainte arbre, Noeud n = noeud racine de 
+l'arbre, Etat e = q l'état initial)
+Début
+        A : Automate
+	
+        Si e est un etat final
+                Retourner 
+        Fin Si
+        
+        Si n.enfantVrai est un état final ET n.enfantVrai n'est pas dans A
+                nouvelEtat = A.ajouterEtatFinal(n.enfantVrai)
+        Sinon Si n.enfantVrai est un état final
+		nouvelEtat = A.obtenirEtatCorrespondant(n.enfantVrai)
+        Sinon
+                nouvelEtat = A.ajouterEtat(n.enfantVrai)
+        Fin Si
+	
+        A.ajouterTransition(e, n.decision, n.enfantVrai)
+        ConstruireAutomate(arbre, n.enfantVrai, nouvelEtat)
+
+        Si n.enfantFaux est un état final ET n.enfantFaux n'est pas dans A
+                nouvelEtat = A.ajouterEtatFinal(n.enfantFaux)
+        Sinon Si n.enfantFaux est un état final
+		nouvelEtat = A.obtenirEtatCorrespondant(n.enfantFaux)
+        Sinon
+                nouvelEtat = A.ajouterEtat(n.enfantFaux)
+        Fin Si
+	
+        A.ajouterTransition(e, Iverser(n.decision), n.enfantFaux)
+        ConstruireAutomate(arbre, n.enfantFaux, nouvelEtat)
+Fin
+\end{verbatim}
+
+\subsection{Exemple d'exécution}
+
+Pour exécuté cet algorithme nous allons reprendre l'exemple de la Figure 
+\ref{fig:exemple_out_jdart}, l'algorithme commence avec un automate ne 
+contenant que l'état initial :
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=.10\linewidth]{./images/graph_build.png}
+ \caption{Automate au début de l'algorithme}
+\end{figure}
+
+\begin{minipage}{.44\linewidth}
+ \centering
+ \begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./images/graph_build_1.png}
+  \caption{Étape 1 : Exploration de l'arbre (profondeur 1)}
+ \end{figure}
+\end{minipage}
+\begin{minipage}{.44\linewidth}
+ \paragraph{} On explore le côté "vrai" de l'arbre des contraintes, nous 
+arrivons sur une état final, qui est ajouté à l'automate. Au deuxième appel 
+l'exploration de ce côte de l'arbre s'arrête et passe à l'autre côté.
+\end{minipage}
+
+\begin{minipage}{.44\linewidth}
+ \centering
+ \begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./images/graph_build_2.png}
+  \caption{Étape 2 : Exploration de l'arbre (profondeur 1)}
+ \end{figure}
+\end{minipage}
+\begin{minipage}{.44\linewidth}
+ \paragraph{} Le nouvel état n'est pas un état final, il faut continuer 
+l'exploration.
+ \paragraph{} Et ainsi de suite jusqu'à ce que tous l'arbre soit exploré.
+\end{minipage}
+
+\begin{minipage}{.44\linewidth}
+ \centering
+ \begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./images/graph_build_3.png}
+  \caption{Étape 3 : Exploration de l'arbre (profondeur 2)}
+ \end{figure}
+\end{minipage}
+\begin{minipage}{.44\linewidth}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./images/graph_build_4.png}
+  \caption{Étape 4 : Exploration de l'arbre (profondeur 2)}
+ \end{figure}
+\end{minipage}
+
+\paragraph{}
+À la fin de l'algorithme nous obtenons bien un automate correspondant à 
+l'exécution de ce code. Il alors possible d'en déduire les valeurs de $i$ et 
+$b$ qui permettent d'aboutir à un état valide ou d'erreur.
+
+\paragraph{Note technique}
+Jusqu'à présent nous n'avons présenté que des sortie brute de JDart car elle 
+permettent de mieux illustrer nos propos. Toutefois JDart est capable de 
+générer une sortie au format JSON.
+
+\begin{figure}[H]
+ \centering
+ \begin{verbatim}
+ {
+        decision: "(i <= 2000)",
+        children: [
+                { result: "OK"},
+                { 
+                        decision: "b",
+                        children: [
+                                 { result: "OK"}
+                                 { result: "ERROR" }
+                        ]
+                }
+        ]
+ }
+ \end{verbatim}
+ \caption{Exemple de fichier JSON généré par JDart}
+\end{figure}
 
 
 \begin{comment}
