@@ -258,9 +258,9 @@ contenant que l'état initial :
  \end{figure}
 
  \paragraph{} On explore le côté "vrai" de l'arbre des contraintes, nous 
-arrivons sur une état final, qui est 
+arrivons sur un état final, qui est 
 ajouté à l'automate ainsi que la transition pour y arriver. Au deuxième appel, 
-l'exploration de ce côte de l'arbre s'arrête et passe à l'autre côté.
+l'exploration de ce côté de l'arbre s'arrête et passe à l'autre côté.
 
 
  \begin{figure}[H]
@@ -296,23 +296,23 @@ $b$ qui permettent d'aboutir à un état valide ou d'erreur.
 
 \subsection{Utilisation possible}
 
-Nous savons construire un automate, quelles utilisations pouvons nous trouver 
-pour répondre à l'objectif principal de notre projet pouvoir tester notre 
-applet et vérifier qu'elle répond au spécification données.
+Nous venons de présenter comment construire un automate. Nous allons maintenant 
+voir qu'il est possible de comparer cet automate à un automate de référence et 
+générer une suite de tests.
 
 \subsection{Comparer avec une spécification}
 
 \paragraph{}
 Pour cette partie nous allons admettre qu'un automate est un graphe orienté, où 
 les états sont des sommets et les transition sont des arcs. Nous pouvons alors 
-utiliser un peu de théorie des graphe.
+utiliser un peu de théorie des graphes.
 
 \paragraph{}
-Imaginons qu'un automate d'une applet soit construit lors de sa conception. Cet 
-automate aurait pour but de décrire son comportement. Une fois l'applet 
+Imaginons que l'automate d'une applet soit construit lors de sa conception. Cet 
+automate aurait pour but de décrire le comportement de l'applet. Une fois l'applet 
 développée nous pourrions comparer le graphe définit lors 
-de la conception, que nous noterons $S$, avec celui générer par notre solution 
-que noté $G$.
+de la conception, que nous noterons $S$, avec celui généré par notre solution 
+ noté $G$.
 
 \paragraph{Sous graphe}
 En utilisant la définition d'un sous graphe \cite{th_graph}:
@@ -324,16 +324,16 @@ $G$ et de toutes les arêtes qui les relient.
 
 
 il est possible de montrer que $G$ est un sous-graphe de $S$, c'est-à-dire 
-qu'il ne possède pas plus de d'états attendu. Autrement dit l'applet ne génère 
+qu'il ne possède pas plus d'états attendu. Autrement dit l'applet ne génère 
 pas d'états qui n'étaient pas spécifié lors de la conception.
 
 \paragraph{Graphes égaux}
 Il serait également possible de déterminer si les deux graphe $S$ et $G$ sont 
 égaux, c'est-à-dire que toutes les arcs sont égaux ainsi que les sommets. Plus 
-concrètement l'applet remplie toutes les spécification ni plus ni moins;
+concrètement l'applet rempli toutes les spécification ni plus ni moins.
 
 \paragraph{}
-Nous pourrions imaginer bien d'autre comparaison possible entre graphe se 
+Nous pourrions imaginer bien d'autres comparaisons possibles entre graphe se 
 basant sur la théorie des graphes.
 
 \subsection{Génération de tests}
@@ -344,11 +344,11 @@ dans un état ou un autre. Cela permet de définir des valeurs d'entrée concrè
 pour tester notre application et obtenir une couverture de code optimale.
 
 
-Pour prouver ce fait nous allons donner un algorithme qui donnes de tels 
+Pour prouver ce fait nous allons donner un algorithme qui donne de tels 
 valeurs puis nous donnerons un exemple d'exécution. 
 
 \paragraph{Algorithme}
-Cet algorithme va retourner une liste de dictionnaire de valeurs concrètes. 
+Cet algorithme va retourner une liste de dictionnaires de valeurs concrètes. 
 Pour remplir cette liste il faut parcourir l'automate en profondeur.
 
 \begin{verbatim}
@@ -466,7 +466,7 @@ $dictionnaireInitial$ à la liste des tests.
 \end{comment}
 
 \paragraph{}Au final on obtient une énumération de valeurs concrète couvrant 
-tous le code : 
+tout le code : 
 \begin{verbatim}
  {i : 4254 b : ?}, {i : 1006 b : vrai}, {i : 1006 b : faux}
 \end{verbatim}
@@ -474,7 +474,7 @@ tous le code :
 
 \paragraph{}
 Dans ce chapitre nous avons vu comment il était possible de générer un 
-automates à partir de la sortie de JDart. Nous avons également présenté les 
+automate à partir de la sortie de JDart. Nous avons également présenté les 
 différentes utilisation de ces automates. 
 
 \begin{comment}
