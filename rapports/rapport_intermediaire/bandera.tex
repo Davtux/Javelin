@@ -175,15 +175,46 @@ Ce fonctionnement est schématisé dans la figure~\ref{fig:bir_jimple}.
 
 \paragraph{}
 Comme vu précédemment, Bandera utilise
-Soot\footnote{https://sable.github.io/soot/} afin de convertir le code
-source Java du projet en Jimple, un langage intermédiaire.
+Soot\footnote{https://sable.github.io/soot/}\cite{Soot} afin de
+convertir le code source Java du projet en Jimple, un langage
+intermédiaire.
 
 \paragraph{}
 Soot est un framework permettant l'analyse de code source ou de
 bytecode Java. \` A l'origine, Soot était un framework dédié à
 l'optimisation de code. Au fil des versions, il s'est généralisé et
-peut maintenant être utilisé pour instrumenter du code Java, le
+peut maintenant être utilisé pour instrumenter du code Java et le
 visualiser en plus de l'optimiser.
+
+\paragraph{}
+Une comparaison entre du bytecode Java et du code Jimple est montrée
+dans la Figure~\ref{fig:jimple_ex}.
+
+\begin{figure}[ht]
+  \centering
+  \begin{framed}
+    \center{Bytecode Java}
+\begin{verbatim}
+iload 1  // mets la variable x1 sur la pile
+iload 2  // mets la variable x2 sur la pile
+iadd     // dépile les deux valeurs et empile leur somme
+istore 1 // dépile et mets la valeur dans x1
+\end{verbatim}
+  \end{framed}
+
+  \begin{framed}
+    \center{Source Jimple}
+\begin{verbatim}
+stack1 = x1 // iload 1
+stack2 = x2 // iload 2
+stack1 = stack1 + stack2 // iadd
+x1 = stack1 // istore 1
+\end{verbatim}
+  \end{framed}
+  \caption{\label{fig:jimple_ex} Comparaison entre du bytecode Java et Jimple}
+  Source~: \url{https://en.wikipedia.org/wiki/Soot_(software)}
+\end{figure}
+
 
 \section{Interêt et limites}
 
@@ -204,11 +235,13 @@ ayant été développée pour être compatible avec le plus de
 vérificateurs possibles.
 
 \paragraph{}
-Notre but n'est pas d'écrire un vérificateur de modèle. De plus, afin
-de nous simplifier la tâche, nous avons décidé d'utiliser JDart, qui
-sera présenté dans la prochaine section. L'API JavaCard ne gérant pas
-les threads dans sa version classique (ceux-ci existent dans la
-version Connected
+Afin de nous simplifier la tâche, nous avons décidé d'utiliser JDart,
+qui sera présenté dans la prochaine section. Cet outil génère des
+fichiers pour Java PathFinder en utilisant la méthode de l'exécution
+concolique.
+
+L'API JavaCard ne gérant pas les threads dans sa version
+classique (ceux-ci existent dans la version Connected
 Edition\footnote{\url{https://fr.wikipedia.org/wiki/Java_Card\#Version_Java_Card_3_.C2.AB.C2.A0Connect.C3.A9e.C2.A0.C2.BB}}),
 toute la complexité de Bandera autour de l'analyse des fils
 d'exécution ne nous concerne pas non plus.
@@ -227,4 +260,7 @@ Une autre partie intéressante de Bandera est son utilisation du
 framework Soot. Ce dernier est un outil permettant l'analyse et la
 modification de code source Java ainsi que de bytecode. Celui-ci
 pourrait nous être utile conjointement avec JDart pour extraire les
-variables participant aux changements d'état d'un applet JavaCard.
+variables participant aux changements d'état d'un applet JavaCard et
+les annoter. En effet, les variables à analyser par JDart doivent être
+annotées par un \verb|@Symbolic|, ce framework nous permettrais
+d'effectuer ceci automatiquement.
