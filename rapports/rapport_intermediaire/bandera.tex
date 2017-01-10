@@ -3,7 +3,7 @@
 \paragraph{}
 Bandera~\cite{bandera1} est un logiciel permettant d'analyser un
 projet Java et d'en extraire un modèle utilisable par un vérificateur
-de code. Il a été développé suite à la collaboration de chercheurs de
+de modèle. Il a été développé suite à la collaboration de chercheurs de
 l'Université d'Hawaï et de l'Université d'État du Kansas.
 
 \paragraph{}
@@ -12,6 +12,14 @@ intéressant de voir les décisions prises par ses développeurs pour
 réaliser ce programme, en effet notre projet possède certaines
 similarités~: nous cherchons aussi à analyser du code source Java afin
 d'en extraire un automate.
+
+\paragraph{}
+La vérification de modèle est un problème parallèle au nôtre~: il
+s'agit de vérifier si le modèle représentant un système (informatique,
+mais aussi matériel) admet certaines propriétés. Par exemple,
+Wikipédia cite \textit{<<~on souhaite vérifier qu'un programme ne se
+  bloque pas, qu'une variable n'est jamais nulle,
+  etc.~>>}\footnote{\url{https://fr.wikipedia.org/wiki/Vérification_de_modèles}}
 
 \paragraph{}
 Nous allons donc étudier son fonctionnement afin de comprendre comment
@@ -72,9 +80,10 @@ Bandera, détaille l'utilisation de Bandera et son fonctionnement.
 \label{sec:bandera_slicing}
 
 \paragraph{}
-Dans le but de ne garder que les instructions intéressantes, Bandera
-effectue un découpage des instructions. Pour un programme $P$, des
-opérations $s_i$ sont extraites et regroupées dans $C$.
+Dans le but de ne garder que les instructions intéressantes à la
+vérification d'une certaine propriété, Bandera effectue un découpage
+des instructions. Pour un programme $P$, des opérations $s_i$ sont
+extraites et regroupées dans $C$.
 
 $$C = \{s_1, s_2, \ldots, s_k\}$$
 
@@ -93,7 +102,8 @@ juste pour la version complète de $P$.
 \paragraph{}
 Découper un programme permet aussi de simplifier le travail du
 vérificateur de modèle en réduisant le nombre d'instructions à
-vérifier.
+vérifier. Bandera peut ainsi générer un modèle différent en fonction
+de la propriété à tester.
 
 \subsection{Abstraction des variables}
 \label{sec:bandera_abstraction}
@@ -180,10 +190,14 @@ ayant été développée pour être compatible avec le plus de
 vérificateurs possibles.
 
 \paragraph{}
-Sachant que l'API JavaCard ne gère pas les threads et que nous
-utiliseront JDart pour effectuer l'analyse, il sera plus simple pour
-nous de travailler sur le code source des applets afin d'en extraire
-un modèle.
+Notre but n'est pas d'écrire un vérificateur de modèle. De plus, afin
+de nous simplifier la tâche, nous avons décidé d'utiliser JDart, qui
+sera présenté dans la prochaine section. L'API JavaCard ne gérant pas
+les threads dans sa version classique (ceux-ci existent dans la
+version Connected
+Edition\footnote{\url{https://fr.wikipedia.org/wiki/Java_Card#Version_Java_Card_3_.C2.AB.C2.A0Connect.C3.A9e.C2.A0.C2.BB}}),
+toute la complexité de Bandera autour de l'analyse des fils
+d'exécution ne nous concerne pas non plus.
 
 \paragraph{}
 Il apparaît que Bandera est un projet très intéressant pour la
@@ -193,3 +207,10 @@ changements des variables, etc. --- sont aussi réalisables en
 utilisant l'outil JDart, qui sera présenté dans la prochaine
 section. Celui-ci est encore maintenu et est plus orienté vers les
 développeurs, il sera donc plus simple à intégrer à notre projet.
+
+\paragraph{}
+Une autre partie intéressante de Bandera est son utilisation du
+framework Soot. Ce dernier est un outil permettant l'analyse et la
+modification de code source Java ainsi que de bytecode. Celui-ci
+pourrait nous être utile conjointement avec JDart pour extraire les
+variables participant aux changements d'état d'un applet JavaCard.
