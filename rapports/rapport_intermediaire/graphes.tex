@@ -196,38 +196,51 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
   \end{itemize}
 
     
-    \begin{table}[!h]{Avantage des différents outils en fonction des autres}
+    \begin{table}[H]
       
       \centering
     
-    \begin{tabular}{p{3.5cm}  p{3.50cm}  p{3.5cm}  p{3.50cm} }
+    \begin{tabular}{p{3.5cm}  p{6cm}  p{6cm} }
 
-	& \textbf{Graph-Tool} 		& \textbf{Gephi} 	& \textbf{Medusa}	\\ 
+	& \textbf{Avantages} 		& \textbf{Inconvénients}\\ 
     	
     \end{tabular}
 
     
-    \begin{tabular}{|p{3.5cm} | p{3.50cm} | p{3.5cm} | p{3.50cm} |}
+    \begin{tabular}{|p{3.5cm} | p{6cm} | p{6cm} |}
       
       \hline
-      \textbf{Graph-Tool} 	& & Graph-Tool plus simple à intégré car codé en Java. 	
-				  & Graph-Tool plus simple à intégré car codé en Java. 	\\ \hline
-      \textbf{Gephi} 		& x 				
-			      & & x 			\\ \hline
-      \textbf{Medusa} 		& x 				
-				& \textcolor{red}{-} 	
-				& \\ \hline
-    \end{tabular}
-    
-    \begin{tabular}{c c c}
-    &&\\
-    x : normal & + = avantage & - = inconvénient\\
-    N/I : non-implémenté & \textcolor{green}{vert} = avantage & \textcolor{red}{rouge} = inconvénient\\
+      \textbf{Graph-Tool} 	& Haute performance grâce à son coeur en C++, nombreuses fonctionnalités déjà implémentées	
+				& Difficulté d'intégration en raison du langage. \\ \hline
+      \textbf{Gephi} 		& Certainement plus simple à intégrer à notre application en raison de son codage en Java. Nombreuses fonctionnalités déjà implémentées.
+				& Contient des outils non indispensables : la GUI par exemple, ce qui rajoutera certainement une difficulté d'extraction des fonctions pouvant nous intéresser. 	\\ \hline
+      \textbf{Medusa} 		& Très hautes performances sur les graphes de grande taille grâce à son parallélisme. Nombreuses fonctionnalités déjà implémentées.
+				& Uniquement compatible avec du matériel NVidia, Difficulté d'intégration en raison du langage.	\\ \hline
     \end{tabular}
 
+    \caption{Avantage et inconvénient des différents outils }
   \end{table}
   
   
   \subsection{Bilan}
+  
+  \paragraph{}
+  Après avoir présenter les différentes solutions et établi une comparaison sommaire, il ressort que les trois solutions sont relativement équivalentent sur les fonctionnalités proposée. Seuls les langages et les manières d'arriver au résultat diffère.
+  
+  \paragraph{}
+  Dans notre problématique, nous n'aurons certainement pas à gérer de trop gros graphes, en effet, bien que complexes, les applets JavaCard sont limités en taille (contrainte naturelle d'une carte à puce). Ayant également une contrainte de temps, il semble logique de préférer la solution codée en Java, nous aurons ainsi plus de simplicité à l'intégrer à notre application finale.
+  
+  \paragraph{}La solution retenue dans cette partie est donc \textbf{Gephi}.
+  
+  \section{Bilan global de la partie Graphes}
+  
+  \paragraph{}
+  Dans ce chapitre, nous avons vu plusieurs formats de fichiers et  outils permettant de répondre au problème de gestion de graphes.
+  
+  Nous avons donc choisi d'utiliser le format Json pour stocker nos graphes, de nombreux outils en java permettent de gérer simplement ce format, il y aura donc moins de travail à fournir de ce point de vue là.
+  
+  Concernant l'outil de représentation des graphes, GraphStream sera celui utiliser en priorité, il permettra un affichage clair et une interraction avec l'utilisateur.
+  
+  Pour terminer, Gephi permettre d'appliquer des traitements sur les graphes pour en tirer le maximum d'informations.
   
   
