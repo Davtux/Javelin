@@ -29,7 +29,7 @@
 	
 			\paragraph{}
 				\gls{JPF} ne se limite pas simplement à détecter les erreurs d'un programme, en effet, il effectue la vérification des modéles.
-				C'est un outil qui permet de simuler le non-determinisme. Certain aspects ne peuvent pas être contrôlés par de simples tests et exigent l'assistance d'une \gls{VM}.
+				C'est un outil qui permet de simuler le non-determinisme. Certains aspects ne peuvent pas être contrôlés par de simples tests et exigent l'assistance d'une \gls{VM}.
 				Cependant, en essayant d'explorer et exécuter tous les chemins au sein d'un programme, le nombre d'executions nécessaires peut croître d'une maniére exponentielle (On parle du problème d'explosion d'état). 
 				Pour résoudre ce problème, \gls{JPF} réalise une correspondance d'état, c'est un mecanisme qui permet de comparer
 				l'état actuel en un n\oe{}ud à des états déjà connus, dans le cas où l'état
@@ -43,7 +43,7 @@
       
 			\paragraph{}
 				La vérification des modèles (\textit{Model Checking}) ne dépend pas des conjectures. En théorie si une anomalie est présente dans le programme à tester
-				alors la vérification des modéles la trouvera, puisque c'est une méthode qui explore de maniére exhaustive tous les comportements possibles du systeme ;
+				alors la vérification des modéles la trouvera, puisque c'est une méthode qui explore de maniére exhaustive tous les comportements possibles du système ;
 				d'où vient l'efficacité du \textit{Model Checking}.
 		\subsection{JDart: Exécution concolique}
 			\nocite{JDart}
@@ -51,19 +51,19 @@
 
 			\paragraph{}
 				\gls{JPF} n'est pas une boite noire. L'une des meilleures fonctionalités de \gls{JPF} est la possibilité de le personnaliser entièrement et d'ainsi pouvoir ajouter des extensions facilement.
-				Cet aspect a permi la création d'un grand nombre d'extensions utiles comme des moteurs
+				Cet aspect a permis la création d'un grand nombre d'extensions utiles comme des moteurs
 				qui permettent l'exécution symbolique et concolique.
 
 			\paragraph{}
-				Une execution concolique commence par une entrée concrète, en exécutant le programme à tester, des contraintes symboliques pour les chemins explorés
-				sont formés pour cette exécution. Ces contraintes symboliques sont en réalité des formules logiques composés d'un tas de déclarations conditionnelles
-				qui ont été collecté tout au long du parcours.
+				Une exécution concolique commence par une entrée concrète, en exécutant le programme à tester, des contraintes symboliques pour les chemins explorés
+				sont formés pour cette exécution. Ces contraintes symboliques sont en réalité des formules logiques composées d'un tas de déclarations conditionnelles
+				qui ont été collectées tout au long du parcours.
 
 				L'étape suivante consiste à nier une sous formule et donc nous arrivons à créer un nouveau vecteur de valeurs concrétes en utilisant un
 				solveur de contraintes.
 
 				Ce vecteur sera utilisé pour une nouvelle exécution du programme ce qui permettra d'éxplorer un nouveau chemin.
-				Cette procedure peut être répéter jusqu'à ce que tous les chemins possibles du système à tester sont explorés.
+				Cette procédure peut être répétée jusqu'à ce que tous les chemins possibles du système à tester soient explorés.
 				
 			\begin{figure}[H]
 				\centering
@@ -72,22 +72,22 @@
 			\end{figure}
 				
 			\paragraph{}
-				L'execution concolique résout un grand problème qui se déclanche généralement au cours de l'exécution concolique,
+				L'exécution concolique résout un grand problème qui se déclanche généralement au cours de l'exécution concolique, %%Là, je pense qu'il y a une exécution concolique de trop !!!
 				puisque l'espace de recherche est réduit significativement de façon à ce que le problème d'explosion d'espace de recherche
 				ne peut plus se réaliser car les formules logiques générées par l'execution symbolique indiquera quelle valeur concrète
 				doit être fournie pour satisfaire la condition concernée.
-				Il n'est plus obligatoire de fournir un grand nombre d'entrée qui au final peuvent générer toutes un même chemin.
+				Il n'est plus obligatoire de fournir un grand nombre d'entrées qui, au final, peuvent toutes générer un même chemin.
 				\newline
 				La technique d'exécution concolique a aussi son effet sur l'exécution symbolique traditionnelle.
 				En effet, quand une condition ne peut pas être résolue symboliquement à cause de la complexité de la contrainte (Equation mathématique complexe,
-				opération sur les nombres flottant...) elle sera remplacer par une valeur concréte ce qui permet de continuer l'exploration des chemins.
+				opération sur les nombres flottant...) elle sera remplacée par une valeur concréte, ce qui permet de continuer l'exploration des chemins.
 
 			\paragraph{}
 				JDart est l'une des extensions de \gls{JPF}, il s'agit d'un moteur d'exécution concolique qui traite un programme Java
-				en utilisant à la fois des valeurs symboliques et concrétes garde les traces des exécution symboliques.
+				en utilisant à la fois des valeurs symboliques et concrétes et garde les traces des exécution symboliques.
 				Les formules logiques créées sont ensuite passées à un solveur \textit{\gls{SMT}} afin d'obtenir une évaluation satisfaisante de la contrainte.
-				JDart utilise par défaut \textit{\gls{microsoft-z3}} mais aussi il propose un niveau d'abstraction qui permet d'intégrer d'autres solveurs
-				si nécessaire tels que: \textit{Coral}, \textit{dreal}...
+				JDart utilise par défaut \textit{\gls{microsoft-z3}} mais  il propose aussi un niveau d'abstraction qui permet d'intégrer d'autres solveurs
+				tels que : \textit{Coral} ou \textit{dreal} si nécessaire.
 				
 			\begin{figure}[H]
 				\centering
@@ -97,7 +97,7 @@
 				
 			\paragraph{}
 				Plus concrètement, la figure~\ref{fig:jdart_sample} montre le résultat d'une portion de code Java executé avec JDart.
-				La portion de code admet deux paramétres primitives et deux simples testes sur ces paramétres, ainsi que la sortie correspondante
+				La portion de code admet deux paramétres primitifs et deux simples tests sur ces paramétres, ainsi que la sortie correspondante
 				de JDart.
 				
 			\begin{figure}[H]
@@ -108,17 +108,17 @@
 			
 			\paragraph{}
 				L'arbre des contraintes contient un n\oe{}ud pour chaque condition dans ce fragment de code et deux feuilles.
-				Le chemin qui aboutie à une erreur est marqué par la classe qui le déclanche.
-				Nous n'avons pas affiché les valeurs concréte qui permettent de parcourir ces chemins, néanmoins, JDart peut être configurer
-				de façon à ce qu'il affiche ces valeurs ou générer des testes unitaires basés sur ces valeurs.
+				Le chemin qui abouti à une erreur est marqué par la classe qui le déclanche.
+				Nous n'avons pas affiché les valeurs concrétes qui permettent de parcourir ces chemins, néanmoins, JDart peut être configuré
+				de façon à ce qu'il affiche ces valeurs ou génère des tests unitaires basés sur ces valeurs.
       
 	\section{La VM JAVA, la VM du JPF et la VM JavaCard}
 		\paragraph{}
-			Nous avons définie \gls{JPF} comme étant une machine virtuelle qui exécute un code Java et analyse son \textit{\gls{bytecode}},
+			Nous avons défini \gls{JPF} comme étant une machine virtuelle qui exécute un code Java et analyse son \textit{\gls{bytecode}},
 			
 	\section{Tester des applets JavaCard}
 	\paragraph{}
 		Java Path Finder est connu comme le couteau suisse de la vérification Java,
-		il est en effet un des outils de test les plus evolués pour les applications Java,
+		il est en effet un des outils de tests les plus évolués pour les applications Java,
 		notamment grâce à son extensibilité et à son habilité à supporter et intérger de nouvelle extensions.
 		Cependant, la majorité des extensions ne sont pas destinées à être executées sur des systèmes JavaCard.
