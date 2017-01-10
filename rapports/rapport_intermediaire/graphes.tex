@@ -1,25 +1,25 @@
 \chapter{Représentation et Analyse de graphes}
 \paragraph{}
 
-Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les automates générés dans la partie précédente. Pour cela, les graphes nous ont été imposés. Dans cette partie, nous vous présenteront donc les moyens que nous avons à disposition pour réaliser le stockage de graphes et nous les compareront afin d'en selectionner le meilleur.
+Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les automates générés dans la partie précédente. Pour cela, les graphes nous ont été imposés. Dans cette partie, nous vous présenteront donc les moyens que nous avons à disposition pour réaliser le stockage de graphes et nous les compareront afin d'en sélectionner le meilleur.
 
 \section{Différents format de représentation}
   \paragraph{}
   Il existe de nombreux formats de représentation de graphes tels que le JSON, le CSV ou bien encore l'XML.
   
   Dans cette première partie, nous allons nous concentrer sur le choix du format que nous utiliserons pour stocker et réutiliser nos graphes après leur création dans l'application.
-  Nous allons pour cela, passer par un tableau comparatif des diverses solutions.
+  Nous allons pour cela passer par un tableau comparatif des diverses solutions.
   
 
   \subsection{Liste des formats de représentation de graphes}
   La liste ci-dessous contient tous les formats de représentation de graphes à comparer : 
   \begin{itemize}
-   \item CSV : est un type de fichier très répendu, il représente les informations sous formes de tableaux et est facilement lisible via la plupart des programmes. 
-   \item XML : est surement le type de fichier le plus répendu, stockant les donées sous forme de balises, il est très utilisé pour toutes les applications webs et orientées objets. 
+   \item CSV : est un type de fichier très répandu, il représente les informations sous forme de tableaux et est facilement lisible via la plupart des programmes. 
+   \item XML : est surement le type de fichier le plus répandu, stockant les donées sous forme de balises, il est très utilisé pour toutes les applications web et orientées objets. 
    \item JSON : le petit nouveau, il est le type de fichier favoris de tous les langages orientés objets car il permet un stockage très simple de tous les types de données, des plus simples aux plus complexes. 
    \item svg : basé sur le XML, ce format est conçu pour supporter les images vectorielles.
    \item bmp : est un format d'image propriétaire lancé par Microsoft, il est assez répandu.
-   \item jpg : est un autre format d'image, plus répendu que le bmp.
+   \item jpg : est un autre format d'image, plus répandu que le bmp.
   \end{itemize}
 
   
@@ -42,7 +42,7 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
 	& \makebox[0cm][l]{\rotatebox{45}{ Format libre }} &
 	\makebox[0cm][l]{\rotatebox{45}{ Inter langages }} &
 	\makebox[0cm][l]{\rotatebox{45}{ Conversion en image simple}} &
-	\makebox[0cm][l]{\rotatebox{45}{ Evolution simple }} &
+	\makebox[0cm][l]{\rotatebox{45}{ Évolution simple }} &
 	\makebox[0cm][l]{\rotatebox{45}{ Support objet natif }}\\
 	    
     \end{tabular}
@@ -102,7 +102,7 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
     \hline
     \textbf{MXGraph\footnote{MXGraph : https://www.jgraph.com/}}& JavaScript &  Apache 2.0 & MXGraph utilise un rendu SVG pour représenter les graphes, ce qui est un gros avantage, car si les graphes obtenus sont très complexes, il est toujours possible de zommer sur une zone sans perdre en lisibilité.\\
     \hline
-    \textbf{JGraphx\footnote{JGraphx : https://github.com/jgraph/jgraphx}}&Java& BSD 3 & JGraphx est développé par les mêmes personnes que MWGraph, mais contrairement à ce dernier, JGraphx utilise Java Swing comme sortie. Java Swing étant en fin de vie et très difficile à adapter, cette solution est à écarter. \\
+    \textbf{JGraphx\footnote{JGraphx : https://github.com/jgraph/jgraphx}}&Java& BSD 3 & JGraphx est développé par les mêmes personnes que MXGraph, mais contrairement à ce dernier, JGraphx utilise Java Swing comme sortie. Java Swing étant en fin de vie et très difficile à adapter, cette solution est à écarter. \\
     \hline 
     \textbf{GraphStream\footnote{GraphStream : http://graphstream-project.org/}}& Java & LGPL v3.0 & GraphStream est une bibliothèque Java avec une sortie très poussée prévue pour gérer de gros graphes. Cette solution est donc accessible pour l'utilisateur, du côté développeur, le fait que la bibliothèque soit développée en Java est un gros avantage pour l'intégration à l'application. \\
     \hline
@@ -118,7 +118,7 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
 
 	& \makebox[0cm][l]{\rotatebox{45}{ Format libre }} &
 	\makebox[0cm][l]{\rotatebox{45}{ Intégration simple }} &
-	\makebox[0cm][l]{\rotatebox{45}{ User friendly}} &
+	\makebox[0cm][l]{\rotatebox{45}{ User-friendly}} &
 	\makebox[0cm][l]{\rotatebox{45}{ Dessin à partir d'un fichier }} &
 	\makebox[0cm][l]{\rotatebox{45}{ Maintenabilité }}&
 	\makebox[0cm][l]{\rotatebox{45}{ Classement }}\\
@@ -145,9 +145,9 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
   \end{table}
   
   \subsection{Bilan}
-  La solution retenue est la solution GraphStream, qui semble être la plus convenir aux attentes. Dans tous les cas, nous aurons à implémenter l'importation de graphes à partir de fichiers.
+  La solution retenue est la solution GraphStream, qui semble être celle convenant la plus aux attentes. Dans tous les cas, nous aurons à implémenter l'importation de graphes à partir de fichiers.
   
-  Si au cours du developpement nous nous rendons compte de l'impossibilité de nous interfacer avec GraphStream, nous aurons la possibilité de migrer vers Dracula qui est le second choix le plus intéressant.
+  Si au cours du développement nous nous rendons compte de l'impossibilité de nous interfacer avec GraphStream, nous aurons la possibilité de migrer vers Dracula qui est le second choix le plus intéressant.
   
 
   \section{Outils d'analyse existants}
@@ -172,13 +172,13 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
     
     \endhead
 	
-    \textbf{Medusa (I) \footnote{Medusa :  http://bioinformatics.oxfordjournals.org/content/21/24/4432.short}} & Java & Inconnue & Medusa est un outil de traitement des graphes destiné à décomposer et reconnaitre des proteïnes ou des gênes. Il est composé d'une interface graphique et d'un coeur tous deux codés en Java. Cependant, il a l'air compliqué, à priori, d'adapter cet outil à notre type d'utilisation.\\
+    \textbf{Medusa (I) \footnote{Medusa :  http://bioinformatics.oxfordjournals.org/content/21/24/4432.short}} & Java & Inconnue & Medusa est un outil de traitement des graphes destiné à décomposer et reconnaître des protéines ou des gènes. Il est composé d'une interface graphique et d'un c\oe{}ur tous deux codés en Java. Cependant, il a l'air compliqué, à priori, d'adapter cet outil à notre type d'utilisation.\\
     \hline
     \textbf{Graph-Tool \footnote{Graph-Tool : https://graph-tool.skewed.de/}}& Python/C++ & GPLv3 &  Graph-Tool est un outil très complet d'analyse et de génération de graphes, même si la partie génération n'est pas celle qui nous intéresse le plus, la partie analyse reste néanmoins assez étoffée. Elle permet, en autres, de calculer l'isomorphisme d'un graphe, l'arbre couvrant minimal, les composantes connexes. \\
     \hline
     \textbf{Gephi \footnote{Gephi :  https://gephi.org/publications/gephi-bastian-feb09.pdf}}& Java &  GPLv3 & Gephi est un logiciel Open Source implémentant une interface graphique ainsi qu'un coeur en Java. Il permet de réaliser de nombreuses représentations de graphe ainsi que d'appliquer de nombreux calculs sur ces derniers. L'interface grahique n'étant pas notre priorité dans cette partie, il reste à noter qu'il nous sera toujours possible de nous en inspirer pour l'adapter. \\
     \hline
-    \textbf{Medusa (II) \footnote{Medusa :  https://github.com/JianlongZhong/Medusa}}& Cuda/C++ &  BSD 3 & Homonyme du premier logiciel présenté, il est tout de même très différent de ce dernier : de par le langage utilisé pour le développé, CUDA à la place de Java, d'une part. Par son objectif beaucoup plus adaptatif et polyvalent, d'autre part. \\
+    \textbf{Medusa (II) \footnote{Medusa :  https://github.com/JianlongZhong/Medusa}}& Cuda/C++ &  BSD 3 & Homonyme du premier logiciel présenté, il est tout de même très différent de ce dernier : de par le langage utilisé pour le développer, CUDA à la place de Java, d'une part. Par son objectif beaucoup plus adaptatif et polyvalent, d'autre part. \\
     \hline
   \end{longtable}
   
@@ -215,7 +215,7 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
       \textbf{Gephi} 		& Certainement plus simple à intégrer à notre application en raison de son codage en Java. Nombreuses fonctionnalités déjà implémentées.
 				& Contient des outils non indispensables : la GUI par exemple, ce qui rajoutera certainement une difficulté d'extraction des fonctions pouvant nous intéresser. 	\\ \hline
       \textbf{Medusa} 		& Très hautes performances sur les graphes de grande taille grâce à son parallélisme. Nombreuses fonctionnalités déjà implémentées.
-				& Uniquement compatible avec du matériel NVidia, Difficulté d'intégration en raison du langage.	\\ \hline
+				& Uniquement compatible avec du matériel Nvidia, difficulté d'intégration en raison du langage.	\\ \hline
     \end{tabular}
 
     \caption{Avantage et inconvénient des différents outils }
@@ -225,7 +225,7 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
   \subsection{Bilan}
   
   \paragraph{}
-  Après avoir présenter les différentes solutions et établi une comparaison sommaire, il ressort que les trois solutions sont relativement équivalentent sur les fonctionnalités proposée. Seuls les langages et les manières d'arriver au résultat diffère.
+  Après avoir présenté les différentes solutions et établi une comparaison sommaire, il ressort que les trois solutions sont relativement équivalentent sur les fonctionnalités proposées. Seuls les langages et les manières d'arriver au résultat diffèrent.
   
   \paragraph{}
   Dans notre problématique, nous n'aurons certainement pas à gérer de trop gros graphes, en effet, bien que complexes, les applets JavaCard sont limités en taille (contrainte naturelle d'une carte à puce). Ayant également une contrainte de temps, il semble logique de préférer la solution codée en Java, nous aurons ainsi plus de simplicité à l'intégrer à notre application finale.
@@ -235,12 +235,12 @@ Comme nous l'avons vu auparavent, il est nécessaire de pouvoir stocker les auto
   \section{Bilan global de la partie Graphes}
   
   \paragraph{}
-  Dans ce chapitre, nous avons vu plusieurs formats de fichiers et  outils permettant de répondre au problème de gestion de graphes.
+  Dans ce chapitre, nous avons vu plusieurs formats de fichiers et outils permettant de répondre au problème de gestion de graphes.
   
-  Nous avons donc choisi d'utiliser le format Json pour stocker nos graphes, de nombreux outils en java permettent de gérer simplement ce format, il y aura donc moins de travail à fournir de ce point de vue là.
+  Nous avons donc choisi d'utiliser le format JSON pour stocker nos graphes, de nombreux outils en Java permettent de gérer simplement ce format, il y aura donc moins de travail à fournir de ce point de vue là.
   
-  Concernant l'outil de représentation des graphes, GraphStream sera celui utiliser en priorité, il permettra un affichage clair et une interraction avec l'utilisateur.
+  Concernant l'outil de représentation des graphes, GraphStream sera celui utilisé en priorité, il permettra un affichage clair et une interaction avec l'utilisateur.
   
-  Pour terminer, Gephi permettre d'appliquer des traitements sur les graphes pour en tirer le maximum d'informations.
+  Pour terminer, Gephi permettra d'appliquer des traitements sur les graphes pour en tirer le maximum d'informations.
   
   
