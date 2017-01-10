@@ -200,53 +200,45 @@ contenant que l'état initial :
 
 \begin{figure}[H]
  \centering
- \includegraphics[width=.10\linewidth]{./images/graph_build.png}
+ \includegraphics[scale=.44]{./images/graph_build.png}
  \caption{Automate au début de l'algorithme}
 \end{figure}
 
-\begin{minipage}{.44\linewidth}
- \centering
+
+ 
  \begin{figure}[H]
   \centering
-  \includegraphics[width=\linewidth]{./images/graph_build_1.png}
+  \includegraphics[scale=0.44]{./images/graph_build_1.png}
   \caption{Étape 1 : Exploration de l'arbre (profondeur 1)}
  \end{figure}
-\end{minipage}
-\begin{minipage}{.44\linewidth}
+
  \paragraph{} On explore le côté "vrai" de l'arbre des contraintes, nous 
 arrivons sur une état final, qui est ajouté à l'automate. Au deuxième appel 
 l'exploration de ce côte de l'arbre s'arrête et passe à l'autre côté.
-\end{minipage}
 
-\begin{minipage}{.44\linewidth}
- \centering
+
  \begin{figure}[H]
   \centering
-  \includegraphics[width=\linewidth]{./images/graph_build_2.png}
+  \includegraphics[scale=0.44]{./images/graph_build_2.png}
   \caption{Étape 2 : Exploration de l'arbre (profondeur 1)}
  \end{figure}
-\end{minipage}
-\begin{minipage}{.44\linewidth}
  \paragraph{} Le nouvel état n'est pas un état final, il faut continuer 
 l'exploration.
  \paragraph{} Et ainsi de suite jusqu'à ce que tous l'arbre soit exploré.
-\end{minipage}
 
-\begin{minipage}{.44\linewidth}
- \centering
+
  \begin{figure}[H]
   \centering
-  \includegraphics[width=\linewidth]{./images/graph_build_3.png}
+  \includegraphics[scale=0.44]{./images/graph_build_3.png}
   \caption{Étape 3 : Exploration de l'arbre (profondeur 2)}
  \end{figure}
-\end{minipage}
-\begin{minipage}{.44\linewidth}
+
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\linewidth]{./images/graph_build_4.png}
+  \includegraphics[scale=0.44]{./images/graph_build_4.png}
   \caption{Étape 4 : Exploration de l'arbre (profondeur 2)}
  \end{figure}
-\end{minipage}
+
 
 \paragraph{}
 À la fin de l'algorithme nous obtenons bien un automate correspondant à 
