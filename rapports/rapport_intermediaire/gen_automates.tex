@@ -119,21 +119,21 @@ on obtient la sortie :
 \end{figure}
 
 Ici JDart énumère toutes les valeurs de $j$ allant de 1 à 4 et "embo\^ite" les 
-condition de (if/else), nous obtenons alors une version linéaire de la boucle 
+conditions de (if/else), nous obtenons alors une version linéaire de la boucle 
 for.
 
 Nous obtenons le même comportement avec une boucle while.
 
 \paragraph{État final}
 Un état final est une instruction dans le code qui permet à JDart d'arrêter son 
-exploration dans une branche, il existe de type d'état final : 
+exploration dans une branche, il existe deux types d'état final : 
 \begin{itemize}
  \item les cas d'erreurs : cela correspond le plus souvent à une exception 
 levée et/ou non attrapée.
  \item les cas valides : c'est-à-dire une instruction ou une suite 
 d'instructions ne contenant aucune décision à prendre et où aucune erreur n'est 
 levée. Un cas valide peut ne correspondre à aucune instruction dans le code 
-source, seulement on explicite toutes les branche du code.
+source, seulement on explicite toutes les branches du code.
 
 \begin{figure}[H]
 	\centering	
