@@ -1,6 +1,6 @@
 \chapter{Objectif du Projet}
 \paragraph{}
-Le but de ce projet est de pouvoir extraire un automate à partir du code source Java d’une applet JavaCard et le comparer à un automate de référence. Dans cette partie, afin d'expliquer au mieux les enjeux et les besoins nous commenceront par expliquer l'intérêt de l'extraction d'automate pour une application sous JavaCard, puis nous donnerons un court exemple de ce qui sera demandé à l'application.
+Le but de ce projet est de pouvoir extraire un automate à partir du code source Java d’une applet JavaCard et le comparer à un automate de référence. Dans cette partie, afin d'expliquer au mieux les enjeux et les besoins nous commencerons par expliquer l'intérêt de l'extraction d'automate pour une application sous JavaCard, puis nous donnerons un court exemple de ce qui sera demandé à l'application.
 
 \section{Intérêt de l'extraction d'automates à partir de code source}
 
@@ -13,12 +13,12 @@ Exporter une application sous forme de graphe permet de vérifier la présence �
 \section{Mise en pratique sur une applet simple}
 
 \paragraph{}
-Tout d’abord il est nécessaire de décrire les différents états de l’applet ainsi que les transitions entre les états qui correspondent à la réception d’une commande \gls{APDU}. Nous devons repérer dans le code les réceptions de commande \gls{APDU}, déterminer les valeurs qu’elles peuvent prendre et créer l’arbre des contraintes de l’applet.
+Tout d’abord il est nécessaire de décrire les différents états de l’applet ainsi que les transitions entre les états qui correspondent à la réception d’une commande \gls{APDU}. Nous devons repérer dans le code les réceptions de commandes \gls{APDU}, déterminer les valeurs qu’elles peuvent prendre et créer l’arbre des contraintes de l’applet.
 \paragraph{}
 Ensuite nous pouvons construire un automate montrant les états et les commandes \gls{APDU} à envoyer pour passer de l’un à l’autre. Il sera alors possible de le comparer à l’automate de spécification de l’applet.
 
 \paragraph{}
-Le programme suivant est la partie métier d’un applet simplifiée de gestion bancaire. Cet applet propose deux fonctionnalités : consulter son solde avec le code 0x34 ou retirer de l’argent avec le code 0x38. Une protection basique est en place pour empêcher l’utilisateur de retirer plus d’argent que son compte n’en possède.
+Le programme suivant est la partie métier d’une applet simplifiée de gestion bancaire. Cette applet propose deux fonctionnalités : consulter son solde avec le code 0x34 ou retirer de l’argent avec le code 0x38. Une protection basique est en place pour empêcher l’utilisateur de retirer plus d’argent que son compte n’en possède.
 
 \textit{Note~:} Le tableau \verb|buffer| contient l'\gls{APDU}.
 
@@ -93,7 +93,7 @@ Une fois l'application analysée par le programme d'analyse concolique, on souha
 \end{tikzpicture}
 
 \paragraph{}
-Une fois le graphe extrait, nous souhaitons créer un automate représentant le fonctionnement de l'application, en voici un exemple en lien avec le graphe précédent :
+Une fois le graphe extrait, nous souhaitons créer un automate représentant le fonctionnement de l'application, en voici un exemple en lien avec le graphe précédant :
 
 
 \begin{figure}[H]
@@ -128,7 +128,7 @@ Une fois le graphe extrait, nous souhaitons créer un automate représentant le 
 L’abstraction de code n’est pas nouveau dans le domaine du développement d’application. Il existe déjà de nombreux outils pour différents langages. Par exemple pour le Java il existe Bandera qui effectue tout un travail d’analyse. Cependant ce principe n’a jamais été appliqué à l’API de JavaCard. 
 
 \paragraph{}
-Notre travail consistera avant tout à utiliser des techniques voir des outils déjà existants mais en les adaptant pour qu’ils puissent analyser une applet JavaCard.
+Notre travail consistera avant tout à utiliser des techniques, voir des outils, déjà existants mais en les adaptant pour qu’ils puissent analyser une applet JavaCard.
 
 C’est dans ce but que nous allons vous présenter un état de l’art qui représente une importante partie de la suite de ce rapport.
 
