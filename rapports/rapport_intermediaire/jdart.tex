@@ -125,14 +125,34 @@
 			\begin{figure}[H]
 				\centering
 					\includegraphics[scale=0.5]{images/layersJDart.png}
-				\caption{\label{fig:jdart_layers} Exemple d'un programme executé avec JDart}
+				\caption{\label{fig:jdart_layers} Les différents niveaux de l'environnement }
 			\end{figure}
 			
-			
+			De plus, combiner le framework JavaCard, \gls{JPF} et ses extensions ce qui demande des connaissances approfondies sur les propriétés des machines virtuelles
+			Java et JavaCard, Pour pouvoir effectuer des testes en utilisant la technique d'éxécution concolique sur des applets JavaCard
+			il est nécessaire de modifier l'API JavaCard à cause des méthodes natives qui ne peuvent pas être éxécuter sur JDart.
+			Pour cela il faut intégrer la librairie JavaCard au sein de la machine virtuelle Java.
 			
 	\section{Tester des applets JavaCard}
+		\paragraph{}
+			Au cours de ce projet, nous essayerons de travailler sur tous les aspects et les fonctionalités d'une applet JavaCard.
+			Pour exécuter des testes concoliques sur des applets il faut choisir les attribues à traiter comme variables concoliques et ceux
+			qui doivent être traiter d'une maniére concrète.
+			Dans la majorité des cas, on se contentera de traiter la classe APDU concoliquement puisque les requêtes passées à la méthode \verb|process()|
+			de l'applet dépends de la valeur de la commande APDU.
+	\section{Etendre les testes}
+		\paragraph{}
+			Exécuter \gls{JPF} sur le système sous test donne une vue claire sur la structure de l'applet à tester, de plus, nous voulons
+			vérifier si l'applet est bien conforme à la spécification \textit{ISO 7816} et que toute transition d'un état à un autre est valide.
+			La solution que nous proposons est d'utiliser la sortie de JDart pour générer un automate qui decrit tous les états et les transitions
+			d'une applet.
+			Puisque \gls{JPF} fait la vérification du modèle, concrètiser cette idée est relativement facile.
+			En effet, nous détaillerons cette solution dans les chapitres suivants.
+			
+	\section{Interêt et limites}
 	\paragraph{}
-		Java Path Finder est connu comme le couteau suisse de la vérification Java,
+		\textbf{Java Path Finder} est connu comme le couteau suisse de la vérification Java,
 		il est en effet un des outils de test les plus evolués pour les applications Java,
 		notamment grâce à son extensibilité et à son habilité à supporter et intérger de nouvelle extensions.
-		Cependant, la majorité des extensions ne sont pas destinées à être executées sur des systèmes JavaCard.
+		Cependant, la majorité des extensions ne sont pas destinées à être executées sur des systèmes JavaCard ce qui nous a motivé
+		à faire le choix de ce projet et à contribuer à la communauté.
