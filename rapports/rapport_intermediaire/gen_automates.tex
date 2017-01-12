@@ -198,7 +198,8 @@ $$ N = (decision, enfantVrai, enfantFaux)$$
 L'algorithme consiste à parcourir en profondeur l'arbre entièrement.
 Cela donne l'algorithme récursif suivant :
 
-\newpage
+\begin{figure}
+\centering
 \begin{verbatim}
 Fonction ConstruireAutomate(ArbreContrainte arbre, Noeud n = noeud racine de 
 l'arbre, Etat e = q l'état initial)
@@ -232,6 +233,9 @@ Début
         ConstruireAutomate(arbre, n.enfantFaux, nouvelEtat)
 Fin
 \end{verbatim}
+\caption{Algorithme pour construire un automate à partir de l'arbre des 
+contraintes}
+\end{figure}
 
 \paragraph{}
 La fonction \textbf{Inverser()} retourne l'expression booléenne inverse, par 
@@ -351,6 +355,8 @@ valeurs puis nous donnerons un exemple d'exécution.
 Cet algorithme va retourner une liste de dictionnaires de valeurs concrètes. 
 Pour remplir cette liste il faut parcourir l'automate en profondeur.
 
+\begin{figure}[H]
+\centering
 \begin{verbatim}
  dictionnaireInitial : est un dictionnaire contnant toutes les variables
                       influant sur le programme.
@@ -372,6 +378,8 @@ Pour remplir cette liste il faut parcourir l'automate en profondeur.
 Fin
         
 \end{verbatim}
+\caption{Algorithme pour générer des tests à partir d'un automate}
+\end{figure}
 
 \paragraph{Exemple}
 Si nous reprenons l'automate généré précédemment (Figure 
