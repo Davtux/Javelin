@@ -1,3 +1,34 @@
 \chapter{Travail à accomplir}
 
 \section{}
+
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,thick,main node/.style={circle,fill=blue!20,draw,minimum size=1cm,inner sep=0pt]}]
+
+\node[draw=white, fill=couleur3, state, rectangle, rounded corners=3pt] (A){\textcolor{white}{\textbf{Code Source}}};
+\node[draw=white, state, ellipse, fill=couleur2] (B) [right=4cm of A] {\textcolor{white}{\textbf{Soot}}};
+\node[draw=white, state, ellipse, fill=couleur2] (C) [below of=A] {\textcolor{white}{\textbf{JPF}}};
+\node[draw=white, fill=couleur3,state, rectangle, rounded corners=3pt] (D) [right of=C] {\textcolor{white}{\textbf{Bytecode}}};
+\node[draw=white, fill=couleur3, state, rectangle, rounded corners=3pt] (E) [below of=C] {\textcolor{white}{\textbf{Sortie JDart}}};
+\node[draw=white,fill=couleur4, state, rectangle] (F) [below=1cm of E] {\textcolor{white}{\textbf{Générateur d'automates}}};
+\node[draw=white, fill=couleur3, state, rectangle, rounded corners=4pt] (G) [below =1cm of F] {\textcolor{white}{\textbf{Graphe}}};
+\node[draw=white, state, ellipse, fill=couleur2] (H) [below =1cm of G] {\textcolor{white}{\textbf{Rendu graphique de graphe (GraphStream)}}};
+
+\node[draw=white, fill=couleur3, state, rectangle, rounded corners=3pt]  (I) [right =3cm of E] {\textcolor{white}{\textbf{Fichiers fournis ou générés}}};
+\node[draw=white, state, ellipse, fill=couleur2]  (J) [below=0.5cm of I] {\textcolor{white}{\textbf{Outils à utiliser}}};
+\node[draw=white,fill=couleur4, state, rectangle] (K) [below=0.5cm of J] {\textcolor{white}{\textbf{Outil à developper}}};
+
+\draw[<->] (A)  --   node [ align=center, below] {Modier
+le code \\ source
+(annotation)}  (B);
+
+\draw[->] (C)  --   node [ align=center, above, rotate=90] {Exécution\\ concolique}  (E);
+
+ \path[->]
+  (A) edge node{} (C)
+  (D) edge node{} (C)
+  (F) edge node{} (G)
+  (G) edge node{} (H)
+  (E) edge node{} (F);
+  
+
+\end{tikzpicture}
