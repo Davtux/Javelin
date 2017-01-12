@@ -11,7 +11,9 @@
 \node[draw=white, fill=couleur3, state, rectangle, rounded corners=3pt] (E) [below of=C] {\textcolor{white}{\textbf{Sortie JDart}}};
 \node[draw=white,fill=couleur4, state, rectangle] (F) [below=1cm of E] {\textcolor{white}{\textbf{Générateur d'automates}}};
 \node[draw=white, fill=couleur3, state, rectangle, rounded corners=4pt] (G) [below =1cm of F] {\textcolor{white}{\textbf{Graphe}}};
-\node[draw=white, state, ellipse, fill=couleur2] (H) [below =1cm of G] {\textcolor{white}{\textbf{Rendu graphique de graphe (GraphStream)}}};
+\node[draw=white, state, ellipse, fill=couleur2, align=center] (H) [below =1cm 
+of G] {\textcolor{white}{\textbf{Rendu graphique de graphe}} \\ 
+\textcolor{white}{\textbf{(GraphStream)}}};
 
 \node[draw=white, fill=couleur3, state, rectangle, rounded corners=3pt]  (I) [right =3cm of E] {\textcolor{white}{\textbf{Fichiers fournis ou générés}}};
 \node[draw=white, state, ellipse, fill=couleur2]  (J) [below=0.5cm of I] {\textcolor{white}{\textbf{Outils à utiliser}}};
