@@ -46,7 +46,7 @@ Afin d'effectuer les tâches décrites dans le Chapitre~\ref{chap:travail}, il e
 \item Création d'un automate
   \begin{itemize}
   \item Définition de la structure de données
-  \end{itemize}
+  \end{itemize} 
 \item Représentation graphique
   \begin{itemize}
   \item Adapter notre structure de données à GraphStream
@@ -62,16 +62,35 @@ Afin d'effectuer les tâches décrites dans le Chapitre~\ref{chap:travail}, il e
   \begin{ganttchart}[
     vgrid,hgrid,
     title height=1
-    ]{2}{26}
+    ]{2}{27}
     \gantttitle{Janvier}{4}  \gantttitle{Février}{6} \gantttitle{Mars}{6} \gantttitle{Avril}{6} \gantttitle{Mai}{3} \\
-    \gantttitlelist{16,21,26,31}{1} \gantttitlelist{3,8,13,18,23,28}{1} \gantttitlelist{6,11,16,21,26,31}{1} \gantttitlelist{5,10,15,20,25,30}{1} \gantttitlelist{6,11,16}{1} \\
+    \gantttitlelist{16,21,26,31}{1} \gantttitlelist{3,8,13,18,23,28}{1} \gantttitlelist{6,11,16,21,26,31}{1} \gantttitlelist{5,10,15,20,25,30}{1} \gantttitlelist{6,11,16,21}{1} \\
     
-    \ganttbar{Intégrer JDart}{2}{2} \\
-    \ganttbar{Définir une structure de données (automates)}{2}{2} \\
-    \ganttbar{Implémenter l'algorithme de création d'automate}{2}{2} \\
-    \ganttbar{Représenter les graphes avec GraphStream}{2}{2} \\
-    \ganttbar{Créer une GUI}{2}{2} \\
-    \ganttbar{Annoter automatiquement avec Soot}{2}{2} \\
+    
+    \ganttgroup{JDart}{2}{13} \\
+    \ganttbar{Générer une classe appelante}{2}{7} \\
+    \ganttbar{Exécuter JDart depuis l'application}{8}{13} \\
+    \ganttgroup{Automates}{2}{13} \\
+    \ganttbar{Définir une structure de données (automates)}{2}{7} \\
+    \ganttbar[]{Implémenter l'algorithme de création d'automate}{8}{13} \\
+    \ganttbar{Représenter les graphes avec GraphStream}{8}{13} \\
+    \ganttmilestone{Lier JDart et les automates}{14} \\
+    \ganttbar{Créer une GUI}{16}{24} \\
+    \ganttbar{Annoter automatiquement avec Soot}{16}{24} \\
+    \ganttmilestone{Application finale}{26}
+    
+    \ganttlink[]{elem1}{elem2}
+    \ganttlink[link mid=1]{elem2}{elem7}
+    
+    \ganttlink{elem4}{elem5}
+    \ganttlink[link mid=.25]{elem4}{elem6}
+    \ganttlink[link mid=1]{elem6}{elem7}
+    \ganttlink[link mid=1]{elem5}{elem7}
+    
+    \ganttlink{elem7}{elem8}
+    \ganttlink[link mid=.25]{elem7}{elem9}
+    \ganttlink{elem8}{elem10}
+    \ganttlink[link mid=.25]{elem9}{elem10}
     
     \begin{comment}
     \ganttgroup{Group 1}{2}{7} \\
