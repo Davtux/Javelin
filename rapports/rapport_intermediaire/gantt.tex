@@ -37,16 +37,27 @@ Afin de simplifier la prise en main de l'application ainsi que sa maintenance, n
   \begin{ganttchart}[
     vgrid,hgrid,
     title height=1
-    ]{2}{31}
-    \gantttitle{Janvier}{6}  \gantttitle{Février}{6} \gantttitle{Mars}{6} \gantttitle{Avril}{6} \gantttitle{Mai}{6} \\
-    \gantttitlelist{6,11,16,21,26,31}{1} \gantttitlelist{3,8,13,18,23,28}{1} \gantttitlelist{6,11,16,21,26,31}{1} \gantttitlelist{5,10,15,20,25,30}{1} \gantttitlelist{6,11,16,21,26,31}{1} \\
+    ]{2}{26}
+    \gantttitle{Janvier}{4}  \gantttitle{Février}{6} \gantttitle{Mars}{6} \gantttitle{Avril}{6} \gantttitle{Mai}{3} \\
+    \gantttitlelist{16,21,26,31}{1} \gantttitlelist{3,8,13,18,23,28}{1} \gantttitlelist{6,11,16,21,26,31}{1} \gantttitlelist{5,10,15,20,25,30}{1} \gantttitlelist{6,11,16}{1} \\
+    
+    \ganttbar{Intégrer JDart}{2}{2} \\
+    \ganttbar{Définir une structure de données (automates)}{2}{2} \\
+    \ganttbar{Implémenter l'algorithme de création d'automate}{2}{2} \\
+    \ganttbar{Représenter les graphes avec GraphStream}{2}{2} \\
+    \ganttbar{Créer une GUI}{2}{2} \\
+    \ganttbar{Annoter automatiquement avec Soot}{2}{2} \\
+    
+    \begin{comment}
     \ganttgroup{Group 1}{2}{7} \\
     \ganttbar{Task 1}{2}{2} \\
     \ganttlinkedbar{Task 2}{3}{7} \ganttnewline
     \ganttmilestone{Milestone}{7} \ganttnewline
     \ganttbar{Final Task}{8}{12}
+    
     \ganttlink{elem2}{elem3}
     \ganttlink{elem3}{elem4}
+    \end{comment}
   \end{ganttchart}
 \caption{Planning prévisionnel du second semestre}
 \end{sidewaystable}
