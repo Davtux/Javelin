@@ -32,11 +32,34 @@ Voici un schéma qui représente les différents composants de notre solution :
   (F) edge node{} (G)
   (G) edge node{} (H)
   (E) edge node{} (F);
-  
-
 \end{tikzpicture}
 \caption{Vue générale de la solution}
 \end{figure}
 
-
 \paragraph{}
+Nous pouvons extraire de ce graphe un certain nombre de tâches à
+effectuer lors du prochain semestre~:
+
+\begin{description}
+\item[Annotation automatique] Nous devrons utiliser Soot afin
+  d'annoter automatiquement la variable \verb|buffer| contenant les
+  informations de l'\gls{APDU}.
+\item[JDart] Il faudra tester JDart de manière plus approfondie sur
+  différents programmes JavaCard, ainsi que récupérer l'arbre des
+  contraintes.
+\item[Création d'automates] Il sera question de définir une structure
+  de données pour représenter les automates générés par notre
+  application, puis d'implémenter les algorithmes en utilisant cette
+  structure.
+\item[GraphStream] Nous devrons intégrer la bibliothèque GraphStream à
+  notre application afin de dessiner l'automate stocké dans la
+  structure de données.
+\item[Étudier Gephi] Nous devons décider si la bibliothèque Gephi nous
+  sera utile, et l'implémenter dans notre programme pour analyser
+  l'automate le cas échéant.
+\item[Créer une interface graphique] Afin que le programme soit plus
+  facilement utilisable, il nous faudra développer une interface
+  graphique afin de simplifier l'analyse d'un applet JavaCard par un
+  utilisateur.
+\end{description}
+
