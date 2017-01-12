@@ -25,3 +25,5 @@ _region_.tex
 *.blg
 *.backup
 *.pdf
+*.lot
+*.lof
