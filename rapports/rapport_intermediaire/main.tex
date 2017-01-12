@@ -71,7 +71,7 @@
 %Création des doubles entrées acronyme-glossaire
 \usepackage{xparse}
 
-\usepackage[acronym]{glossaries}
+\usepackage[acronym, toc, section=chapter]{glossaries}
 
 \makeglossaries
 
@@ -84,7 +84,9 @@
 
 \input{./glossaire.tex}
 
-
+\usepackage{etoolbox}
+\apptocmd{\thebibliography}{\csname 
+phantomsection\endcsname\addcontentsline{toc}{chapter}{\bibname}}{}{}
 
 \begin{document}
 	\input{./title}
@@ -113,6 +115,7 @@
 
         \include{gantt}
         
+	\addcontentsline{toc}{chapter}{Conclusion}
 	\include{./conclusion}
 
     %Glossaire des Acronymes
@@ -125,7 +128,7 @@
     \clearpage 
     \bibliographystyle{plain-fr}
     \bibliography{bibliographie}
-    \addcontentsline{toc}{section}{Références}
+    %\addcontentsline{toc}{section}{Références}
 
 
 \end{document}
