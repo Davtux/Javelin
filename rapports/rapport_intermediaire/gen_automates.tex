@@ -42,7 +42,7 @@ vers une autre décision ou vers un état terminal, en fonction de la valeur de
 la décision.
 \par
 Une décision s'effectue sur la valeur d'une variable, elle correspond à une 
-instruction conditionnel dans le code (\textbf{if/else}, \textbf{switch}) ou à 
+instruction conditionnelle dans le code (\textbf{if/else}, \textbf{switch}) ou à 
 une boucle (\textbf{while}, \textbf{for}). Nous allons présenter comment JDart 
 représente ces instructions.
 
@@ -62,7 +62,7 @@ Si i != 1
 Une instruction peut être une nouvelle condition ou un état final.
 
 \paragraph{Table switch}
-Les instructions \textbf{switch} peuvent être transformé en une imbrication de 
+Les instructions \textbf{switch} peuvent être transformées en une imbrication de 
 \textbf{if/else}, où chaque \textbf{if} correspond à un \textbf{case} :
 
 \begin{minted}{java}
@@ -142,7 +142,7 @@ source, seulement on explicite toutes les branches du code.
 	\label{fig:exemple_out_jdart}
 \end{figure}
 
-Dans cet exemple les deux états "OK" ne corresponde à aucune instruction dans 
+Dans cet exemple les deux états "OK" ne correspondent à aucune instruction dans 
 le code, seulement dans les deux cas aucune erreur n'est levée et la fonction 
 prend fin.
 
@@ -177,8 +177,8 @@ et une liste d'états finaux.
 
 Pour construire notre automate nous devons d'abord ajouter un état initial qui 
 correspond à l'entrée du programme ou de la fonction analysée. Les états finaux 
-sont le cas valide et les cas d'erreur, on pourra ajouté plusieurs états 
-d'erreur en fonction des exception levé.
+sont le cas valide et les cas d'erreur, on pourra ajouter plusieurs états 
+d'erreur en fonction des exception levées.
 
 \paragraph{}
 Pour la suite nous utiliserons la structure de données suivante pour 
@@ -187,11 +187,11 @@ représenter un automate :
 $$A = ( E, q, F, \delta )$$
 où $E$ est la liste des états, $q$ l'état initial, $F$ la liste des états 
 finaux 
-et $\delta$ la liste des transition. Nous représenterons les transition de la 
+et $\delta$ la liste des transitions. Nous représenterons les transitions de la 
 manière suivante : $(etatDepart, etiquette, etatArrive)$.
 
 \paragraph{}
-Les n\oe{}uds de l'arbre des contraintes seront définit tel que :
+Les n\oe{}uds de l'arbre des contraintes seront définis tel que :
 $$ N = (decision, enfantVrai, enfantFaux)$$
 
 
@@ -333,7 +333,7 @@ pas d'états qui n'étaient pas spécifié lors de la conception.
 
 \paragraph{Graphes égaux}
 Il serait également possible de déterminer si les deux graphe $S$ et $G$ sont 
-égaux, c'est-à-dire que toutes les arcs sont égaux ainsi que les sommets. Plus 
+égaux, c'est-à-dire que tous les arcs sont égaux ainsi que les sommets. Plus 
 concrètement l'applet rempli toutes les spécification ni plus ni moins.
 
 \paragraph{}
@@ -348,7 +348,7 @@ dans un état ou un autre. Cela permet de définir des valeurs d'entrée concrè
 pour tester notre application et obtenir une couverture de code optimale.
 
 
-Pour prouver ce fait nous allons donner un algorithme qui donne de tels 
+Pour prouver ce fait nous allons donner un algorithme qui donne de telles 
 valeurs puis nous donnerons un exemple d'exécution. 
 
 \paragraph{Algorithme}
@@ -483,7 +483,7 @@ tout le code :
 \paragraph{}
 Dans ce chapitre nous avons vu comment il était possible de générer un 
 automate à partir de la sortie de JDart. Nous avons également présenté les 
-différentes utilisation de ces automates. 
+différentes utilisations de ces automates. 
 
 \begin{comment}
 
