@@ -19,7 +19,7 @@
 				en réalité \gls{JPF} est une \gls{VM} qui exécute le programme donné en entrée autant de fois que nécessaire
 				afin d'explorer chaque chemin qu'il contient.
 				
-				Tout au long de ce processus, \gls{JPF} collecte les anomalies rencontrées telles que l'interblocage des threads et les exceptions non traitées, puis il génére un rapport contenant les traces qui ménent à ces anomalies.
+				Tout au long de ce processus, \gls{JPF} collecte les anomalies rencontrées telles que l'interblocage des threads et les exceptions non traitées, puis il génére un rapport contenant les traces qui mènent à ces anomalies.
 	
 			\begin{figure}[H]
 				\centering
@@ -146,15 +146,15 @@ avec JDart}
 		\paragraph{}
 			Exécuter \gls{JPF} sur le système sous test donne une vue claire sur la structure de l'applet à tester, de plus, nous voulons
 			vérifier si l'applet est bien conforme à la spécification \textit{ISO 7816} et que toute transition d'un état à un autre est valide.
-			La solution que nous proposons est d'utiliser la sortie de JDart pour générer un automate qui decrit tous les états et les transitions
+			La solution que nous proposons est d'utiliser la sortie de JDart pour générer un automate qui décrit tous les états et les transitions
 			d'une applet.
-			Puisque \gls{JPF} fait la vérification du modèle, concrètiser cette idée est relativement facile.
+			Puisque \gls{JPF} fait la vérification du modèle, concrétiser cette idée est relativement facile.
 			En effet, nous détaillerons cette solution dans les chapitres suivants.
 			
 	\section{Interêt et limites}
 	\paragraph{}
 		\textbf{Java Path Finder} est connu comme le couteau suisse de la vérification Java,
 		il est en effet un des outils de tests les plus évolués pour les applications Java,
-		notamment grâce à son extensibilité et à son habilité à supporter et intérger de nouvelle extensions.
+		notamment grâce à son extensibilité et à son capacité à supporter et intégrer de nouvelle extensions.
 		Cependant, la majorité des extensions ne sont pas destinées à être executées sur des systèmes JavaCard ce qui nous a motivé
 		à faire le choix de ce projet et à contribuer à la communauté.
