@@ -20,10 +20,16 @@ public class MainGenerator {
 	 */
 	private String APDUClassName;
 	
-	public MainGenerator(Path classPath, Path newProjectPath, String APDUClassName) {
+	/**
+	 * The name of the package the APDU is in
+	 */
+	private String packageName;
+	
+	public MainGenerator(Path classPath, Path newProjectPath, String APDUClassName, String packageName) {
 		this.classPath = classPath;
 		this.newProjectPath = newProjectPath;
 		this.APDUClassName = APDUClassName;
+		this.packageName = packageName;
 	}
 	
 	/**
