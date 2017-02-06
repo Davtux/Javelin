@@ -27,3 +27,22 @@ _region_.tex
 *.pdf
 *.lot
 *.lof
+
+classes/
+.metadata 
+bin/ 
+tmp/ 
+*.tmp 
+*.bak 
+*.swp 
+*~.nib 
+local.properties 
+.settings/ 
+.loadpath 
+.recommenders 
+.idea/ 
+
+#JaCaCoCo.iml 
+
+# Eclipse Core 
+.project
