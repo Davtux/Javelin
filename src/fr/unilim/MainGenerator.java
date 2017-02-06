@@ -1,14 +1,15 @@
 package fr.unilim;
 
 import java.io.FileWriter;
+import java.nio.file.Path;
 
 public class MainGenerator {
 	
-	private String classPath;
-	private String newProjectPath;
+	private Path classPath;
+	private Path newProjectPath;
 	private String APDUClassName;
 	
-	public MainGenerator(String classPath, String newProjectPath, String APDUClassName) {
+	public MainGenerator(Path classPath, Path newProjectPath, String APDUClassName) {
 		this.classPath = classPath;
 		this.newProjectPath = newProjectPath;
 		this.APDUClassName = APDUClassName;
