@@ -20,17 +20,23 @@ public class Master {
 	 */
 	private String APDUClassName;
 	
-	public Master(Path classPath, Path newProjectPath, String APDUClassName) {
+	/**
+	 * The name of the package the APDU is in
+	 */
+	private String packageName;
+	
+	public Master(Path classPath, Path newProjectPath, String APDUClassName, String packageName) {
 		this.classPath = classPath;
 		this.newProjectPath = newProjectPath;
 		this.APDUClassName = APDUClassName;
+		this.packageName = packageName;
 	}
 	
 	/**
 	 * Generates the MainTest.java file as well as jpf.properties 
 	 */
 	public void generate() {
-		FileGenerator fg = new FileGenerator(classPath, APDUClassName, packageName);
+		FileGenerator fg = new FileGenerator(classPath.toString(), APDUClassName, packageName);
 		fg.generateConfigFile();
 		fg.generateMainFile();
 	}
