@@ -3,7 +3,7 @@ package fr.unilim;
 import java.io.FileWriter;
 import java.nio.file.Path;
 
-public class MainGenerator {
+public class Master {
 	
 	/**
 	 * A Path pointing to the location of the .class files we're testing
@@ -20,7 +20,7 @@ public class MainGenerator {
 	 */
 	private String APDUClassName;
 	
-	public MainGenerator(Path classPath, Path newProjectPath, String APDUClassName) {
+	public Master(Path classPath, Path newProjectPath, String APDUClassName) {
 		this.classPath = classPath;
 		this.newProjectPath = newProjectPath;
 		this.APDUClassName = APDUClassName;
@@ -30,7 +30,9 @@ public class MainGenerator {
 	 * Generates the MainTest.java file as well as jpf.properties 
 	 */
 	public void generate() {
-		// TODO: Generate MainTest.java file and jpf.properties
+		FileGenerator fg = new FileGenerator(classPath, APDUClassName, packageName);
+		fg.generateConfigFile();
+		fg.generateMainFile();
 	}
 
 	public Path getClassPath() {
