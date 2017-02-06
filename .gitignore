@@ -44,9 +44,6 @@ local.properties
 
 #JaCaCoCo.iml 
 
-# Eclipse Core 
-.project
-
 # External tool builders
 .externalToolBuilders/
 
@@ -82,3 +79,4 @@ local.properties
 
 # Code Recommenders
 .recommenders/
+/bin/
