@@ -6,7 +6,7 @@
 //
 
 
-package fr.unilim.automaton;
+package fr.unilim.automaton.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +40,7 @@ public class Node {
     protected String desc;
     @XmlElements({
         @XmlElement(name = "data", type = Data.class),
-        @XmlElement(name = "port", type = Port.class),
         @XmlElement(name = "graph", type = Graph.class),
-        @XmlElement(name = "locator", type = Locator.class)
     })
     protected List<Object> dataOrPortOrGraphOrLocator;
 
