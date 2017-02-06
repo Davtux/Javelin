@@ -11,6 +11,7 @@ public class FileGenerator {
 	private String packageName;
 	
 	private Logger l;
+	
 	public FileGenerator(String classPath, String appletClassName, String packageName){
 		clsPath = classPath;
 		appletClsName = appletClassName;
@@ -25,9 +26,9 @@ public class FileGenerator {
 	 */
 	public boolean generateConfigFile(){
 		try{
-		    PrintWriter writer = new PrintWriter("config.jpf", "UTF-8");
+		    PrintWriter writer = new PrintWriter(Config.JPF_CONF_NAME, "UTF-8");
 		    	
-		    writer.println("@include=config/main_config.jpf");
+		    writer.println("@include="+Config.JPF_MAIN_CONF_NAME);
 		    writer.println("target=fr.unilim.???.MainTester");
 		    writer.println("jdart.configs."+packageName+".symbolic.include="+packageName+".*;");
 		    writer.println("concolic.method.process="+packageName+"."+appletClsName+".process(apdu:fr.unilim.jc.APDU)");

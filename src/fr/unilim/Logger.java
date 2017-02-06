@@ -2,7 +2,6 @@ package fr.unilim;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -23,9 +22,9 @@ public class Logger {
 	}
 	
 	private void initDirNFile(){
-		new File("logs").mkdirs();
+		new File(Config.LOG_DIR).mkdirs();
     	try {
-    	      new File("logs/"+fileName).createNewFile();
+    	      new File(Config.LOG_DIR+"/"+fileName).createNewFile();
         	} catch (IOException e) {
         		System.out.println("We got an IOException: "+ e.getMessage());
         		e.printStackTrace();
@@ -35,7 +34,7 @@ public class Logger {
 	public void w(int lvl, String msg){
 		String txt = format(lvl, msg);
 		try {
-		    Files.write(Paths.get("logs/"+fileName), txt.getBytes(), StandardOpenOption.APPEND);
+		    Files.write(Paths.get(Config.LOG_DIR+"/"+fileName), txt.getBytes(), StandardOpenOption.APPEND);
 		}catch (IOException e) {
 		    //exception handling left as an exercise for the reader
 		}
