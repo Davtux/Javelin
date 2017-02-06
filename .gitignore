@@ -29,20 +29,20 @@ _region_.tex
 *.lof
 
 classes/
-.metadata 
-bin/ 
-tmp/ 
-*.tmp 
-*.bak 
-*.swp 
-*~.nib 
-local.properties 
-.settings/ 
-.loadpath 
-.recommenders 
-.idea/ 
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+.idea/
 
-#JaCaCoCo.iml 
+#JaCaCoCo.iml
 
 # External tool builders
 .externalToolBuilders/
@@ -80,3 +80,5 @@ local.properties
 # Code Recommenders
 .recommenders/
 /bin/
+
+generatedsrc/
