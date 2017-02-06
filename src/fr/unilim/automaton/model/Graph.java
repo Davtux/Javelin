@@ -6,7 +6,7 @@
 //
 
 
-package fr.unilim.automaton;
+package fr.unilim.automaton.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +45,6 @@ public class Graph {
         @XmlElement(name = "data", type = Data.class),
         @XmlElement(name = "node", type = Node.class),
         @XmlElement(name = "edge", type = Edge.class),
-        @XmlElement(name = "hyperedge", type = Hyperedge.class),
-        @XmlElement(name = "locator", type = Locator.class)
     })
     protected List<Object> dataOrNodeOrEdgeOrHyperedgeOrLocator;
 

@@ -6,7 +6,7 @@
 //
 
 
-package fr.unilim.automaton;
+package fr.unilim.automaton.model;
 
 import java.util.ArrayList;
 import java.util.List;
