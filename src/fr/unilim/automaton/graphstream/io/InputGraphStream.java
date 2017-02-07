@@ -1,4 +1,4 @@
-package fr.unilim.automaton.utils;
+package fr.unilim.automaton.graphstream.io;
 
 import java.io.IOException;
 
@@ -12,9 +12,9 @@ import org.graphstream.stream.file.FileSourceFactory;
  * @author romain
  *
  */
-public class InputAutomaton {
+public class InputGraphStream {
 	
-	private InputAutomaton(){}
+	private InputGraphStream(){}
 	
 	/**
 	 * Import an automaton from a file
