@@ -1,6 +1,7 @@
 package fr.unilim;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -17,6 +18,10 @@ import java.util.regex.Pattern;
 
 import javax.xml.bind.DatatypeConverter;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.DefaultGraph;
@@ -26,6 +31,7 @@ import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceFactory;
 
 import scala.Char;
+import fr.unilim.automaton.graphstream.xml.Graphml;
 import scala.inline;
 
 public class Main {
@@ -66,6 +72,48 @@ public class Main {
 			  
 			  System.out.println(line);
 		  }
+		  
+		  
+		  
+			String filePath = "test.xml";
+			Graph g = new DefaultGraph("g");
+			FileSource fs = null;
+			try {
+				fs = FileSourceFactory.sourceFor(filePath);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				return;
+			}
+
+			fs.addSink(g);
+
+			try {
+				fs.begin(filePath);
+
+				while (fs.nextEvents()) {
+					// Optionally some code here ...
+				}
+			} catch( IOException e) {
+				e.printStackTrace();
+			}
+			
+
+			try {
+				fs.end();
+			} catch( IOException e) {
+				e.printStackTrace();
+			} finally {
+				fs.removeSink(g);
+			}
+
+			g.display();
+		 
+	}
+	
+	private static Graphml readFile(File file) throws JAXBException {
+		JAXBContext jaxbContext = JAXBContext.newInstance(Graphml.class);
+		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		return (Graphml) unmarshaller.unmarshal(file);
 	}
 
 }
