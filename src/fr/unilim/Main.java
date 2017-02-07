@@ -118,29 +118,6 @@ public class Main {
 
 			g.display();
 		
-
-			fs.addSink(g);
-
-			try {
-				fs.begin(filePath);
-
-				while (fs.nextEvents()) {
-					// Optionally some code here ...
-				}
-			} catch( IOException e) {
-				e.printStackTrace();
-			}
-			
-
-			try {
-				fs.end();
-			} catch( IOException e) {
-				e.printStackTrace();
-			} finally {
-				fs.removeSink(g);
-			}
-
-			g.display();
 		 
 	}
 
