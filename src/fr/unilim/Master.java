@@ -24,7 +24,7 @@ public class Master {
 	 */
 	private String packageName;
 
-	public Master(Path classPath, Path newProjectPath, String APDUClassName) {
+	public Master(Path classPath, Path newProjectPath, String APDUClassName, String packageName) {
 		this.classPath = classPath;
 		this.newProjectPath = newProjectPath;
 		this.APDUClassName = APDUClassName;
