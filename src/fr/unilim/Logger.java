@@ -41,8 +41,8 @@ public class Logger {
 	}
 	
 	private String format(int lvl, String msg){
-		String f = "";
-		String prefix = "";
+		String f;
+		String prefix;
 		if(lvl == INFO){
 			prefix = "(!) ";
 		}else if(lvl == WARN){

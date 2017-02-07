@@ -3,7 +3,6 @@ package fr.unilim;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,9 +56,9 @@ public class FileGenerator {
 			} catch (TemplateException e) {
 				e.printStackTrace();
 				l.w(Logger.ERR, "Une erreur s'est produite lors de l'expansion de la template : " + e.getMessage());
+			} finally {
+				writer.close();
 			}
-		    
-		    writer.close();
 		    
 		    l.w(Logger.INFO, "Le fichier config.jpf est bien créé !");
 		    
@@ -85,9 +84,10 @@ public class FileGenerator {
 		    } catch (TemplateException te) {
 		    	te.printStackTrace();
 		    	l.w(Logger.ERR, "Une erreur s'est produite lors de l'expansion de la template : " + te.getMessage());
+		    } finally {
+			    writer.close();
 		    }
 		    
-		    writer.close();
 		    l.w(Logger.INFO, "Le fichier Main.java est bien créé !");
 		    
 		    return true;
