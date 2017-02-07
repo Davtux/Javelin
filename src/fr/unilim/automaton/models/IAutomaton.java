@@ -9,23 +9,25 @@ public interface IAutomaton {
 	 * Add final state.
 	 * @param name
 	 * @param label
+	 * @return False if state already exist.
 	 */
-	void addFinalState(String name, String label);
+	boolean addFinalState(String name, String label);
 	
 
 	/**
 	 * Add state.
 	 * @param name
 	 * @param label
+	 * @return False if state already exist.
 	 */
-	void addState(String name, String label);
+	boolean addState(String name, String label);
 	
 	/**
 	 * Return true if state in automaton
-	 * @param nane
+	 * @param name
 	 * @return
 	 */
-	boolean containsState(String nane);
+	boolean containsState(String name);
 	
 	/**
 	 * Add transition between origin and dest.

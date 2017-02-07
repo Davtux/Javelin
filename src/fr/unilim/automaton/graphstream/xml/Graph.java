@@ -28,7 +28,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "desc",
-    "dataOrNodeOrEdgeOrHyperedgeOrLocator"
+    "nodes",
+    "edges",
+    "data"
 })
 @XmlRootElement(name = "graph")
 public class Graph {
@@ -41,12 +43,21 @@ public class Graph {
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String edgedefault;
     protected String desc;
-    @XmlElements({
+    /*@XmlElements({
         @XmlElement(name = "data", type = Data.class),
         @XmlElement(name = "node", type = Node.class),
         @XmlElement(name = "edge", type = Edge.class),
     })
-    protected List<Object> dataOrNodeOrEdgeOrHyperedgeOrLocator;
+    protected List<Object> dataOrNodeOrEdgeOrHyperedgeOrLocator;*/
+    
+    @XmlElements({
+    	@XmlElement(name = "node")    	
+    })
+    protected List<Node> nodes;
+    @XmlElement(name = "data")
+    protected List<Data> data;
+    @XmlElement(name = "edge")
+    protected List<Edge> edges;
 
     /**
      * Obtient la valeur de la propriété id.
@@ -146,11 +157,32 @@ public class Graph {
      * 
      * 
      */
-    public List<Object> getDataOrNodeOrEdgeOrHyperedgeOrLocator() {
+    /*public List<Object> getDataOrNodeOrEdgeOrHyperedgeOrLocator() {
         if (dataOrNodeOrEdgeOrHyperedgeOrLocator == null) {
             dataOrNodeOrEdgeOrHyperedgeOrLocator = new ArrayList<Object>();
         }
         return this.dataOrNodeOrEdgeOrHyperedgeOrLocator;
+    }*/
+    
+    public List<Node> getNodes(){
+    	if (nodes == null){
+    		this.nodes = new ArrayList<Node>();
+    	}
+    	return this.nodes;
+    }
+    
+    public List<Data> getData(){
+    	if (data == null){
+    		this.data = new ArrayList<Data>();
+    	}
+    	return this.data;
+    }
+    
+    public List<Edge> getEdges() {
+    	if (edges == null){
+    		this.edges = new ArrayList<Edge>();
+    	}
+    	return this.edges;
     }
 
 }
