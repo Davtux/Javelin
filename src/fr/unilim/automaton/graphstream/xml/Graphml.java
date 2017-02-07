@@ -6,20 +6,16 @@
 //
 
 
-package fr.unilim.automaton.model;
+package fr.unilim.automaton.graphstream.xml;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -28,45 +24,19 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "desc",
-    "dataOrPortOrGraphOrLocator"
+    "key",
+    "dataOrGraph"
 })
-@XmlRootElement(name = "node")
-public class Node {
+@XmlRootElement(name = "graphml")
+public class Graphml {
 
-    @XmlAttribute(name = "id", required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlID
-    protected String id;
     protected String desc;
+    protected List<Key> key;
     @XmlElements({
         @XmlElement(name = "data", type = Data.class),
-        @XmlElement(name = "graph", type = Graph.class),
+        @XmlElement(name = "graph", type = Graph.class)
     })
-    protected List<Object> dataOrPortOrGraphOrLocator;
-
-    /**
-     * Obtient la valeur de la propriété id.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Définit la valeur de la propriété id.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setId(String value) {
-        this.id = value;
-    }
+    protected List<Object> dataOrGraph;
 
     /**
      * Obtient la valeur de la propriété desc.
@@ -93,35 +63,62 @@ public class Node {
     }
 
     /**
-     * Gets the value of the dataOrPortOrGraphOrLocator property.
+     * Gets the value of the key property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dataOrPortOrGraphOrLocator property.
+     * This is why there is not a <CODE>set</CODE> method for the key property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDataOrPortOrGraphOrLocator().add(newItem);
+     *    getKey().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Key }
+     * 
+     * 
+     */
+    public List<Key> getKey() {
+        if (key == null) {
+            key = new ArrayList<Key>();
+        }
+        return this.key;
+    }
+
+    /**
+     * Gets the value of the dataOrGraph property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the dataOrGraph property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDataOrGraph().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Data }
-     * {@link Port }
      * {@link Graph }
-     * {@link Locator }
      * 
      * 
      */
-    public List<Object> getDataOrPortOrGraphOrLocator() {
-        if (dataOrPortOrGraphOrLocator == null) {
-            dataOrPortOrGraphOrLocator = new ArrayList<Object>();
+    public List<Object> getDataOrGraph() {
+        if (dataOrGraph == null) {
+            dataOrGraph = new ArrayList<Object>();
         }
-        return this.dataOrPortOrGraphOrLocator;
+        return this.dataOrGraph;
     }
 
 }

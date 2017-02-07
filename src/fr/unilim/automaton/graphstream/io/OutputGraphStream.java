@@ -1,4 +1,4 @@
-package fr.unilim.automaton.utils;
+package fr.unilim.automaton.graphstream.io;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,9 +12,9 @@ import org.graphstream.stream.file.FileSinkGraphML;
  * @author romain
  *
  */
-public class OutputAutomaton {
+public class OutputGraphStream {
 	
-	private OutputAutomaton(){}
+	private OutputGraphStream(){}
 	
 	/**
 	 * Export an automaton to a file

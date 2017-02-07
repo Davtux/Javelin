@@ -6,7 +6,7 @@
 //
 
 
-package fr.unilim.automaton.model;
+package fr.unilim.automaton.graphstream.xml;
 
 import java.util.ArrayList;
 import java.util.List;

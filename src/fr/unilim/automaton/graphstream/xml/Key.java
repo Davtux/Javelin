@@ -6,13 +6,12 @@
 //
 
 
-package fr.unilim.automaton.model;
+package fr.unilim.automaton.graphstream.xml;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
@@ -27,42 +26,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlType(name = "", propOrder = {
     "value"
 })
-@XmlRootElement(name = "data")
-public class Data {
+@XmlRootElement(name = "key")
+public class Key {
 
-    @XmlAttribute(name = "key", required = true)
-    @XmlIDREF
-    protected Object key;
-    @XmlAttribute(name = "id")
+    @XmlAttribute(name = "id", required = true)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
     protected String id;
+    @XmlAttribute(name = "for")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String _for;
     @XmlValue
     protected String value;
-
-    /**
-     * Obtient la valeur de la propriété key.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
-     */
-    public Object getKey() {
-        return key;
-    }
-
-    /**
-     * Définit la valeur de la propriété key.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
-     */
-    public void setKey(Object value) {
-        this.key = value;
-    }
 
     /**
      * Obtient la valeur de la propriété id.
@@ -86,6 +61,34 @@ public class Data {
      */
     public void setId(String value) {
         this.id = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété for.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getFor() {
+        if (_for == null) {
+            return "all";
+        } else {
+            return _for;
+        }
+    }
+
+    /**
+     * Définit la valeur de la propriété for.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFor(String value) {
+        this._for = value;
     }
 
     /**
