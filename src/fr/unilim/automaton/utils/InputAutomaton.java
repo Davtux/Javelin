@@ -13,21 +13,18 @@ import org.graphstream.stream.file.FileSourceFactory;
  *
  */
 public class InputAutomaton {
+	
+	private InputAutomaton(){}
+	
 	/**
 	 * Import an automaton from a file
 	 * 
 	 * @param filePath
 	 * @return
 	 */
-	static Graph importGraph(String filePath){
+	static Graph importGraph(String filePath) throws IOException {
 		Graph outputGraph= new DefaultGraph("g");
-		FileSource fs = null;
-		try {
-			fs = FileSourceFactory.sourceFor(filePath);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-			return null;
-		}
+		FileSource fs = FileSourceFactory.sourceFor(filePath);
 
 		fs.addSink(outputGraph);	
 		return outputGraph;
