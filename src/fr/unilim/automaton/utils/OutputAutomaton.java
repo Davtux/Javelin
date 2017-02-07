@@ -1,15 +1,11 @@
 package fr.unilim.automaton.utils;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
 import org.graphstream.graph.Graph;
-import org.graphstream.graph.implementations.DefaultGraph;
 import org.graphstream.stream.file.FileSinkGraphML;
-import org.graphstream.stream.file.FileSource;
-import org.graphstream.stream.file.FileSourceFactory;
 
 /**
  * Class allowing to export an automaton to a file
@@ -17,6 +13,9 @@ import org.graphstream.stream.file.FileSourceFactory;
  *
  */
 public class OutputAutomaton {
+	
+	private OutputAutomaton(){}
+	
 	/**
 	 * Export an automaton to a file
 	 * 
@@ -27,7 +26,7 @@ public class OutputAutomaton {
 	static void exportGraph(String filePath, Graph toExport) throws IOException{
 		FileSinkGraphML sink = new FileSinkGraphML();
 		OutputStream out;
-		out = new FileOutputStream("test.xml");
+		out = new FileOutputStream(filePath);
 		sink.writeAll(toExport, out);	
 	}
 }
