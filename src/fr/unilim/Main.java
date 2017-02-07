@@ -18,6 +18,11 @@ import java.util.regex.Pattern;
 
 import javax.xml.bind.DatatypeConverter;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -33,6 +38,11 @@ import org.graphstream.stream.file.FileSourceFactory;
 import scala.Char;
 import fr.unilim.automaton.graphstream.xml.Graphml;
 import scala.inline;
+import org.graphstream.graph.implementations.DefaultGraph;
+import org.graphstream.stream.file.FileSource;
+import org.graphstream.stream.file.FileSourceFactory;
+
+import fr.unilim.automaton.graphstream.xml.Graphml;
 
 public class Main {
 
@@ -107,13 +117,31 @@ public class Main {
 			}
 
 			g.display();
+		
+
+			fs.addSink(g);
+
+			try {
+				fs.begin(filePath);
+
+				while (fs.nextEvents()) {
+					// Optionally some code here ...
+				}
+			} catch( IOException e) {
+				e.printStackTrace();
+			}
+			
+
+			try {
+				fs.end();
+			} catch( IOException e) {
+				e.printStackTrace();
+			} finally {
+				fs.removeSink(g);
+			}
+
+			g.display();
 		 
-	}
-	
-	private static Graphml readFile(File file) throws JAXBException {
-		JAXBContext jaxbContext = JAXBContext.newInstance(Graphml.class);
-		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-		return (Graphml) unmarshaller.unmarshal(file);
 	}
 
 }
