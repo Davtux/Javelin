@@ -38,4 +38,17 @@ public interface IAutomaton {
 	 * @throws StateNotFoundException if origin or dest not in automaton
 	 */
 	void addTransition(String origin, String name, String label, String dest) throws StateNotFoundException;
+	
+	/**
+	 * Return True if state is a final state.
+	 * @param name
+	 * @return
+	 */
+	boolean isFianlState(String name);
+	
+	/**
+	 * Return name of initial state.
+	 * @return
+	 */
+	String getIntialState();
 }

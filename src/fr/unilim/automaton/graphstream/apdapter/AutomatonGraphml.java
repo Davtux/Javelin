@@ -1,5 +1,8 @@
 package fr.unilim.automaton.graphstream.apdapter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.IdAlreadyInUseException;
@@ -14,9 +17,13 @@ public class AutomatonGraphml implements IAutomaton {
 	public static final String ATTR_LABEL = "ui.label";
 	
 	private Graph graph;
+	private Set<String> finalStates;
+	private Node intialState;
 	
 	public AutomatonGraphml(String name){
 		this.graph = new SingleGraph(name);
+		this.finalStates = new HashSet<String>();
+		this.intialState = this.graph.addNode("init");
 	}
 
 	public boolean addFinalState(String name, String label) {
@@ -27,6 +34,9 @@ public class AutomatonGraphml implements IAutomaton {
 			return false;
 		}
 		n.addAttribute(ATTR_LABEL, label);
+		
+		this.finalStates.add(name);
+		
 		return true;
 	}
 
@@ -58,6 +68,14 @@ public class AutomatonGraphml implements IAutomaton {
 	
 	public Graph getGraph(){
 		return this.graph;
+	}
+
+	public boolean isFianlState(String name) {
+		return this.finalStates.contains(name);
+	}
+
+	public String getIntialState() {
+		return this.intialState.getId();
 	}
 
 }
