@@ -34,6 +34,8 @@ import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.stream.file.FileSinkGraphML;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import scala.Char;
 import fr.unilim.automaton.graphstream.xml.Graphml;
@@ -46,7 +48,10 @@ import fr.unilim.automaton.graphstream.xml.Graphml;
 
 public class Main {
 
+	private static final Logger log = LoggerFactory.getLogger(Main.class);
+	
 	public static void main(String[] args) throws IOException {
+		log.debug("Start Main ...");
 		/*FileReader in;
 		Scanner sc = null;
 		try {
@@ -117,7 +122,6 @@ public class Main {
 			}
 
 			g.display();
-		
 		 
 	}
 
