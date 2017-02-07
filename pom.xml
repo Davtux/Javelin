@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ProjetM1</groupId>
+  <artifactId>ProjetM1</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>ProjetM1</name>
+  <description>Projet de Master 1 : extraction d'un automate depuis une applet JavaCard</description>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source/>
+          <target/>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.freemarker</groupId>
+  		<artifactId>freemarker</artifactId>
+  		<version>2.3.25-incubating</version>
+  	</dependency>
+  </dependencies>
+</project>
