@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml>
+	<key id="attr0000" for="node" attr.name="ui.label" attr.type="string"/>
+	<key id="attr0001" for="node" attr.name="ui.style" attr.type="string"/>
+	<key id="attr0002" for="edge" attr.name="ui.label" attr.type="string"/>
+	<graph id="test" edgedefault="undirected">
+		<node id="etat_initial">
+			<data key="attr0000">Etat Initial</data>
+			<data key="attr0001">fill-mode: dyn-plain; fill-color: red, blue;</data>
+		</node>
+		<node id="e1">
+		</node>
+		<node id="e2">
+		</node>
+		<node id="etat_final">
+		</node>
+		<node id="etat_erreur">
+		</node>
+		<edge id="1" source="etat_initial" target="e1" directed="true">
+			<data key="attr0002">i &lt; 10</data>
+		</edge>
+		<edge id="2" source="etat_initial" target="etat_erreur" directed="true">
+		</edge>
+		<edge id="3" source="e1" target="e2" directed="true">
+		</edge>
+		<edge id="4" source="e1" target="etat_erreur" directed="true">
+		</edge>
+		<edge id="5" source="e2" target="etat_final" directed="true">
+		</edge>
+		<edge id="6" source="e2" target="etat_erreur" directed="true">
+		</edge>
+	</graph>
+</graphml>
