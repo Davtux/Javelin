@@ -13,6 +13,7 @@ import org.json.simple.parser.ParseException;
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
 import fr.unilim.automaton.models.IAutomaton;
 import fr.unilim.automaton.models.StateNotFoundException;
+import fr.unilim.automaton.utils.ConditionInverter;
 import fr.unilim.automaton.utils.JDartOutputParser;
 import fr.unilim.counter.Counter;
 
@@ -78,8 +79,8 @@ public class AutomatonCreator {
 			automaton.addState(newState, "");
 		}
 		
-
-		automaton.addTransition(currentState, counter.nextString(), tree.get("decision").toString(), newState);
+		String decision = tree.get("decision").toString();
+		automaton.addTransition(currentState, counter.nextString(), decision, newState);
 		constructAutomaton(trueObject, newState, automaton);
 		
 		JSONObject falsechild = (JSONObject) children.get(1);
@@ -94,7 +95,7 @@ public class AutomatonCreator {
 			automaton.addState(newState, "");
 		}
 		
-		automaton.addTransition(currentState, counter.nextString(), "INVERSE", newState); 
+		automaton.addTransition(currentState, counter.nextString(), ConditionInverter.invertCondition(decision), newState); 
 		constructAutomaton(falsechild, newState, automaton);
 		
 	}
