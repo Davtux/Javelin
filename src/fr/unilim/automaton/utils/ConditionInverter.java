@@ -2,6 +2,7 @@ package fr.unilim.automaton.utils;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map.Entry;
 
 public class ConditionInverter {
 
@@ -37,23 +38,25 @@ public class ConditionInverter {
 	 * @return
 	 */
 	public static String invertCondition(String conditionToInvert){
-		String[] splitedPartsAND, splitedPartsOR;
+		String[] splitedPartsAND;
+		String[] splitedPartsOR;
 		splitedPartsAND = conditionToInvert.split(AND);
-		String toReturn = new String();
-		String sOR, sAND; 
+		StringBuilder toReturn = new StringBuilder();
+		String sOR;
+		String sAND; 
 		for(int i =0; i<splitedPartsAND.length; i++){
 			sAND = splitedPartsAND[i];
 			splitedPartsOR = sAND.split(OR_ESCAPE);
 			for(int j = 0; j < splitedPartsOR.length; j++){
 				sOR = stripWhitespace(splitedPartsOR[j]);
 				if(j != splitedPartsOR.length -1)
-					toReturn += invertAtomicCondition(sOR) + " " + AND + " ";
-				else toReturn += invertAtomicCondition(sOR);	
+					toReturn.append(invertAtomicCondition(sOR) + " " + AND + " ");
+				else toReturn.append(invertAtomicCondition(sOR));	
 			}
 			if( i!= splitedPartsAND.length-1)
-				toReturn  += " " + OR + " ";
+				toReturn.append(" " + OR + " ");
 		}	
-		return toReturn;
+		return toReturn.toString();
 	}
 	
 	/**
@@ -63,8 +66,8 @@ public class ConditionInverter {
 	 */
 	private static String invertAtomicCondition(String conditionToInvert){
 		String converted;
-		for(String s : INVERSE.keySet()){
-			converted = conditionToInvert.replaceAll(s, INVERSE.get(s));
+		for(Entry<String, String> entry : INVERSE.entrySet()){
+			converted = conditionToInvert.replaceAll(entry.getKey(), entry.getValue());
 			if(!converted.equals(conditionToInvert))
 				return converted;
 		}
