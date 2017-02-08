@@ -40,6 +40,7 @@ import org.slf4j.LoggerFactory;
 
 import scala.Char;
 import fr.unilim.automaton.algorithms.AutomatonCreator;
+import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
 import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
 import fr.unilim.automaton.graphstream.xml.Graphml;
 import fr.unilim.automaton.models.IAutomaton;
@@ -134,8 +135,10 @@ public class Main {
 			a.getGraph().display();
 		} catch (ParseException e) {
 			e.printStackTrace();
+		} catch (AlgorithmStateException e) {
+			e.printStackTrace();
 		}
-		
+		f.close();
 		 
 	}
 

@@ -10,9 +10,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
 import fr.unilim.automaton.models.IAutomaton;
 import fr.unilim.automaton.models.StateNotFoundException;
 import fr.unilim.automaton.utils.JDartOutputParser;
+import fr.unilim.counter.Counter;
 
 /**
  * This class create {@link IAutomaton} from jdart's output (format JSON)
@@ -22,13 +24,14 @@ public class AutomatonCreator {
 	public static final String CHARSET = "utf-8";
 
 	private JSONParser jsonParser;
-	private Integer counter;
+	private Counter counter;
 	
 	/**
 	 * Constructor
 	 */
 	public AutomatonCreator(){
 		this.jsonParser = new JSONParser();
+		this.counter = new Counter();
 	}
 	
 	/**
@@ -37,21 +40,26 @@ public class AutomatonCreator {
 	 * @return
 	 * @throws IOException
 	 * @throws ParseException 
+	 * @throws AlgorithmStateException 
 	 */
-	public IAutomaton parse(InputStream inJson, IAutomaton automaton) throws IOException, ParseException {
+	public IAutomaton parse(InputStream inJson, IAutomaton automaton) throws IOException, ParseException, AlgorithmStateException {
 		String content = JDartOutputParser.parseJDartOutput(
 			new BufferedReader(new InputStreamReader(inJson, CHARSET))
 		);
 		
 		JSONObject json = (JSONObject) jsonParser.parse(content);
 		
-		this.counter = 0;
-		constructAutomaton(json, automaton.getIntialState(), automaton);
+		this.counter.reset();
+		try {
+			constructAutomaton(json, automaton.getIntialState(), automaton);
+		} catch (StateNotFoundException e) {
+			throw new AlgorithmStateException("Eorro when construct automaton.", e);
+		}
 		
 		return automaton;
 	}
 	
-	private void constructAutomaton(JSONObject tree, String currentState, IAutomaton automaton){
+	private void constructAutomaton(JSONObject tree, String currentState, IAutomaton automaton) throws StateNotFoundException{
 		if(automaton.isFianlState(currentState)){
 			return;
 		}
@@ -60,48 +68,33 @@ public class AutomatonCreator {
 		JSONArray children = (JSONArray) tree.get("children");
 		JSONObject trueObject = (JSONObject) children.get(0);
 		
-		if(trueObject.containsKey("result") && !automaton.containsState(trueObject.get("result").toString())){
-			newState = counter.toString();
-			counter++;
-			automaton.addFinalState(newState, trueObject.get("result").toString());
-		}else if(trueObject.containsKey("result")){
+		if(trueObject.containsKey("result")){
 			newState = trueObject.get("result").toString();
+			if(!automaton.containsState(trueObject.get("result").toString())){
+				automaton.addFinalState(newState, trueObject.get("result").toString());
+			}
 		}else{
-			newState = counter.toString();
-			counter++;
+			newState = counter.nextString();
 			automaton.addState(newState, "");
 		}
 		
-		try {
-			automaton.addTransition(currentState, counter.toString(), tree.get("decision").toString(), newState);
-		} catch (StateNotFoundException e) {
-			e.printStackTrace();
-			return;
-		}
-		counter++;
+
+		automaton.addTransition(currentState, counter.nextString(), tree.get("decision").toString(), newState);
 		constructAutomaton(trueObject, newState, automaton);
 		
 		JSONObject falsechild = (JSONObject) children.get(1);
 		
-		if(falsechild.containsKey("result") && !automaton.containsState(falsechild.get("result").toString())){
-			newState = counter.toString();
-			counter++;
-			automaton.addFinalState(newState, falsechild.get("result").toString());
-		}else if(falsechild.containsKey("result")){
+		if(falsechild.containsKey("result")){
 			newState = falsechild.get("result").toString();
+			if(!automaton.containsState(falsechild.get("result").toString())){
+				automaton.addFinalState(newState, falsechild.get("result").toString());			
+			}
 		}else{
-			newState = counter.toString();
-			counter++;
+			newState = counter.nextString();
 			automaton.addState(newState, "");
 		}
 		
-		try {
-			automaton.addTransition(currentState, counter.toString(), "INVERSE", newState);
-		} catch (StateNotFoundException e) {
-			e.printStackTrace();
-			return;
-		}
-		counter++;
+		automaton.addTransition(currentState, counter.nextString(), "INVERSE", newState); 
 		constructAutomaton(falsechild, newState, automaton);
 		
 	}
