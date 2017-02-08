@@ -34,11 +34,16 @@ import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.stream.file.FileSinkGraphML;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.stream.file.FileSourceFactory;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import scala.Char;
+import fr.unilim.automaton.algorithms.AutomatonCreator;
+import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
+import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
 import fr.unilim.automaton.graphstream.xml.Graphml;
+import fr.unilim.automaton.models.IAutomaton;
 import scala.inline;
 import org.graphstream.graph.implementations.DefaultGraph;
 import org.graphstream.stream.file.FileSource;
@@ -64,7 +69,7 @@ public class Main {
 		}
 		System.out.println(sc.nextLine());
 		*/
-		String charset = "UTF-8"; // or what corresponds
+		/*String charset = "UTF-8"; // or what corresponds
 		  BufferedReader in = new BufferedReader( 
 		      new InputStreamReader (new FileInputStream("test.json"), charset));
 		  String line, group;
@@ -121,7 +126,19 @@ public class Main {
 				fs.removeSink(g);
 			}
 
-			g.display();
+			g.display();*/
+		
+		AutomatonCreator ac = new AutomatonCreator();
+		FileInputStream f = new FileInputStream("test.json");
+		try {
+			AutomatonGraphml a = (AutomatonGraphml) ac.parse(f, new AutomatonGraphml("automaton"));
+			a.getGraph().display();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (AlgorithmStateException e) {
+			e.printStackTrace();
+		}
+		f.close();
 		 
 	}
 
