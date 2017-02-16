@@ -99,9 +99,15 @@ public class Main {
 			AutomatonGraphml a = (AutomatonGraphml) ac.parse(tree, new AutomatonGraphml("automaton"));
 			Graph g = a.getGraph();
 			Viewer v = g.display();
+			v.enableAutoLayout();
+			Thread.sleep(2000);
+			v.disableAutoLayout();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		} catch (AlgorithmStateException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		f.close();
