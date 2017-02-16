@@ -22,7 +22,7 @@ public class InputGraphStream {
 	 * @param filePath
 	 * @return
 	 */
-	static Graph importGraph(String filePath) throws IOException {
+	public static Graph importGraph(String filePath) throws IOException {
 		Graph outputGraph= new DefaultGraph("g");
 		FileSource fs = FileSourceFactory.sourceFor(filePath);
 

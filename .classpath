@@ -17,5 +17,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/home/romain/Seafile/Travail/ProjetM1/dependencies/gs-ui-1.3/gs-ui-1.3.jar"/>
+	<classpathentry kind="lib" path="/home/romain/Seafile/Travail/ProjetM1/dependencies/gs-core-1.3/gs-core-1.3.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

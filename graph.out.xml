@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+	   http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+	<key id="attr0000" for="node" attr.name="ui.class" attr.type="string"/>
+	<key id="attr0001" for="node" attr.name="ui.label" attr.type="string"/>
+	<key id="attr0002" for="edge" attr.name="ui.label" attr.type="string"/>
+	<key id="attr0003" for="edge" attr.name="ui.class" attr.type="string"/>
+	<graph id="automaton" edgedefault="undirected">
+		<node id="init">
+			<data key="attr0000">initial</data>
+		</node>
+		<node id="ERROR: java.lang.AssertionError">
+			<data key="attr0001">ERROR: java.lang.AssertionError</data>
+			<data key="attr0000">error</data>
+		</node>
+		<node id="1">
+			<data key="attr0001"></data>
+		</node>
+		<node id="3">
+			<data key="attr0001"></data>
+		</node>
+		<node id="6">
+			<data key="attr0001"></data>
+		</node>
+		<node id="8">
+			<data key="attr0001"></data>
+		</node>
+		<node id="OK: [  ]">
+			<data key="attr0001">OK: [  ]</data>
+		</node>
+		<node id="12">
+			<data key="attr0001"></data>
+		</node>
+		<node id="16">
+			<data key="attr0001"></data>
+		</node>
+		<node id="DONT_KNOW">
+			<data key="attr0001">DONT_KNOW</data>
+			<data key="attr0000">unkown</data>
+		</node>
+		<edge id="0" source="init" target="ERROR: java.lang.AssertionError" directed="true">
+			<data key="attr0002">('i' < 0)</data>
+			<data key="attr0003">side1</data>
+		</edge>
+		<edge id="2" source="init" target="1" directed="true">
+			<data key="attr0002">('i' >= 0)</data>
+			<data key="attr0003">side2</data>
+		</edge>
+		<edge id="4" source="1" target="3" directed="true">
+			<data key="attr0002">('i' >= 2)</data>
+			<data key="attr0003">side1</data>
+		</edge>
+		<edge id="5" source="3" target="ERROR: java.lang.AssertionError" directed="true">
+			<data key="attr0002">('i' != 2)</data>
+			<data key="attr0003">side2</data>
+		</edge>
+		<edge id="7" source="3" target="6" directed="true">
+			<data key="attr0002">('i' == 2)</data>
+			<data key="attr0003">side1</data>
+		</edge>
+		<edge id="9" source="6" target="8" directed="true">
+			<data key="attr0002">('f1' != 'f2')</data>
+			<data key="attr0003">side2</data>
+		</edge>
+		<edge id="10" source="8" target="OK: [  ]" directed="true">
+			<data key="attr0002">('f2' != 'f3')</data>
+			<data key="attr0003">side1</data>
+		</edge>
+		<edge id="11" source="8" target="OK: [  ]" directed="true">
+			<data key="attr0002">('f2' == 'f3')</data>
+			<data key="attr0003">side2</data>
+		</edge>
+		<edge id="13" source="6" target="12" directed="true">
+			<data key="attr0002">('f1' == 'f2')</data>
+			<data key="attr0003">side1</data>
+		</edge>
+		<edge id="14" source="12" target="OK: [  ]" directed="true">
+			<data key="attr0002">('f2' != 'f3')</data>
+			<data key="attr0003">side2</data>
+		</edge>
+		<edge id="15" source="12" target="OK: [  ]" directed="true">
+			<data key="attr0002">('f2' == 'f3')</data>
+			<data key="attr0003">side1</data>
+		</edge>
+		<edge id="17" source="1" target="16" directed="true">
+			<data key="attr0002">('i' < 2)</data>
+			<data key="attr0003">side2</data>
+		</edge>
+		<edge id="18" source="16" target="ERROR: java.lang.AssertionError" directed="true">
+			<data key="attr0002">((double)'f2' != 3.141)</data>
+			<data key="attr0003">side1</data>
+		</edge>
+		<edge id="19" source="16" target="DONT_KNOW" directed="true">
+			<data key="attr0002">((double)'f2' == 3.141)</data>
+			<data key="attr0003">side2</data>
+		</edge>
+	</graph>
+</graphml>
