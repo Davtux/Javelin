@@ -1,0 +1,5 @@
+{"decision":"(\u0027i\u0027 \u003c 0)","children":[{"result":"ERROR: java.lang.AssertionError"},{"decision":"(\u0027i\u0027 \u003e\u003d 2)","children":[{"decision":"(\u0027i\u0027 
+!\u003d 2)","children":[{"result":"ERROR: java.lang.AssertionError"},{"decision":"(\u0027f1\u0027 !\u003d \u0027f2\u0027)","children":[{"decision":"(\u0027f2\u0027 !\u003d 
+\u0027f3\u0027)","children":[{"result":"OK: [  ]"},{"result":"OK: [  ]"}]},{"decision":"(\u0027f2\u0027 !\u003d \u0027f3\u0027)","children":[{"result":"OK: [  ]"},{"result":"OK: [  
+]"}]}]}]},{"decision":"((double)\u0027f2\u0027 !\u003d 3.141)","children":[{"result":"ERROR: java.lang.AssertionError"},{"result":"DONT_KNOW"}]}]}]}
+

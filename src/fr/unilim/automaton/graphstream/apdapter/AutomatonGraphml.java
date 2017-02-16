@@ -4,16 +4,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.graphstream.graph.Edge;
+import org.graphstream.graph.EdgeRejectedException;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.IdAlreadyInUseException;
 import org.graphstream.graph.Node;
-import org.graphstream.graph.implementations.SingleGraph;
+import org.graphstream.graph.implementations.MultiGraph;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.unilim.automaton.models.IAutomaton;
 import fr.unilim.automaton.models.StateNotFoundException;
 
 public class AutomatonGraphml implements IAutomaton {
 	
+	private Logger log = LoggerFactory.getLogger(getClass());
+
 	public static final String ATTR_LABEL = "ui.label";
 	
 	private Graph graph;
@@ -21,7 +26,7 @@ public class AutomatonGraphml implements IAutomaton {
 	private Node intialState;
 	
 	public AutomatonGraphml(String name){
-		this.graph = new SingleGraph(name);
+		this.graph = new MultiGraph(name); // MutliGraph for prevent EdgeRejetedException
 		this.finalStates = new HashSet<String>();
 		this.intialState = this.graph.addNode("init");
 	}
@@ -31,9 +36,13 @@ public class AutomatonGraphml implements IAutomaton {
 		try {
 			n = graph.addNode(name);
 		} catch(IdAlreadyInUseException iAiUe){
+			log.warn("Node already use : {} : {}", name, iAiUe.getMessage(), iAiUe);
 			return false;
 		}
-		n.addAttribute(ATTR_LABEL, label);
+		
+		if(null != label){
+			n.addAttribute(ATTR_LABEL, label);			
+		}
 		
 		this.finalStates.add(name);
 		
@@ -45,9 +54,14 @@ public class AutomatonGraphml implements IAutomaton {
 		try {
 			n = graph.addNode(name);
 		} catch(IdAlreadyInUseException iAiUe){
+			log.warn("Node already use : {} : {}", name, iAiUe.getMessage(), iAiUe);
 			return false;
 		}
-		n.addAttribute(ATTR_LABEL, label);
+		
+		if(null != label){
+			n.addAttribute(ATTR_LABEL, label);			
+		}
+		
 		return true;
 	}
 
@@ -62,8 +76,21 @@ public class AutomatonGraphml implements IAutomaton {
 		if(!containsState(dest)){
 			throw new StateNotFoundException("Dest state not found : " + dest);
 		}
-		Edge e = graph.addEdge(name, origin, dest, true);
-		e.addAttribute(ATTR_LABEL, label);
+		
+		Edge e = null;
+		try{
+			e = graph.addEdge(name, origin, dest, true);
+		}catch(EdgeRejectedException eRe){
+			log.warn("Ege rejected between {} and {}, name {} : ", origin, dest, name, eRe);
+		}
+		if(e == null){
+			log.debug("addEdge return null, name = " + name + " origin = " + origin + " dest = " + dest);
+			return;
+		}
+		
+		if(label != null){
+			e.addAttribute(ATTR_LABEL, label);			
+		}
 	}
 	
 	public Graph getGraph(){

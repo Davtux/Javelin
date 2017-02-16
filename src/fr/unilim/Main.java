@@ -129,7 +129,7 @@ public class Main {
 			g.display();*/
 		
 		AutomatonCreator ac = new AutomatonCreator();
-		FileInputStream f = new FileInputStream("test.json");
+		FileInputStream f = new FileInputStream("test_arrays_m4.json");
 		try {
 			AutomatonGraphml a = (AutomatonGraphml) ac.parse(f, new AutomatonGraphml("automaton"));
 			a.getGraph().display();
