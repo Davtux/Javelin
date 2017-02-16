@@ -10,6 +10,10 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
+/**
+ * Generates jpf.properties and Main.java files
+ *
+ */
 public class FileGenerator {
 	
 	private String clsPath;
@@ -38,8 +42,9 @@ public class FileGenerator {
 	}
 	
 	/**
+	 * Generates the jpf.properties file using the parameters passed in the constructor
 	 * TODO: créer une liste pour récupérer puis traiter la liste des packages à inclure dans le fichier de config
-	 * @return vrai si la génération s'est bien passée, faux sinon
+	 * @return true if the generation was successful, false otherwise
 	 */
 	public boolean generateConfigFile(){
 		try{
@@ -68,7 +73,11 @@ public class FileGenerator {
 		   return false;
 		}
 	}
-
+	
+	/**
+	 * Generates a Main.java file to serve as a target for JDart
+	 * @return true if the generation was successful, false otherwise
+	 */
 	public boolean generateMainFile(){
 		try{
 		    PrintWriter writer = new PrintWriter("Main.java", "UTF-8");

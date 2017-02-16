@@ -2,6 +2,10 @@ package fr.unilim;
 
 import java.nio.file.Path;
 
+/**
+ * Master class delegating file generation and running JPF to other classes
+ *
+ */
 public class Master {
 	
 	/**

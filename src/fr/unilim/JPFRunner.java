@@ -8,15 +8,26 @@ import java.nio.file.Path;
  *
  */
 public class JPFRunner {
-
+	
+	/**
+	 * The path to the JPF executable on the host system
+	 */
 	private Path jpfExecutable;
+	
+	/**
+	 * The Logger
+	 */
 	private Logger l;
 
 	public JPFRunner(Path pathToJPF) {
 		jpfExecutable = pathToJPF;
 		l = new Logger(getClass().getName());
 	}
-
+	
+	/**
+	 * Runs JPF
+	 * @param propertiesFiles the jpf.properties file to be passed as a parameter
+	 */
 	public void runJPF(Path propertiesFiles) {
 		Runtime rt = Runtime.getRuntime();
 		try {
