@@ -1,5 +1,6 @@
 package fr.unilim.automaton.graphstream.apdapter;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,6 +31,7 @@ public class AutomatonGraphml implements IAutomaton {
 		this.enableHQ();
 		this.finalStates = new HashSet<String>();
 		this.intialState = this.graph.addNode("init");
+		this.intialState.addAttribute("ui.style", "fill-color: rgb(0,50,255);");
 	}
 
 	private void enableHQ() {
@@ -46,13 +48,22 @@ public class AutomatonGraphml implements IAutomaton {
 			return false;
 		}
 		
-		if(null != label){
-			n.addAttribute(ATTR_LABEL, label);			
-		}
+		if(null != label)
+			labelErrorTreatment(label, n);
 		
 		this.finalStates.add(name);
 		
+		
 		return true;
+	}
+
+	private void labelErrorTreatment(String label, Node n) {
+		n.addAttribute(ATTR_LABEL, label);
+		Boolean found = Arrays.asList(label.split(" ")).contains("ERROR:")|| Arrays.asList(label.split(" ")).contains("DONT_KNOW");
+		if(found)
+			n.addAttribute("ui.style", "fill-color: rgb(255,0,50);");
+		else
+			n.addAttribute("ui.style", "fill-color: rgb(0,255,50);");
 	}
 
 	public boolean addState(String name, String label) {
