@@ -1,57 +1,19 @@
 package fr.unilim;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.xml.bind.DatatypeConverter;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
 import org.graphstream.graph.Graph;
-import org.graphstream.graph.Node;
-import org.graphstream.graph.implementations.DefaultGraph;
-import org.graphstream.graph.implementations.SingleGraph;
-import org.graphstream.stream.file.FileSinkGraphML;
-import org.graphstream.stream.file.FileSource;
-import org.graphstream.stream.file.FileSourceFactory;
+import org.graphstream.ui.view.Viewer;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import scala.Char;
 import fr.unilim.automaton.algorithms.AutomatonCreator;
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
 import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
-import fr.unilim.automaton.graphstream.xml.Graphml;
-import fr.unilim.automaton.models.IAutomaton;
 import fr.unilim.tree.IBinaryTree;
 import fr.unilim.tree.adapter.BinaryTreeJSON;
-import scala.inline;
-import org.graphstream.graph.implementations.DefaultGraph;
-import org.graphstream.stream.file.FileSource;
-import org.graphstream.stream.file.FileSourceFactory;
-
-import fr.unilim.automaton.graphstream.xml.Graphml;
 
 public class Main {
 
@@ -135,7 +97,8 @@ public class Main {
 		try {
 			IBinaryTree tree = new BinaryTreeJSON(f);
 			AutomatonGraphml a = (AutomatonGraphml) ac.parse(tree, new AutomatonGraphml("automaton"));
-			a.getGraph().display();
+			Graph g = a.getGraph();
+			Viewer v = g.display();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		} catch (AlgorithmStateException e) {
