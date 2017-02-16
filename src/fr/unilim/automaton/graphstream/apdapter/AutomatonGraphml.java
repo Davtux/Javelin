@@ -27,8 +27,14 @@ public class AutomatonGraphml implements IAutomaton {
 	
 	public AutomatonGraphml(String name){
 		this.graph = new MultiGraph(name); // MutliGraph for prevent EdgeRejetedException
+		this.enableHQ();
 		this.finalStates = new HashSet<String>();
 		this.intialState = this.graph.addNode("init");
+	}
+
+	private void enableHQ() {
+		this.graph.addAttribute("ui.quality", true);
+		this.graph.addAttribute("ui.antialias", true);
 	}
 
 	public boolean addFinalState(String name, String label) {
@@ -89,7 +95,8 @@ public class AutomatonGraphml implements IAutomaton {
 		}
 		
 		if(label != null){
-			e.addAttribute(ATTR_LABEL, label);			
+			e.addAttribute(ATTR_LABEL, label);	
+			e.addAttribute("ui.style", "text-offset: -1000, -200;"); 
 		}
 	}
 	
