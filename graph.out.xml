@@ -13,7 +13,7 @@
 		</node>
 		<node id="ERROR: java.lang.AssertionError">
 			<data key="attr0001">ERROR: java.lang.AssertionError</data>
-			<data key="attr0000">error</data>
+			<data key="attr0000">final</data>
 		</node>
 		<node id="1">
 			<data key="attr0001"></data>
@@ -29,6 +29,7 @@
 		</node>
 		<node id="OK: [  ]">
 			<data key="attr0001">OK: [  ]</data>
+			<data key="attr0000">final</data>
 		</node>
 		<node id="12">
 			<data key="attr0001"></data>

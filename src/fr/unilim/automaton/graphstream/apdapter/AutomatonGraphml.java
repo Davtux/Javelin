@@ -16,6 +16,10 @@ import org.slf4j.LoggerFactory;
 import fr.unilim.automaton.models.IAutomaton;
 import fr.unilim.automaton.models.StateNotFoundException;
 
+/**
+ * Class managing the automaton.
+ *
+ */
 public class AutomatonGraphml implements IAutomaton {
 	
 	private Logger log = LoggerFactory.getLogger(getClass());
@@ -27,6 +31,10 @@ public class AutomatonGraphml implements IAutomaton {
 	private Node intialState;
 	private boolean side;
 	
+	/**
+	 * Automaton builder 
+	 * @param name : name of the automaton
+	 */
 	public AutomatonGraphml(String name){
 		this.graph = new MultiGraph(name); // MutliGraph for prevent EdgeRejetedException
 		this.enableHQ();
@@ -37,11 +45,28 @@ public class AutomatonGraphml implements IAutomaton {
 		this.graph.addAttribute("ui.stylesheet", "url('file:///home/romain/Seafile/Travail/ProjetM1/graph.css')");
 	}
 
+	/**
+	 * Enable anti-aliasing and HD
+	 */
 	private void enableHQ() {
 		this.graph.addAttribute("ui.quality", true);
 		this.graph.addAttribute("ui.antialias", true);
 	}
+	
+	/**
+	 * Disable anti-aliasing and HD
+	 */
+	private void disableHQ() {
+		this.graph.removeAttribute("ui.quality");
+		this.graph.removeAttribute("ui.antialias");
+	}
 
+	/**
+	 * Add final state in the list.
+	 * 
+	 * @param name : name of the state
+	 * @param label : label of the state
+	 */
 	public boolean addFinalState(String name, String label) {
 		Node n = null;
 		try {
@@ -60,6 +85,12 @@ public class AutomatonGraphml implements IAutomaton {
 		return true;
 	}
 
+	/**
+	 * Apply css to Error and Unkonwn nodes
+	 * 
+	 * @param label : node's label
+	 * @param n : node to treat
+	 */
 	private void labelErrorTreatment(String label, Node n) {
 		n.addAttribute(ATTR_LABEL, label);
 		Boolean found = Arrays.asList(label.split(" ")).contains("ERROR:");
@@ -68,8 +99,17 @@ public class AutomatonGraphml implements IAutomaton {
 		found = Arrays.asList(label.split(" ")).contains("DONT_KNOW");
 		if(found)
 			n.setAttribute("ui.class", "unkown");
+		else
+			n.setAttribute("ui.class", "final");
 	}
+	
 
+	/**
+	 * Add a state in the automaton
+	 * 
+	 * @param name : name of the state
+	 * @param label : label of the state
+	 */
 	public boolean addState(String name, String label) {
 		Node n = null;
 		try {
