@@ -1,0 +1,22 @@
+edge.side1 {
+	text-alignment: right;
+}
+edge.side2 {
+	text-alignment: left;
+}
+
+node.initial {
+	fill-color: rgb(0,50,255);
+}
+
+node.final {
+	fill-color: rgb(0,255,50);
+}
+
+node.error {
+	fill-color: rgb(255,0,50);
+}
+
+node.unkown {
+	fill-color: rgb(255,0,200);
+}

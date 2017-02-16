@@ -25,13 +25,16 @@ public class AutomatonGraphml implements IAutomaton {
 	private Graph graph;
 	private Set<String> finalStates;
 	private Node intialState;
+	private boolean side;
 	
 	public AutomatonGraphml(String name){
 		this.graph = new SingleGraph(name); // MutliGraph for prevent EdgeRejetedException
 		this.enableHQ();
+		this.side = true;
 		this.finalStates = new HashSet<String>();
 		this.intialState = this.graph.addNode("init");
-		this.intialState.addAttribute("ui.style", "fill-color: rgb(0,50,255);");
+		this.intialState.setAttribute("ui.class", "initial");
+		this.graph.addAttribute("ui.stylesheet", "url('graph.css')");
 	}
 
 	private void enableHQ() {
@@ -59,11 +62,12 @@ public class AutomatonGraphml implements IAutomaton {
 
 	private void labelErrorTreatment(String label, Node n) {
 		n.addAttribute(ATTR_LABEL, label);
-		Boolean found = Arrays.asList(label.split(" ")).contains("ERROR:")|| Arrays.asList(label.split(" ")).contains("DONT_KNOW");
+		Boolean found = Arrays.asList(label.split(" ")).contains("ERROR:");
 		if(found)
-			n.addAttribute("ui.style", "fill-color: rgb(255,0,50);");
-		else
-			n.addAttribute("ui.style", "fill-color: rgb(0,255,50);");
+			n.setAttribute("ui.class", "error");
+		found = Arrays.asList(label.split(" ")).contains("DONT_KNOW");
+		if(found)
+			n.setAttribute("ui.class", "unkown");
 	}
 
 	public boolean addState(String name, String label) {
@@ -108,8 +112,13 @@ public class AutomatonGraphml implements IAutomaton {
 		}
 		
 		if(label != null){
-			e.addAttribute(ATTR_LABEL, label);	
-			e.addAttribute("ui.style", "text-offset: -1000, -200;"); 
+			e.addAttribute(ATTR_LABEL, label);
+		    
+			if(this.side)
+				e.setAttribute("ui.class", "side1");
+			else
+				e.setAttribute("ui.class", "side2");
+			this.side = !this.side;
 		}
 	}
 

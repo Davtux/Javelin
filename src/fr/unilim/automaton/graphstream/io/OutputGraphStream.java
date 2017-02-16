@@ -23,7 +23,7 @@ public class OutputGraphStream {
 	 * @param toExport
 	 * @throws IOException 
 	 */
-	static void exportGraph(String filePath, Graph toExport) throws IOException{
+	public static void exportGraph(String filePath, Graph toExport) throws IOException{
 		FileSinkGraphML sink = new FileSinkGraphML();
 		OutputStream out;
 		out = new FileOutputStream(filePath);

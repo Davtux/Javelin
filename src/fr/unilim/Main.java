@@ -91,7 +91,7 @@ public class Main {
 			}
 
 			g.display();*/
-		
+		System.setProperty("org.graphstream.ui.rendere", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
 		AutomatonCreator ac = new AutomatonCreator();
 		FileInputStream f = new FileInputStream("test_arrays_m4.json");
 		try {
