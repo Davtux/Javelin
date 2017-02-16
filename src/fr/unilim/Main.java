@@ -98,6 +98,8 @@ public class Main {
 			IBinaryTree tree = new BinaryTreeJSON(f);
 			AutomatonGraphml a = (AutomatonGraphml) ac.parse(tree, new AutomatonGraphml("automaton"));
 			Graph g = a.getGraph();
+			g.setAttribute("layout.quality", 4);
+			g.setAttribute("layout.weight", 0);
 			Viewer v = g.display();
 			v.enableAutoLayout();
 			Thread.sleep(2000);
