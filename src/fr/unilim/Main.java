@@ -44,6 +44,8 @@ import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
 import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
 import fr.unilim.automaton.graphstream.xml.Graphml;
 import fr.unilim.automaton.models.IAutomaton;
+import fr.unilim.tree.IBinaryTree;
+import fr.unilim.tree.adapter.BinaryTreeJSON;
 import scala.inline;
 import org.graphstream.graph.implementations.DefaultGraph;
 import org.graphstream.stream.file.FileSource;
@@ -131,7 +133,8 @@ public class Main {
 		AutomatonCreator ac = new AutomatonCreator();
 		FileInputStream f = new FileInputStream("test_arrays_m4.json");
 		try {
-			AutomatonGraphml a = (AutomatonGraphml) ac.parse(f, new AutomatonGraphml("automaton"));
+			IBinaryTree tree = new BinaryTreeJSON(f);
+			AutomatonGraphml a = (AutomatonGraphml) ac.parse(tree, new AutomatonGraphml("automaton"));
 			a.getGraph().display();
 		} catch (ParseException e) {
 			e.printStackTrace();
