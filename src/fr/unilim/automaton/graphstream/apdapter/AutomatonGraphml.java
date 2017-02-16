@@ -9,7 +9,7 @@ import org.graphstream.graph.EdgeRejectedException;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.IdAlreadyInUseException;
 import org.graphstream.graph.Node;
-import org.graphstream.graph.implementations.MultiGraph;
+import org.graphstream.graph.implementations.SingleGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,13 +36,13 @@ public class AutomatonGraphml implements IAutomaton {
 	 * @param name : name of the automaton
 	 */
 	public AutomatonGraphml(String name){
-		this.graph = new MultiGraph(name); // MutliGraph for prevent EdgeRejetedException
+		this.graph = new SingleGraph(name); // MutliGraph for prevent EdgeRejetedException
 		this.enableHQ();
 		this.side = true;
 		this.finalStates = new HashSet<String>();
 		this.intialState = this.graph.addNode("init");
 		this.intialState.setAttribute("ui.class", "initial");
-		this.graph.addAttribute("ui.stylesheet", "url('file:///home/romain/Seafile/Travail/ProjetM1/graph.css')");
+		this.graph.addAttribute("ui.stylesheet", "url('graph.css')");
 	}
 
 	/**
@@ -143,6 +143,8 @@ public class AutomatonGraphml implements IAutomaton {
 			e = graph.addEdge(name, origin, dest, true);
 		}catch(EdgeRejectedException eRe){
 			log.warn("Ege rejected between {} and {}, name {} : ", origin, dest, name, eRe);
+			fixRejectedEdge(origin, name, label, dest);
+			return;
 		}
 		if(e == null){
 			log.debug("addEdge return null, name = " + name + " origin = " + origin + " dest = " + dest);
@@ -158,6 +160,21 @@ public class AutomatonGraphml implements IAutomaton {
 				e.setAttribute("ui.class", "side2");
 			this.side = !this.side;
 		}
+	}
+
+	private void fixRejectedEdge(String origin, String name, String label, String dest) throws StateNotFoundException {
+		String newDest = dest + "-1";
+		if(null == this.graph.getNode(newDest)){
+			log.info("Create new node {} : {}", dest, newDest);
+			Node n = this.graph.getNode(dest);
+			if(isFianlState(dest)){
+				this.addFinalState(newDest, (String) n.getAttribute("ui.label"));
+			}else{
+				this.addState(newDest, (String) n.getAttribute("ui.label"));
+			}
+		}
+		log.info("Create transition between {} and {}", origin, newDest);
+		this.addTransition(origin, name, label, newDest);
 	}
 	
 	public Graph getGraph(){
