@@ -10,9 +10,11 @@ import java.nio.file.Path;
 public class JPFRunner {
 
 	private Path jpfExecutable;
+	private Logger l;
 
 	public JPFRunner(Path pathToJPF) {
 		jpfExecutable = pathToJPF;
+		l = new Logger(getClass().getName());
 	}
 
 	public void runJPF(Path propertiesFiles) {
@@ -21,9 +23,9 @@ public class JPFRunner {
 			Process proc = rt.exec(new String[] { jpfExecutable.toString(), propertiesFiles.toString() });
 			proc.waitFor();
 		} catch (IOException e) {
-			e.printStackTrace();
+			l.w(Logger.ERR, "Error launching JPF: " + e);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			l.w(Logger.ERR, "Thread has been interrupted: " + e);
 		}
 	}
 }

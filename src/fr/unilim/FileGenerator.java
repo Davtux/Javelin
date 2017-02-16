@@ -33,13 +33,13 @@ public class FileGenerator {
 			conf.setDirectoryForTemplateLoading(new File("templates/"));
 		} catch (IOException e) {
 			e.printStackTrace();
-			l.w(Logger.ERR, "Impossible de spécifier le dossier de templates : " + e.getMessage());
+			l.w(Logger.ERR, "Could not set templates directory: " + e.getMessage());
 		}
 	}
 	
 	/**
 	 * TODO: créer une liste pour récupérer puis traiter la liste des packages à inclure dans le fichier de config
-	 * @return
+	 * @return vrai si la génération s'est bien passée, faux sinon
 	 */
 	public boolean generateConfigFile(){
 		try{
@@ -55,20 +55,20 @@ public class FileGenerator {
 				tmpl.process(root, writer);
 			} catch (TemplateException e) {
 				e.printStackTrace();
-				l.w(Logger.ERR, "Une erreur s'est produite lors de l'expansion de la template : " + e.getMessage());
+				l.w(Logger.ERR, "An error occured while expanding the template: " + e.getMessage());
 			} finally {
 				writer.close();
 			}
 		    
-		    l.w(Logger.INFO, "Le fichier config.jpf est bien créé !");
+		    l.w(Logger.INFO, "File config.jpf created!");
 		    
 		    return true;
 		} catch (IOException e) {
-			l.w(Logger.ERR, "Impossible de créer un fichier !");
+			l.w(Logger.ERR, "Could not create file config.jpf!");
 		   return false;
 		}
 	}
-	/* TODO: créer le fichier :p */
+
 	public boolean generateMainFile(){
 		try{
 		    PrintWriter writer = new PrintWriter("Main.java", "UTF-8");
@@ -83,16 +83,15 @@ public class FileGenerator {
 		    	tpl.process(root, writer);
 		    } catch (TemplateException te) {
 		    	te.printStackTrace();
-		    	l.w(Logger.ERR, "Une erreur s'est produite lors de l'expansion de la template : " + te.getMessage());
-		    } finally {
-			    writer.close();
+		    	l.w(Logger.ERR, "An error occured while expanding the template: " + te.getMessage());
 		    }
 		    
-		    l.w(Logger.INFO, "Le fichier Main.java est bien créé !");
+		    writer.close();
+		    l.w(Logger.INFO, "File Main.java created!");
 		    
 		    return true;
 		} catch (IOException e) {
-			l.w(Logger.ERR, "Impossible de créer un fichier !");
+			l.w(Logger.ERR, "Could not create file Main.java!");
 		   return false;
 		}
 	}
