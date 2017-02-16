@@ -96,11 +96,13 @@ public class AutomatonGraphml implements IAutomaton {
 		Boolean found = Arrays.asList(label.split(" ")).contains("ERROR:");
 		if(found)
 			n.setAttribute("ui.class", "error");
-		found = Arrays.asList(label.split(" ")).contains("DONT_KNOW");
-		if(found)
-			n.setAttribute("ui.class", "unkown");
-		else
-			n.setAttribute("ui.class", "final");
+		else{
+			found = Arrays.asList(label.split(" ")).contains("DONT_KNOW");
+			if(found)
+				n.setAttribute("ui.class", "unkown");
+			else
+				n.setAttribute("ui.class", "final");
+		}
 	}
 	
 
