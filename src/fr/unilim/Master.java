@@ -59,11 +59,12 @@ public class Master {
 	/**
 	 * Instantiate JPFRunner class in order to execute JPF
 	 * @param pathToJPF The path to the JPF executable on the host system
+	 * @param z3Path the build folder of the z3 constraint solver
 	 */
-	public void execute(Path pathToJPF){
+	public void execute(Path pathToJPF, Path z3Path){
 		if(generate()){
 			JPFRunner jpfRunner = new JPFRunner(pathToJPF);
-			jpfRunner.runJPF(Paths.get(Config.JPF_CONF_NAME));
+			jpfRunner.runJPF(Paths.get(Config.JPF_CONF_NAME), z3Path);
 		}else{
 			l.w(Logger.ERR, "Failed when generating files.");
 		}
