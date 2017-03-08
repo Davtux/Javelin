@@ -50,7 +50,7 @@ echo "JAVA_HOME=$JAVA_HOME"
 CXX=clang++ CC=clang python scripts/mk_make.py --java || exit 2
 
 cd build || exit 2 
-# make all -j4 || exit 2
+make all -j4 || exit 2
 
 export LD_LIBRARY_PATH="$(pwd)"
 echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH" > ../../export_ld_library_path
