@@ -80,7 +80,7 @@ public class FileGenerator {
 	 */
 	public boolean generateMainFile(){
 		try{
-		    PrintWriter writer = new PrintWriter("Main.java", "UTF-8");
+		    PrintWriter writer = new PrintWriter("MainTester.java", "UTF-8");
 		    
 		    Template tpl = conf.getTemplate("MainTester.java");
 		    
@@ -96,11 +96,11 @@ public class FileGenerator {
 		    }
 		    
 		    writer.close();
-		    l.w(Logger.INFO, "File Main.java created!");
+		    l.w(Logger.INFO, "File MainTester.java created!");
 		    
 		    return true;
 		} catch (IOException e) {
-			l.w(Logger.ERR, "Could not create file Main.java!");
+			l.w(Logger.ERR, "Could not create file MainTester.java!");
 		   return false;
 		}
 	}
