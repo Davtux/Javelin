@@ -30,6 +30,11 @@ if ! which java 1>/dev/null 2>/dev/null; then
 	exit 1
 fi
 
+if ! which python 1>/dev/null 2>/dev/null; then
+	echo "Need python"
+	exit 1
+fi
+
 echo ""
 echo "##############################"
 echo "Install Z3 ..."
