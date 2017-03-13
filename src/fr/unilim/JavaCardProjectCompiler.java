@@ -2,6 +2,7 @@ package fr.unilim;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Arrays;
 
 import javax.tools.*;
@@ -15,8 +16,8 @@ class NoJDKException extends Exception {
 public class JavaCardProjectCompiler {
 	
 	@SuppressWarnings("restriction")
-	public static boolean compile(File mainClassPath, File outputPath) throws IOException, NoJDKException {
-		File[] files = { mainClassPath };
+	public static boolean compile(Path mainClassPath, Path outputPath) throws IOException, NoJDKException {
+		File[] files = { mainClassPath.toFile() };
 
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 		if (compiler == null) {
