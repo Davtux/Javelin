@@ -1,0 +1,4 @@
+@using = jpf-jdart
+shell=gov.nasa.jpf.jdart.JDart
+symbolic.dp=z3
+
