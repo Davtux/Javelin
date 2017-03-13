@@ -1,0 +1,8 @@
+@include=../config/main_config.jpf
+target=fr.unilim.talos.MainTester
+jdart.configs.com.zeruf.apdu.symbolic.include=com.zeruf.apdu.*;
+concolic.method.process=com.zeruf.apdu.APDU.process(apdu:fr.unilim.jc.APDU)
+concolic.method=process
+
+jdart.tree.json.print=true
+jdart.tree.json.dir=.
