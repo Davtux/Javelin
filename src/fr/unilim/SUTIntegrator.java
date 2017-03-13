@@ -26,7 +26,7 @@ public class SUTIntegrator {
 	 * @param srcPath Source folder (.java files) to be integrated in the jDart folder tree
 	 * @param classPath Folder containing compiled files (.class) to be integrated in the jDart folder tree
 	 */
-	public void integrate(Path srcPath, Path classPath){
+	public boolean integrate(Path srcPath, Path classPath){
 		File srcFolder = srcPath.toFile();
 		File classFolder = classPath.toFile();
 		File srcDest = new File(jDartPath.toString()+"/src/examples");
@@ -35,7 +35,7 @@ public class SUTIntegrator {
     	//making sure source folder exists
     	if(!srcFolder.exists() || !classFolder.exists()){
     		l.w(Logger.ERR, "Directory does not exist.");
-           System.exit(0);
+    		return false;
 
         }else{
 
@@ -47,11 +47,12 @@ public class SUTIntegrator {
            }catch(IOException e){
         	   l.w(Logger.ERR, "Cannot integrate the SUT project in JDart");
         	   e.printStackTrace();
-                System.exit(0);
+        	   return false;
            }
         }
 
     	l.w(Logger.INFO, "The SUT project has been integrated in JDart successfully");
+    	return true;
 	}
 	
 	/**
