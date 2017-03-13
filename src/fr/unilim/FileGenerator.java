@@ -53,7 +53,7 @@ public class FileGenerator {
 		    Template tmpl = conf.getTemplate("jpf.properties");
 		    try {
 		    	Map<String, Object> root = new HashMap<String, Object>();
-		    	root.put("main_conf_name", Config.JPF_MAIN_CONF_NAME);
+		    	root.put("main_conf_name", "../"+Config.JPF_MAIN_CONF_NAME);
 		    	root.put("packageName", packageName);
 		    	root.put("appletClsName", appletClsName);
 		    	
@@ -80,7 +80,7 @@ public class FileGenerator {
 	 */
 	public boolean generateMainFile(){
 		try{
-		    PrintWriter writer = new PrintWriter("MainTester.java", "UTF-8");
+		    PrintWriter writer = new PrintWriter(Config.SUT_SRC_FOLDER+"MainTester.java", "UTF-8");
 		    
 		    Template tpl = conf.getTemplate("MainTester.java");
 		    
