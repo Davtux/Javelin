@@ -1,5 +1,6 @@
 package fr.unilim;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
@@ -63,8 +64,32 @@ public class Master {
 	 */
 	public void execute(Path pathToJPF, Path z3Path){
 		if(generate()){
-			JPFRunner jpfRunner = new JPFRunner(pathToJPF);
-			jpfRunner.runJPF(Paths.get(Config.JPF_CONF_NAME), z3Path);
+			try {
+				boolean compilationState = JavaCardProjectCompiler.compile(Paths.get(Config.SUT_SRC_FOLDER+"MainTester.java"), Paths.get(Config.SUT_BIN_FOLDER));
+				if(compilationState)
+					l.w(Logger.INFO, "SUT compiled successfully.");
+				else
+					l.w(Logger.WARN, "Errors occured while compiling the SUT.");
+			} catch (IOException | NoJDKException e) {
+				l.w(Logger.ERR, "Cannot compile SUT.");
+				e.printStackTrace();
+			}
+			
+			String jDart = JPFConfigFileReader.getJDartPath();
+			if(jDart != null){
+				Path jDartPath = Paths.get(jDart);
+				
+				SUTIntegrator integrator = new SUTIntegrator(jDartPath);
+				
+				if(integrator.integrate(Paths.get("SUT", "src"), Paths.get("SUT", "build"))){
+					JPFRunner jpfRunner = new JPFRunner(pathToJPF);
+					jpfRunner.runJPF(Paths.get(Config.JPF_CONF_NAME), z3Path);		
+				}else{
+					l.w(Logger.ERR, "Failed to integrate the SUT into JDart structor.");
+				}
+			}else{
+				l.w(Logger.ERR, "Cannot find JDart path.");
+			}
 		}else{
 			l.w(Logger.ERR, "Failed when generating files.");
 		}
