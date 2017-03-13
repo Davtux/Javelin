@@ -19,21 +19,21 @@ public class Counter {
 	}
 	
 	/**
-	 * @return Value of Cuunter and increments it;
+	 * @return Value of Counter and increments it;
 	 */
 	public Integer nextInteger(){
 		return this.value++;
 	}
 	
 	/**
-	 * @return Value of Cuunter and increments it.
+	 * @return Value of Counter and increments it.
 	 */
 	public int nextInt(){
 		return this.value++;
 	}
 	
 	/**
-	 * @return Value of Cuunter and increments it.
+	 * @return Value of Counter and increments it.
 	 */
 	public String nextString(){
 		String str = this.value.toString();
