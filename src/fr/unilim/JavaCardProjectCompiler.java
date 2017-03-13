@@ -14,7 +14,7 @@ class NoJDKException extends Exception {
 
 public class JavaCardProjectCompiler {
 	
-	@SuppressWarnings("restriction")
+	//@SuppressWarnings("restriction")
 	public static boolean compile(File mainClassPath, File outputPath) throws IOException, NoJDKException {
 		File[] files = { mainClassPath };
 
@@ -29,11 +29,11 @@ public class JavaCardProjectCompiler {
 		};
 		
 		Iterable<? extends JavaFileObject> compilationUnit = fileManager.getJavaFileObjectsFromFiles(Arrays.asList(files));
-		compiler.getTask(null, fileManager, null, Arrays.asList(params), null, compilationUnit).call();
+		boolean ok = compiler.getTask(null, fileManager, null, Arrays.asList(params), null, compilationUnit).call();
 		
 		fileManager.close();
 		
-		return false;
+		return ok;
 	}
 
 }
