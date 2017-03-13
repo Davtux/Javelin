@@ -1,4 +1,4 @@
-package fr.unilim;
+package fr.unilim.tests;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,9 +15,9 @@ import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
 import fr.unilim.tree.IBinaryTree;
 import fr.unilim.tree.adapter.BinaryTreeJSON;
 
-public class Main {
+public class MainGraph {
 
-	private static final Logger log = LoggerFactory.getLogger(Main.class);
+	private static final Logger log = LoggerFactory.getLogger(MainGraph.class);
 	
 	public static void main(String[] args) throws IOException {
 		log.debug("Start Main ...");
