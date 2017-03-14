@@ -23,9 +23,19 @@ public class Config {
 	public static final String JPF_CONF_NAME ="SUT/config.jpf";
 	public static final String JPF_MAIN_CONF_NAME ="config/main_config.jpf";
 	
-	private static final String NAME_JAVACARD_API_JAR_PATH = "JAVACARD_API_JAR_PATH ";
+	private static final String NAME_JAVACARD_API_JAR_PATH = "JAVACARD_API_JAR_PATH";
 	private static String javacardApiJarPath = "/home/simon/dev/OracleJCSDK/oracle_javacard_sdks/jc222_kit/lib/api.jar";
-
+	
+	private static final String NAME_JDART_PATH = "JDART_PATH";
+	private static String jdartPath = null;
+	
+	private static final String NAME_JPF_BIN_PATH = "JPF_BIN_PATH";
+	private static String jpfBinPath = null;
+	
+	private static final String NAME_Z3_BUILD_PATH = "Z3_BUILD_PATH";
+	private static String z3BuildPath = null;
+	
+	
 	private Config() {}
 	
 	
@@ -33,6 +43,19 @@ public class Config {
 		return javacardApiJarPath;
 	}
 	
+	public static String getJdartPath() {
+		return jdartPath;
+	}
+
+	public static String getJpfBinPath() {
+		return jpfBinPath;
+	}
+	
+	public static String getZ3BuildPath() {
+		return z3BuildPath;
+	}
+
+
 	/**
 	 * Load configuration file
 	 * @param filePath
@@ -51,8 +74,18 @@ public class Config {
 				Config.NAME_JAVACARD_API_JAR_PATH, 
 				Config.javacardApiJarPath
 				);
+		Config.jdartPath = prop.getProperty(
+				Config.NAME_JDART_PATH
+				);
+		Config.jpfBinPath = prop.getProperty(
+				Config.NAME_JPF_BIN_PATH
+				);
+		Config.z3BuildPath = prop.getProperty(
+				Config.NAME_Z3_BUILD_PATH
+				);
 		
 		FileUtil.closeFile(input);
+		log.debug("Configuration loaded.");
 	}
 	
 	/**
@@ -65,6 +98,9 @@ public class Config {
 		FileOutputStream out = new FileOutputStream(new File(filePath));
 		
 		prop.setProperty(Config.NAME_JAVACARD_API_JAR_PATH, Config.javacardApiJarPath);
+		prop.setProperty(Config.NAME_JDART_PATH, Config.jdartPath);
+		prop.setProperty(Config.NAME_JPF_BIN_PATH, Config.jpfBinPath);
+		prop.setProperty(Config.NAME_Z3_BUILD_PATH, Config.z3BuildPath);
 		
 		prop.store(out, "");
 		

@@ -12,10 +12,16 @@
   <description>Projet de Master 1 : extraction d'un automate depuis une applet JavaCard</description>
   <build>
     <sourceDirectory>src/</sourceDirectory>
-    <testSourceDirectory>test</testSourceDirectory>
+    <testSourceDirectory>test/java</testSourceDirectory>
     <resources>
       <resource>
         <directory>resources</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <directory>test/resources</directory>
         <excludes>
           <exclude>**/*.java</exclude>
         </excludes>

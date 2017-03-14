@@ -1,0 +1,204 @@
+// converted by version 1.3
+// on Mon Feb 01 16:00:09 CET 2016
+
+.package fr/unilim {
+	.aid 0x1:0x2:0x3:0x4:0x5:0x6:0x7:0x8:0x9;
+	.version 1.9;
+
+	.imports {
+		0xA0:0x0:0x0:0x0:0x62:0x1:0x1 1.2;		//javacard/framework
+	}
+
+	.applet {
+		0x1:0x2:0x3:0x4:0x5:0x6:0x7:0x8:0x9:0x0:0x0 PorteMonaie;
+	}
+
+	.constantPool {
+		// 0
+		instanceFieldRef short PorteMonaie/balance;
+		// 1
+		virtualMethodRef 0.3.1()V;		// javacard/framework/Applet.register()V
+		// 2
+		classRef PorteMonaie;
+		// 3
+		staticMethodRef PorteMonaie/<init>()V;
+		// 4
+		virtualMethodRef 0.10.1()[B;		// javacard/framework/APDU.getBuffer()[B
+		// 5
+		virtualMethodRef 0.3.3()Z;		// javacard/framework/Applet.selectingApplet()Z
+		// 6
+		staticMethodRef 0.7.1(S)V;		// javacard/framework/ISOException.throwIt(S)V
+		// 7
+		virtualMethodRef 0.10.6()S;		// javacard/framework/APDU.setIncomingAndReceive()S
+		// 8
+		staticMethodRef 0.3.0()V;		// javacard/framework/Applet.<init>()V
+		// 9
+		staticMethodRef 0.16.6([BSS)S;		// javacard/framework/Util.setShort([BSS)S
+		// 10
+		virtualMethodRef 0.10.8(SS)V;		// javacard/framework/APDU.setOutgoingAndSend(SS)V
+		// 11
+		staticMethodRef 0.16.4([BS)S;		// javacard/framework/Util.getShort([BS)S
+	}
+
+	.class public PorteMonaie 0 extends 0.3 {		// extends javacard/framework/Applet
+
+		.fields {
+			private short balance 0;		// S
+		}
+
+		.publicMethodTable 7 {
+			equals(Ljava/lang/Object;)Z;
+			register()V;
+			register([BSB)V;
+			selectingApplet()Z;
+			deselect()V;
+			getShareableInterfaceObject(Ljavacard/framework/AID;B)Ljavacard/framework/Shareable;;
+			select()Z;
+			process(Ljavacard/framework/APDU;)V;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.method private <init>()V {
+			.stack 1;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 8;		// javacard/framework/Applet.<init>()V
+					aload_0;
+					invokevirtual 1;		// javacard/framework/Applet.register()V
+					return;
+		}
+
+		.method public static install([BSB)V 0 {
+			.stack 1;
+			.locals 0;
+
+				L0:	new 2;		// fr/unilim/PorteMonaie
+					invokespecial 3;		// fr/unilim/PorteMonaie.<init>()V
+					return;
+		}
+
+		.method public process(Ljavacard/framework/APDU;)V 7 {
+			.stack 3;
+			.locals 4;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_1;
+					invokevirtual 4;		// javacard/framework/APDU.getBuffer()[B
+					astore_2;
+					aload_0;
+					invokevirtual 5;		// javacard/framework/Applet.selectingApplet()Z
+					ifeq L2;
+				L1:	return;
+				L2:	aload_2;
+					sconst_0;
+					baload;
+					bspush -128;
+					if_scmpeq L4;
+				L3:	sspush 28160;
+					invokestatic 6;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	aload_2;
+					sconst_1;
+					baload;
+					stableswitch L25 52 56 L5 L25 L11 L25 L17;
+				L5:	aload_1;
+					invokevirtual 7;		// javacard/framework/APDU.setIncomingAndReceive()S
+					sstore_3;
+					sload_3;
+					ifeq L7;
+				L6:	sspush 26368;
+					invokestatic 6;		// javacard/framework/ISOException.throwIt(S)V
+				L7:	aload_2;
+					sconst_2;
+					baload;
+					ifeq L10;
+				L8:	aload_2;
+					sconst_3;
+					baload;
+					ifeq L10;
+				L9:	sspush 27270;
+					invokestatic 6;		// javacard/framework/ISOException.throwIt(S)V
+				L10:	aload_2;
+					sconst_0;
+					getfield_s_this 0;		// short fr/unilim/PorteMonaie.balance
+					invokestatic 9;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					aload_1;
+					sconst_0;
+					sconst_2;
+					invokevirtual 10;		// javacard/framework/APDU.setOutgoingAndSend(SS)V
+					return;
+				L11:	aload_1;
+					invokevirtual 7;		// javacard/framework/APDU.setIncomingAndReceive()S
+					sstore_3;
+					sload_3;
+					sconst_2;
+					if_scmpeq L13;
+				L12:	sspush 26368;
+					invokestatic 6;		// javacard/framework/ISOException.throwIt(S)V
+				L13:	aload_2;
+					sconst_5;
+					invokestatic 11;		// javacard/framework/Util.getShort([BS)S
+					sstore 4;
+					aload_2;
+					sconst_2;
+					baload;
+					ifeq L16;
+				L14:	aload_2;
+					sconst_3;
+					baload;
+					ifeq L16;
+				L15:	sspush 27270;
+					invokestatic 6;		// javacard/framework/ISOException.throwIt(S)V
+				L16:	aload_0;
+					dup;
+					getfield_s 0;		// short fr/unilim/PorteMonaie.balance
+					sload 4;
+					sadd;
+					putfield_s 0;		// short fr/unilim/PorteMonaie.balance
+					return;
+				L17:	aload_1;
+					invokevirtual 7;		// javacard/framework/APDU.setIncomingAndReceive()S
+					sstore_3;
+					sload_3;
+					sconst_2;
+					if_scmpeq L19;
+				L18:	sspush 26368;
+					invokestatic 6;		// javacard/framework/ISOException.throwIt(S)V
+				L19:	aload_2;
+					sconst_5;
+					invokestatic 11;		// javacard/framework/Util.getShort([BS)S
+					sstore 5;
+					aload_2;
+					sconst_2;
+					baload;
+					ifeq L22;
+				L20:	aload_2;
+					sconst_3;
+					baload;
+					ifeq L22;
+				L21:	sspush 27270;
+					invokestatic 6;		// javacard/framework/ISOException.throwIt(S)V
+				L22:	getfield_s_this 0;		// short fr/unilim/PorteMonaie.balance
+					sload 5;
+					if_scmpge L24;
+				L23:	sspush 27014;
+					invokestatic 6;		// javacard/framework/ISOException.throwIt(S)V
+				L24:	aload_0;
+					dup;
+					getfield_s 0;		// short fr/unilim/PorteMonaie.balance
+					sload 5;
+					ssub;
+					putfield_s 0;		// short fr/unilim/PorteMonaie.balance
+					return;
+				L25:	sspush 27904;
+					invokestatic 6;		// javacard/framework/ISOException.throwIt(S)V
+					return;
+		}
+
+	}
+
+}

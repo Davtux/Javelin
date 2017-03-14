@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<applet CLA="84">
+	<test INS="16"></test>
+	<test INS="1E" data="00 01 02 03"></test>
+	<test INS="16"></test>
+	<test INS="18"></test>
+	<test INS="16"></test>
+	<test INS="1E"></test>
+	<test INS="18" data="00"></test>
+	<test INS="16"></test>
+	<test INS="AE"></test>
+	<test INS="A8" data="0A" length="10"></test>
+	<test INS="AE"></test>
+	<test INS="AE"></test>
+	<test INS="88" P2="01"></test>
+	<test INS="88" P1="00"></test>
+	<test INS="88" P1="00"></test>
+	<test INS="CA" P1="0A"></test>
+	<test INS="CA" P1="9F"></test>
+	<test INS="CA" P1="9F" P2="36"></test>
+	<test INS="CA" P1="9F" P2="13"></test>
+	<test INS="CA" P1="9F" P2="17"></test>
+	<test INS="CA" P1="9F" P2="4F"></test>
+	<test INS="CA" P1="9F" P2="0F"></test>
+	<test INS="88" P1="00"></test>
+	<test INS="01"></test>
+	<test INS="88" P1="00"></test>
+</applet>

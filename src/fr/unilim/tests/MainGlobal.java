@@ -10,6 +10,7 @@ import org.graphstream.graph.Graph;
 import org.graphstream.ui.view.Viewer;
 import org.json.simple.parser.ParseException;
 
+import fr.unilim.Config;
 import fr.unilim.Master;
 import fr.unilim.automaton.algorithms.AutomatonCreator;
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
@@ -19,9 +20,18 @@ import fr.unilim.tree.adapter.BinaryTreeJSON;
 
 public class MainGlobal {
 	public static void main(String[] args) {
-		
-		Master master = new Master(Paths.get("/home/romain/Seafile/Travail/testGen"),Paths.get("/home/romain/Seafile/Travail/TPs_JAVACARD/Card_1/src"), "MyFutureApplet", "fr.unilim.tp1");
-		master.execute(Paths.get("/home/romain/Seafile/Travail/jdart/jpf-core/bin/jpf"), Paths.get("/home/romain/Seafile/Travail/jdart/z3/build"));
+		try {
+			Config.loadConfigFile("ProjetM1.conf");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			return;
+		}
+		Master master = new Master(
+				Paths.get("test/resources/"),
+				Paths.get("test/resources/PorteMonnaie/src/"), 
+				"PorteMonnaie", 
+				"fr.unilim");
+		master.execute(Paths.get(Config.getJpfBinPath()), Paths.get(Config.getZ3BuildPath()));
 		System.out.println("Generated successfully");
 		
 		System.setProperty("org.graphstream.ui.rendere", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
