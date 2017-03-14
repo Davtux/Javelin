@@ -1,4 +1,5 @@
 @using = jpf-jdart
 shell=gov.nasa.jpf.jdart.JDart
 symbolic.dp=z3
-
+jdart.tree.json.print=true
+jdart.tree.json.dir=.
