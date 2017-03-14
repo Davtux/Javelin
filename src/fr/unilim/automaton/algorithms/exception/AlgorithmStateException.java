@@ -1,5 +1,10 @@
 package fr.unilim.automaton.algorithms.exception;
 
+import fr.unilim.automaton.algorithms.AutomatonCreator;
+
+/**
+ * Throw by method parse in {@link AutomatonCreator}.
+ */
 public class AlgorithmStateException extends Exception {
 
 	private static final long serialVersionUID = 1L;

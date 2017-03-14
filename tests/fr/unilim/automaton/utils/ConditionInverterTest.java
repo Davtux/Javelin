@@ -51,6 +51,16 @@ public class ConditionInverterTest {
 	}
 	
 	@Test
+	public void testCombine(){
+		String testE = "(a == 7) && a";
+		String expectedE = "(a != 7) || !a";
+		String testNE = "(a != 7) || !c";
+		String expectedNE = "(a == 7) && c";
+		assertEquals(expectedE, ConditionInverter.invertCondition(testE));
+		assertEquals(expectedNE, ConditionInverter.invertCondition(testNE));
+	}
+	
+	@Test
 	public void testEquals(){
 		String testEquals = "foo.equals('a')";
 		String expectedEquals = "!foo.equals('a')";
