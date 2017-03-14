@@ -4,13 +4,18 @@
   <artifactId>ProjetM1</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>ProjetM1</name>
+  
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
   <description>Projet de Master 1 : extraction d'un automate depuis une applet JavaCard</description>
   <build>
-    <sourceDirectory>src</sourceDirectory>
-    <testSourceDirectory>tests</testSourceDirectory>
+    <sourceDirectory>src/</sourceDirectory>
+    <testSourceDirectory>test</testSourceDirectory>
     <resources>
       <resource>
-        <directory>src</directory>
+        <directory>resources</directory>
         <excludes>
           <exclude>**/*.java</exclude>
         </excludes>
@@ -53,6 +58,25 @@
 		<artifactId>logback-classic</artifactId>
 		<version>1.1.7</version>
 	</dependency>
+	
+	<dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+    	<version>1.1.7</version>
+ 	</dependency>
+	
+	<dependency>
+    	<groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.21</version>
+    </dependency>
+     
+     <dependency>
+     	<groupId>junit</groupId>       
+     	<artifactId>junit</artifactId>       
+     	<version>4.12</version>       
+     	<scope>test</scope>     
+     </dependency>
 	
 	<dependency>
     	<groupId>com.googlecode.json-simple</groupId>
