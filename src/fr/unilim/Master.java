@@ -27,9 +27,9 @@ public class Master {
 	private Path classPath;
 	
 	/**
-	 * The Path were we'll create the project used by JDart to test the applet
+	 * The Path were the project under test is located
 	 */
-	private Path newProjectPath;
+	private Path projectPath;
 	
 	/**
 	 * The name of the class containing the APDU 
@@ -41,9 +41,9 @@ public class Master {
 	private String packageName;
 	
 
-	public Master(Path classPath, Path newProjectPath, String aPDUClassName, String packageName) {
+	public Master(Path classPath, Path projectPath, String aPDUClassName, String packageName) {
 		this.classPath = classPath;
-		this.newProjectPath = newProjectPath;
+		this.projectPath = projectPath;
 		this.aPDUClassName = aPDUClassName;
 		this.packageName = packageName;
 		l.info("Start: "+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
@@ -64,9 +64,12 @@ public class Master {
 	 * @param z3Path the build folder of the z3 constraint solver
 	 */
 	public void execute(Path pathToJPF, Path z3Path){
-		if(generate()){
+		String jDart = JPFConfigFileReader.getJDartPath();
+		Path jDartPath = Paths.get(jDart);
+		SUTIntegrator integrator = new SUTIntegrator(jDartPath);
+		if(generate() && integrator.getSrc(projectPath)){
 			try {
-				boolean compilationState = JavaCardProjectCompiler.compile(Paths.get(Config.SUT_SRC_FOLDER+"MainTester.java"), Paths.get(Config.SUT_BIN_FOLDER), Paths.get("SUT/src/"));
+				boolean compilationState = JavaCardProjectCompiler.compile(Paths.get(Config.TALOS_SRC_FOLDER+"MainTester.java"), Paths.get(Config.SUT_BIN_FOLDER), Paths.get("SUT/src/"));
 				if(compilationState)
 					l.info("SUT compiled successfully.");
 				else
@@ -74,13 +77,7 @@ public class Master {
 			} catch (IOException | NoJDKException e) {
 				l.error("Cannot compile SUT.", e);
 			}
-			
-			String jDart = JPFConfigFileReader.getJDartPath();
 			if(jDart != null){
-				Path jDartPath = Paths.get(jDart);
-				
-				SUTIntegrator integrator = new SUTIntegrator(jDartPath);
-				
 				if(integrator.integrate(Paths.get("SUT", "src"), Paths.get("SUT", "build"))){
 					JPFRunner jpfRunner = new JPFRunner(pathToJPF);
 					jpfRunner.runJPF(Paths.get(Config.JPF_CONF_NAME), z3Path);		
@@ -103,12 +100,12 @@ public class Master {
 		this.classPath = classPath;
 	}
 
-	public Path getNewProjectPath() {
-		return newProjectPath;
+	public Path getProjectPath() {
+		return projectPath;
 	}
 
-	public void setNewProjectPath(Path newProjectPath) {
-		this.newProjectPath = newProjectPath;
+	public void setProjectPath(Path projectPath) {
+		this.projectPath = projectPath;
 	}
 
 	public String getAPDUClassName() {

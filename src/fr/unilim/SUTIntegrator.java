@@ -20,6 +20,28 @@ public class SUTIntegrator {
 	public SUTIntegrator(Path jDartPath){
 		this.jDartPath = jDartPath;
 	}
+	
+	public boolean getSrc(Path srcPath){
+		File srcFolder = srcPath.toFile();
+		File srcDest = new File(Config.SUT_SRC_FOLDER);
+
+    	//making sure source folder exists
+    	if(!srcFolder.exists()){
+    		l.error("Directory does not exist.");
+    		return false;
+
+        }else{
+           try{
+        	copyFolder(srcFolder,srcDest);
+           }catch(IOException e){
+        	   l.error("Cannot integrate the sources in the SUT directory", e);
+        	   return false;
+           }
+        }
+
+    	l.info("The SUT project has been copied in the SUT directory successfully");
+    	return true;
+	}
 
 	/**
 	 * Integrate the SUT project in the JDart structure by copying the .java and .class files
