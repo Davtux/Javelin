@@ -32,7 +32,7 @@ public class JavaCardProjectCompiler {
 		}
 		StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
 		
-		String apiJar = Config.JAVACARD_API_JAR_PATH;
+		String apiJar = Config.getJavacardApiJarPath();
 		String annotationPath = Paths.get(JPFConfigFileReader.getJDartPath(), "src", "annotations").toString();
 		String classPathParam = String.join(":", apiJar, packageTopLevel.toString(), annotationPath);
 		
