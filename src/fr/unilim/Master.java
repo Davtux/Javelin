@@ -69,7 +69,7 @@ public class Master {
 		SUTIntegrator integrator = new SUTIntegrator(jDartPath);
 		if(generate() && integrator.getSrc(projectPath)){
 			try {
-				boolean compilationState = JavaCardProjectCompiler.compile(Paths.get(Config.TALOS_SRC_FOLDER+"MainTester.java"), Paths.get(Config.SUT_BIN_FOLDER), Paths.get("SUT/src/"));
+				boolean compilationState = JavaCardProjectCompiler.compile(Paths.get(Config.TALOS_SRC_FOLDER+"MainTester.java"), Paths.get(Config.SUT_BIN_FOLDER), Paths.get("SUT", "src"));
 				if(compilationState)
 					l.info("SUT compiled successfully.");
 				else
