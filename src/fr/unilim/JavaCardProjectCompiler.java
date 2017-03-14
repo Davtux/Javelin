@@ -10,16 +10,19 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
-class NoJDKException extends Exception {
-	public NoJDKException(String msg) {
-		super(msg);
-	}
-}
 
 public class JavaCardProjectCompiler {
 
-	@SuppressWarnings("restriction")
-	public static boolean compile(Path mainClassPath, Path outputPath) throws IOException, NoJDKException {
+	/**
+	 * Compiles a given Java file using the system JDK
+	 * @param mainClassPath Path to the Java file to be compiled
+	 * @param outputPath Path where we'll put the *.class files
+	 * @param packageTopLevel Path to the folder where the top-level package lives
+	 * @return True if the compilation was successful, False otherwise
+	 * @throws IOException If a file cannot be found
+	 * @throws NoJDKException If we can't find a JDK on the system
+	 */
+	public static boolean compile(Path mainClassPath, Path outputPath, Path packageTopLevel) throws IOException, NoJDKException {
 		File[] files = { mainClassPath.toFile() };
 
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
@@ -28,8 +31,12 @@ public class JavaCardProjectCompiler {
 		}
 		StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
 		
+		String apiJar = Config.JAVACARD_API_JAR_PATH;
+		String classPathParam = String.join(":", apiJar, packageTopLevel.toString());
+		
 		String[] params = {
-			"-d", outputPath.toString()
+			"-d", outputPath.toString(),
+			"-cp", classPathParam
 		};
 		
 		Iterable<? extends JavaFileObject> compilationUnit = fileManager.getJavaFileObjectsFromFiles(Arrays.asList(files));

@@ -66,7 +66,7 @@ public class Master {
 	public void execute(Path pathToJPF, Path z3Path){
 		if(generate()){
 			try {
-				boolean compilationState = JavaCardProjectCompiler.compile(Paths.get(Config.SUT_SRC_FOLDER+"MainTester.java"), Paths.get(Config.SUT_BIN_FOLDER));
+				boolean compilationState = JavaCardProjectCompiler.compile(Paths.get(Config.SUT_SRC_FOLDER+"MainTester.java"), Paths.get(Config.SUT_BIN_FOLDER), Paths.get("SUT/src/"));
 				if(compilationState)
 					l.info("SUT compiled successfully.");
 				else
