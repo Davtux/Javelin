@@ -82,7 +82,7 @@ public class FileGenerator {
 	 */
 	public boolean generateMainFile(){
 		try{
-		    PrintWriter writer = new PrintWriter(Config.SUT_SRC_FOLDER+"MainTester.java", "UTF-8");
+		    PrintWriter writer = new PrintWriter(Config.TALOS_SRC_FOLDER+"MainTester.java", "UTF-8");
 		    
 		    Template tpl = conf.getTemplate("MainTester.java");
 		    
