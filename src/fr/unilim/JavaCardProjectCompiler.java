@@ -34,11 +34,12 @@ public class JavaCardProjectCompiler {
 		
 		String apiJar = Config.JAVACARD_API_JAR_PATH;
 		String annotationPath = Paths.get(JPFConfigFileReader.getJDartPath(), "src", "annotations").toString();
-		String classPathParam = String.join(":", apiJar, packageTopLevel.toString(), annotationPath);
+		String sourcepathParam = String.join(":", packageTopLevel.toString(), annotationPath);
 		
 		String[] params = {
 			"-d", outputPath.toString(),
-			"-cp", classPathParam
+			"-cp", apiJar,
+			"-sourcepath", sourcepathParam
 		};
 		
 		Iterable<? extends JavaFileObject> compilationUnit = fileManager.getJavaFileObjectsFromFiles(Arrays.asList(files));
