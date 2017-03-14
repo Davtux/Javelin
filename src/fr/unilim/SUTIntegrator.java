@@ -19,6 +19,30 @@ public class SUTIntegrator {
 	
 	public SUTIntegrator(Path jDartPath){
 		this.jDartPath = jDartPath;
+		createDirectories();
+	}
+	
+	private void createDirectories() {
+		File sutSrc = new File(Config.SUT_SRC_FOLDER);
+		if(! sutSrc.exists()){
+			l.info("{} not exist.", Config.SUT_SRC_FOLDER);
+			sutSrc.mkdirs();
+			l.info("{} created", Config.SUT_SRC_FOLDER);
+		}
+		
+		File sutBin = new File(Config.SUT_BIN_FOLDER);
+		if(! sutBin.exists()){
+			l.info("{} not exist.", Config.SUT_BIN_FOLDER);
+			sutBin.mkdirs();
+			l.info("{} created", Config.SUT_BIN_FOLDER);
+		}
+		
+		File sutTalos = new File(Config.TALOS_SRC_FOLDER);
+		if(! sutTalos.exists()){
+			l.info("{} not exist.", Config.TALOS_SRC_FOLDER);
+			sutTalos.mkdirs();
+			l.info("{} created", Config.TALOS_SRC_FOLDER);
+		}
 	}
 	
 	public boolean getSrc(Path srcPath){

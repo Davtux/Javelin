@@ -83,3 +83,4 @@ local.properties
 generatedsrc/
 /target/
 ProjetM1.conf
+SUT/

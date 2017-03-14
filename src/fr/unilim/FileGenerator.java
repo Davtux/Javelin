@@ -102,7 +102,7 @@ public class FileGenerator {
 		    
 		    return true;
 		} catch (IOException e) {
-			l.error("Could not create file MainTester.java!");
+			l.error("Could not create file MainTester.java!", e);
 		   return false;
 		}
 	}

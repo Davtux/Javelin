@@ -1,8 +1,0 @@
-@include=../config/main_config.jpf
-target=fr.unilim.talos.MainTester
-jdart.configs.fr.unilim.tp1.symbolic.include=fr.unilim.tp1.*;
-concolic.method.process=fr.unilim.tp1.PorteMonaie.process(apdu:fr.unilim.jc.APDU)
-concolic.method=process
-
-jdart.tree.json.print=true
-jdart.tree.json.dir=.
