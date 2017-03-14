@@ -25,6 +25,7 @@ public class AutomatonGraphml implements IAutomaton {
 	private Logger log = LoggerFactory.getLogger(getClass());
 
 	public static final String ATTR_LABEL = "ui.label";
+	public static final String ATTR_CLASS = "ui.class";
 	
 	private Graph graph;
 	private Set<String> finalStates;
@@ -39,9 +40,9 @@ public class AutomatonGraphml implements IAutomaton {
 		this.graph = new SingleGraph(name); // MutliGraph for prevent EdgeRejetedException
 		this.enableHQ();
 		this.side = true;
-		this.finalStates = new HashSet<String>();
+		this.finalStates = new HashSet<>();
 		this.intialState = this.graph.addNode("init");
-		this.intialState.setAttribute("ui.class", "initial");
+		this.intialState.setAttribute(ATTR_CLASS, "initial");
 		this.graph.addAttribute("ui.stylesheet", "url('graph.css')");
 	}
 
@@ -56,7 +57,7 @@ public class AutomatonGraphml implements IAutomaton {
 	/**
 	 * Disable anti-aliasing and HD
 	 */
-	private void disableHQ() {
+	public void disableHQ() {
 		this.graph.removeAttribute("ui.quality");
 		this.graph.removeAttribute("ui.antialias");
 	}
@@ -67,6 +68,7 @@ public class AutomatonGraphml implements IAutomaton {
 	 * @param name : name of the state
 	 * @param label : label of the state
 	 */
+	@Override
 	public boolean addFinalState(String name, String label) {
 		Node n = null;
 		try {
@@ -95,13 +97,13 @@ public class AutomatonGraphml implements IAutomaton {
 		n.addAttribute(ATTR_LABEL, label);
 		Boolean found = Arrays.asList(label.split(" ")).contains("ERROR:");
 		if(found)
-			n.setAttribute("ui.class", "error");
+			n.setAttribute(ATTR_CLASS, "error");
 		else{
 			found = Arrays.asList(label.split(" ")).contains("DONT_KNOW");
 			if(found)
-				n.setAttribute("ui.class", "unkown");
+				n.setAttribute(ATTR_CLASS, "unkown");
 			else
-				n.setAttribute("ui.class", "final");
+				n.setAttribute(ATTR_CLASS, "final");
 		}
 	}
 	
@@ -112,6 +114,7 @@ public class AutomatonGraphml implements IAutomaton {
 	 * @param name : name of the state
 	 * @param label : label of the state
 	 */
+	@Override
 	public boolean addState(String name, String label) {
 		Node n = null;
 		try {
@@ -128,10 +131,13 @@ public class AutomatonGraphml implements IAutomaton {
 		return true;
 	}
 
+	@Override
 	public boolean containsState(String name) {
 		return graph.getNode(name) != null;
 	}
 
+	
+	@Override
 	public void addTransition(String origin, String name, String label, String dest) throws StateNotFoundException {
 		if(!containsState(origin)){
 			throw new StateNotFoundException("Origin state not found : " + origin);
@@ -157,9 +163,9 @@ public class AutomatonGraphml implements IAutomaton {
 			e.addAttribute(ATTR_LABEL, label);
 		    
 			if(this.side)
-				e.setAttribute("ui.class", "side1");
+				e.setAttribute(ATTR_CLASS, "side1");
 			else
-				e.setAttribute("ui.class", "side2");
+				e.setAttribute(ATTR_CLASS, "side2");
 			this.side = !this.side;
 		}
 	}
@@ -170,9 +176,9 @@ public class AutomatonGraphml implements IAutomaton {
 			log.info("Create new node {} : {}", dest, newDest);
 			Node n = this.graph.getNode(dest);
 			if(isFianlState(dest)){
-				this.addFinalState(newDest, (String) n.getAttribute("ui.label"));
+				this.addFinalState(newDest, (String) n.getAttribute(ATTR_LABEL));
 			}else{
-				this.addState(newDest, (String) n.getAttribute("ui.label"));
+				this.addState(newDest, (String) n.getAttribute(ATTR_LABEL));
 			}
 		}
 		log.info("Create transition between {} and {}", origin, newDest);
@@ -183,10 +189,12 @@ public class AutomatonGraphml implements IAutomaton {
 		return this.graph;
 	}
 
+	@Override
 	public boolean isFianlState(String name) {
 		return this.finalStates.contains(name);
 	}
 
+	@Override
 	public String getIntialState() {
 		return this.intialState.getId();
 	}

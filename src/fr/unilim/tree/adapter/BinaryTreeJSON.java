@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,11 +30,10 @@ public class BinaryTreeJSON implements IBinaryTree {
 	/**
 	 * Construct {@link IBinaryTree} from JDart JSON output.
 	 * @param inJson
-	 * @throws UnsupportedEncodingException
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public BinaryTreeJSON(InputStream inJson) throws UnsupportedEncodingException, IOException, ParseException{
+	public BinaryTreeJSON(InputStream inJson) throws IOException, ParseException{
 		this.jsonParser = new JSONParser();
 		
 		String content = JDartOutputParser.parseJDartOutput(
@@ -63,7 +61,7 @@ public class BinaryTreeJSON implements IBinaryTree {
 			this.right = new BinaryTreeJSON(falseObject);
 		}
 		
-		this.values = new HashMap<String, String>();
+		this.values = new HashMap<>();
 		for(String n : nameValues){
 			if(node.containsKey(n)){
 				values.put(n, (String) node.get(n));
@@ -71,18 +69,22 @@ public class BinaryTreeJSON implements IBinaryTree {
 		}
 	}
 
+	@Override
 	public IBinaryTree getLeft() {
 		return this.left;
 	}
 
+	@Override
 	public IBinaryTree getRight() {
 		return this.right;
 	}
 
+	@Override
 	public Map<String, String> getValues() {
 		return this.values;
 	}
 	
+	@Override
 	public boolean containsKey(String key) {
 		return this.values.containsKey(key);
 	}

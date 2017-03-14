@@ -6,18 +6,18 @@ import java.util.Map.Entry;
 
 public class ConditionInverter {
 
-	final static String AND = "&&";
-	final static String OR_ESCAPE = "\\|\\|";
-	final static String OR = "||";
-	final static String NO = "!";
-	final static String GT = ">";
-	final static String LT = "<";
-	final static String EQ = "==";
-	final static String NEQ = "!=";
-	final static String LE = "<=";
-	final static String GE = ">=";
+	static final String AND = "&&";
+	static final String OR_ESCAPE = "\\|\\|";
+	static final String OR = "||";
+	static final String NO = "!";
+	static final String GT = ">";
+	static final String LT = "<";
+	static final String EQ = "==";
+	static final String NEQ = "!=";
+	static final String LE = "<=";
+	static final String GE = ">=";
 	
-	final static HashMap<String, String> INVERSE = new LinkedHashMap<String, String>();
+	static final HashMap<String, String> INVERSE = new LinkedHashMap<>();
 	static{
 	 INVERSE.put(AND, OR);
 	 INVERSE.put(OR_ESCAPE, AND);

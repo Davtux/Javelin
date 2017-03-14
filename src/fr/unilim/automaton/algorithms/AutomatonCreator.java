@@ -3,8 +3,6 @@ package fr.unilim.automaton.algorithms;
 import java.io.IOException;
 
 import org.json.simple.parser.ParseException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
 import fr.unilim.automaton.models.IAutomaton;
@@ -20,8 +18,6 @@ public class AutomatonCreator {
 	
 	public static final String NAME_RESULT = "result";
 	public static final String NAME_DECISION = "decision";
-	
-	private static final Logger log = LoggerFactory.getLogger(AutomatonCreator.class);
 	
 	private Counter counter;
 	

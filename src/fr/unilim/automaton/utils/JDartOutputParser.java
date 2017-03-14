@@ -17,7 +17,7 @@ public class JDartOutputParser {
 	public static String parseJDartOutput(BufferedReader toParse) throws IOException{
 		String line;
 		String group;
-		String toReturn = "";
+		StringBuilder toReturn = new StringBuilder();
 		Pattern pattern = Pattern.compile("\\\\u....");
 		Pattern pattern2 = Pattern.compile("[0-9a-fA-F]{4}");
 		Matcher matcher;
@@ -30,9 +30,9 @@ public class JDartOutputParser {
 				while(matcher2.find())
 					line = line.replaceAll("\\\\u"+matcher2.group(0),String.valueOf((char)Integer.parseInt(matcher2.group(0),16)));  
 			}
-			toReturn += line;
+			toReturn.append(line);
 		}
-		return toReturn;
+		return toReturn.toString();
 	}
 	
 }
