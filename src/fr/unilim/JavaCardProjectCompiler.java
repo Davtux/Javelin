@@ -3,6 +3,7 @@ package fr.unilim;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 import javax.tools.JavaCompiler;
@@ -32,7 +33,8 @@ public class JavaCardProjectCompiler {
 		StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
 		
 		String apiJar = Config.JAVACARD_API_JAR_PATH;
-		String classPathParam = String.join(":", apiJar, packageTopLevel.toString());
+		String annotationPath = Paths.get(JPFConfigFileReader.getJDartPath(), "src", "annotations").toString();
+		String classPathParam = String.join(":", apiJar, packageTopLevel.toString(), annotationPath);
 		
 		String[] params = {
 			"-d", outputPath.toString(),
