@@ -11,6 +11,7 @@ import org.graphstream.ui.view.Viewer;
 import org.json.simple.parser.ParseException;
 
 import fr.unilim.Config;
+import fr.unilim.JPFConfigFileReader;
 import fr.unilim.Master;
 import fr.unilim.automaton.algorithms.AutomatonCreator;
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
@@ -30,7 +31,7 @@ public class MainGlobal {
 				Paths.get("test/resources/PorteMonnaie/src/"), 
 				"PorteMonnaie", 
 				"fr.unilim");
-		master.execute(Paths.get(Config.getJpfBinPath()), Paths.get(Config.getZ3BuildPath()));
+		master.execute(Paths.get(Config.getZ3BuildPath()));
 		System.out.println("Generated successfully");
 		
 		System.setProperty("org.graphstream.ui.rendere", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");

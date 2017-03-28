@@ -57,7 +57,7 @@ public class Master {
 	 * @param pathToJPF The path to the JPF executable on the host system
 	 * @param z3Path the build folder of the z3 constraint solver
 	 */
-	public void execute(Path pathToJPF, Path z3Path){
+	public void execute(Path z3Path){
 		String jDart = JPFConfigFileReader.getJDartPath();
 		Path jDartPath = Paths.get(jDart);
 		SUTIntegrator integrator = new SUTIntegrator(jDartPath);
@@ -73,7 +73,7 @@ public class Master {
 			}
 			if(jDart != null){
 				if(integrator.integrate(Paths.get("SUT", "src"), Paths.get("SUT", "build"))){
-					JPFRunner jpfRunner = new JPFRunner(pathToJPF);
+					JPFRunner jpfRunner = new JPFRunner();
 					jpfRunner.runJPF(Paths.get(Config.JPF_CONF_NAME), z3Path);		
 				}else{
 					l.error("Failed to integrate the SUT into JDart structor.");

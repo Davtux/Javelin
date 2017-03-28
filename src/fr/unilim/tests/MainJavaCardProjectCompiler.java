@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import fr.unilim.Config;
+import fr.unilim.JPFConfigFileReader;
 import fr.unilim.JavaCardProjectCompiler;
 import fr.unilim.NoJDKException;
 
@@ -21,7 +22,7 @@ public class MainJavaCardProjectCompiler {
 			result = JavaCardProjectCompiler.compile(
 					Paths.get("test/resources/PorteMonnaie/src/fr/unilim/PorteMonnaie.java"), 
 					Paths.get("/tmp/"), 
-					Paths.get(Config.getJdartPath() + "src/examples/"));
+					Paths.get(JPFConfigFileReader.getJDartPath() + "/src/examples/"));
 			if (result) {
 				System.out.println("Generated successfully");	
 			} else {
