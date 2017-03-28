@@ -20,16 +20,13 @@ import freemarker.template.TemplateException;
 public class FileGenerator {
 	
 	private static final Logger l = LoggerFactory.getLogger(FileGenerator.class);
-	
-	private String clsPath;
 	private String appletClsName;
 	private String packageName;
 	
 	
 	private Configuration conf;
 	
-	public FileGenerator(String classPath, String appletClassName, String packageName){
-		clsPath = classPath;
+	public FileGenerator(String appletClassName, String packageName){
 		appletClsName = appletClassName;
 		this.packageName = packageName;
 		
@@ -105,14 +102,6 @@ public class FileGenerator {
 			l.error("Could not create file MainTester.java!", e);
 		   return false;
 		}
-	}
-
-	public String getClsPath() {
-		return clsPath;
-	}
-
-	public void setClsPath(String clsPath) {
-		this.clsPath = clsPath;
 	}
 
 	public String getAppletClsName() {

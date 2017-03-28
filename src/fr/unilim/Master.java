@@ -22,11 +22,6 @@ public class Master {
 	private static final Logger l = LoggerFactory.getLogger(Master.class);
 	
 	/**
-	 * A Path pointing to the location of the .class files we're testing
-	 */
-	private Path classPath;
-	
-	/**
 	 * The Path were the project under test is located
 	 */
 	private Path projectPath;
@@ -41,8 +36,7 @@ public class Master {
 	private String packageName;
 	
 
-	public Master(Path classPath, Path projectPath, String aPDUClassName, String packageName) {
-		this.classPath = classPath;
+	public Master(Path projectPath, String aPDUClassName, String packageName) {
 		this.projectPath = projectPath;
 		this.aPDUClassName = aPDUClassName;
 		this.packageName = packageName;
@@ -54,7 +48,7 @@ public class Master {
 	 * @return true Only when both config and the main files are generated successfully
 	 */
 	private boolean generate() {
-		FileGenerator fg = new FileGenerator(classPath.toString(), aPDUClassName, packageName);
+		FileGenerator fg = new FileGenerator(aPDUClassName, packageName);
 		return fg.generateConfigFile() && fg.generateMainFile();
 	}
 	
@@ -90,14 +84,6 @@ public class Master {
 		}else{
 			l.error("Failed when generating files.");
 		}
-	}
-
-	public Path getClassPath() {
-		return classPath;
-	}
-
-	public void setClassPath(Path classPath) {
-		this.classPath = classPath;
 	}
 
 	public Path getProjectPath() {

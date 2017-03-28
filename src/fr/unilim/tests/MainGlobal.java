@@ -27,7 +27,6 @@ public class MainGlobal {
 			return;
 		}
 		Master master = new Master(
-				Paths.get("test/resources/"),
 				Paths.get("test/resources/PorteMonnaie/src/"), 
 				"PorteMonnaie", 
 				"fr.unilim");
