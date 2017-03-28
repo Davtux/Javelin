@@ -21,10 +21,10 @@ public class PorteMonnaie extends Applet {
 	public void process(APDU apdu) throws ISOException {
 		byte[] buffer = apdu.getBuffer();
 		
-		if(selectingApplet()){ return; }
+		//if(selectingApplet()){ return; }
 		
-		if(buffer[ISO7816.OFFSET_CLA] != (byte) 0x80) 
-			ISOException.throwIt(ISO7816.SW_CLA_NOT_SUPPORTED);
+		/*if(buffer[ISO7816.OFFSET_CLA] != (byte) 0x80) 
+			ISOException.throwIt(ISO7816.SW_CLA_NOT_SUPPORTED);*/
 		
 		short octetsLus;
 		

@@ -26,7 +26,7 @@ public class JPFRunner {
 	private Path jpfExecutable;
 	
 	public JPFRunner() {
-		jpfExecutable =  Paths.get(JPFConfigFileReader.getJPFPath());
+		jpfExecutable =  Paths.get(JPFConfigFileReader.getJPFPath() + "/" + Config.JPF_BIN);
 	}
 	
 	/**

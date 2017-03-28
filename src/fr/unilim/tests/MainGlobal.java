@@ -41,7 +41,7 @@ public class MainGlobal {
 		
 		FileInputStream f = null;
 		try {
-			f = new FileInputStream("/home/romain/Seafile/Travail/TPs_JAVACARD/Card_1/config.jpf.json");
+			f = new FileInputStream("SUT/config.jpf.json");
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

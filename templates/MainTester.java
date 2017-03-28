@@ -2,7 +2,7 @@
 
 import ${packageName}.${appletClsName};
 import javacard.framework.ISOException;
-import fr.unilim.talos.APDU;
+import javacard.framework.APDU;
 // import lhs.simu.jc.JCRE;
 
 public class MainTester {

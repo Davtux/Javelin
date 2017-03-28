@@ -22,6 +22,7 @@ public class Config {
 	public static final String LOG_DIR ="logs";
 	public static final String JPF_CONF_NAME ="SUT/config.jpf";
 	public static final String JPF_MAIN_CONF_NAME ="config/main_config.jpf";
+	public static final String JPF_BIN = "bin/jpf";
 	
 	private static final String NAME_JAVACARD_API_JAR_PATH = "JAVACARD_API_JAR_PATH";
 	private static String javacardApiJarPath = "/home/simon/dev/OracleJCSDK/oracle_javacard_sdks/jc222_kit/lib/api.jar";
