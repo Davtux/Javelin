@@ -1,4 +1,4 @@
-package fr.unilim;
+package fr.unilim.concolic;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import fr.unilim.Config;
 
 /**
  * Master class delegating file generation and running JPF to other classes

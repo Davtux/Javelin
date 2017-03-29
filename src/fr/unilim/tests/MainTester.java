@@ -3,9 +3,9 @@ package fr.unilim.tests;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import fr.unilim.JavaCardProjectCompiler;
-import fr.unilim.Master;
-import fr.unilim.NoJDKException;
+import fr.unilim.concolic.JavaCardProjectCompiler;
+import fr.unilim.concolic.Master;
+import fr.unilim.concolic.NoJDKException;
 
 public class MainTester {
 

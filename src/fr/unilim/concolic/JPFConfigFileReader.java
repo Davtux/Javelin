@@ -1,4 +1,4 @@
-package fr.unilim;
+package fr.unilim.concolic;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

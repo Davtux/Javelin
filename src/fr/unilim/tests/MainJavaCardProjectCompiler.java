@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import fr.unilim.Config;
-import fr.unilim.JPFConfigFileReader;
-import fr.unilim.JavaCardProjectCompiler;
-import fr.unilim.NoJDKException;
+import fr.unilim.concolic.JPFConfigFileReader;
+import fr.unilim.concolic.JavaCardProjectCompiler;
+import fr.unilim.concolic.NoJDKException;
 
 public class MainJavaCardProjectCompiler {
 

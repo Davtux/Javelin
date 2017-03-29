@@ -1,4 +1,4 @@
-package fr.unilim;
+package fr.unilim.concolic;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,8 @@ import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
+
+import fr.unilim.Config;
 
 
 public class JavaCardProjectCompiler {

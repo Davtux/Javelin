@@ -1,4 +1,4 @@
-package fr.unilim;
+package fr.unilim.concolic;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import fr.unilim.Config;
 
 /**
  * This class runs JPF with a certain properties file as parameter
