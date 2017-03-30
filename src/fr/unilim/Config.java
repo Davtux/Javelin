@@ -25,7 +25,7 @@ public class Config {
 	public static final String JPF_BIN = "bin/jpf";
 	
 	private static final String NAME_JAVACARD_API_JAR_PATH = "JAVACARD_API_JAR_PATH";
-	private static String javacardApiJarPath = "/home/simon/dev/OracleJCSDK/oracle_javacard_sdks/jc222_kit/lib/api.jar";
+	private static String javacardApiJarPath = null;
 	
 	
 	private static final String NAME_Z3_BUILD_PATH = "Z3_BUILD_PATH";
@@ -41,6 +41,15 @@ public class Config {
 	
 	public static String getZ3BuildPath() {
 		return z3BuildPath;
+	}
+	
+	public static void setJavacardApiJarPath(String javacardApiJarPath) {
+		Config.javacardApiJarPath = javacardApiJarPath;
+	}
+
+
+	public static void setZ3BuildPath(String z3BuildPath) {
+		Config.z3BuildPath = z3BuildPath;
 	}
 
 

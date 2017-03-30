@@ -83,4 +83,5 @@ local.properties
 generatedsrc/
 /target/
 ProjetM1.conf
+Javelin.conf
 SUT/

@@ -1,11 +1,11 @@
 package fr.unilim.application.gui.util;
 
-import javafx.scene.control.Button;
+import java.io.File;
+import java.nio.file.Paths;
+
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
-
-import java.io.File;
 
 public class DirectoryChooserUtil {
 
@@ -47,5 +47,13 @@ public class DirectoryChooserUtil {
 		if(dir != null && tf != null)
 			tf.setText(dir.toString());
 		return dir;
+	}
+	
+	public static File createDirectoryChooser(Window parent, String title, TextField tf, String initial){
+		File f = null;
+		if(initial != null && Paths.get(initial).toFile().exists()){
+			f = Paths.get(initial).toFile();
+		}
+		return createDirectoryChooser(parent, title, tf, f);
 	}
 }
