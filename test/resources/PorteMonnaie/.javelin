@@ -1,0 +1,3 @@
+SRC_DIR=src/
+PACKAGE=fr.unilim
+APPLET=PorteMonnaie

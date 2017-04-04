@@ -49,6 +49,19 @@ public class DirectoryChooserUtil {
 		return dir;
 	}
 	
+	/**
+	 * Create DirectoryChooser with title.
+	 * @param parent
+	 * 		Parent window
+	 * @param title
+	 * 		title of DirectoryChooser
+	 * @param tf
+	 * 		if tf is not null, path is write in field
+	 * @param initial
+	 * 		if not null directory chooser is open in initial,
+	 * 		but if tf contains an exists path, this path is choose.
+	 * @return File selected 
+	 */
 	public static File createDirectoryChooser(Window parent, String title, TextField tf, String initial){
 		File f = null;
 		if(initial != null && Paths.get(initial).toFile().exists()){

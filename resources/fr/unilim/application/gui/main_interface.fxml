@@ -13,6 +13,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
+                  <MenuItem fx:id="im_open" mnemonicParsing="false" onAction="#open" text="Open project" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="im_configuration" mnemonicParsing="false" onAction="#configuration" text="Configuration" />
                   <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />

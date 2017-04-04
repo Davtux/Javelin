@@ -18,12 +18,15 @@ public class MainUI extends Application{
     public void start(Stage primaryStage) throws Exception {
 		Parent root = null;
 		try{
-			root = FXMLLoader.load(getClass().getResource("main_interface.fxml"));			
+			FXMLLoader loader = new FXMLLoader(Controller.class.getResource("main_interface.fxml"));
+			root = loader.load();
+			final Controller controller = (Controller) loader.getController();
+			controller.setParent(root);
 		}catch(IOException ioe){
 			log.error("Can't load main_interface.fxml", ioe);
 			return;
 		}
-
+		
 		Scene scene = new Scene(root, 650, 650);
 
         primaryStage.setTitle("Javelin");
