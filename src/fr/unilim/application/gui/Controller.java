@@ -1,5 +1,7 @@
 package fr.unilim.application.gui;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,6 +9,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Paths;
 import java.util.Properties;
+
+import javax.swing.JPanel;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.ui.view.Viewer;
@@ -23,6 +27,7 @@ import fr.unilim.concolic.Master;
 import fr.unilim.tree.IBinaryTree;
 import fr.unilim.tree.adapter.BinaryTreeJSON;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -52,6 +57,9 @@ public class Controller {
 	private MenuItem im_open;
 	@FXML
 	private MenuItem im_configuration;
+	@FXML
+	private Pane p_graph;
+	private JPanel panel_graph;
 	
 	public void close(){
 		Platform.exit();
@@ -158,14 +166,24 @@ public class Controller {
 			Graph g = a.getGraph();
 			g.setAttribute("layout.quality", 4);
 			g.setAttribute("layout.weight", 0);
-			Viewer v = g.display();
+			Viewer viewer = new Viewer(g, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+			viewer.enableAutoLayout();
+			JPanel view = viewer.addDefaultView(false);
+			panel_graph = new JPanel();
+			panel_graph.setLayout(new BorderLayout());
+			panel_graph.add(view);
+			panel_graph.setPreferredSize(new Dimension((int)p_graph.getWidth(), (int)p_graph.getHeight()));
+			SwingNode graphViewer = new SwingNode();
+			graphViewer.setContent(panel_graph);
+			p_graph.getChildren().add(graphViewer);
+			/*
 			v.enableAutoLayout();
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				return;
 			}
-			v.disableAutoLayout();
+			v.disableAutoLayout();**/
 		
 		} catch (ParseException e) {
 			log.error("Error during parsing", e);
