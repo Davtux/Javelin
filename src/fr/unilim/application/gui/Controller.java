@@ -2,7 +2,6 @@ package fr.unilim.application.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,6 +34,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -47,21 +47,26 @@ public class Controller {
 	public static final String APP_FILE_CONFIG = "Javelin.conf";
 	
 	public static final String PROJECT_FILE_CONFIG = ".javelin";
-	public static final String NAME_PROJECT_SRC = "SRC_DIR";
-	public static final String NAME_PROJECT_PKG = "PACKAGE";
-	public static final String NAME_PROJECT_APPLET = "APPLET";
 	
 	private Parent parent;
-	private Master master;
 
 	@FXML
 	private MenuItem im_open;
 	@FXML
 	private MenuItem im_configuration;
 	@FXML
+	private Menu m_project;
+	@FXML
+	private MenuItem im_start_generation;
+	@FXML
+	private MenuItem im_properties;
+	@FXML
 	private Pane p_graph;
 	private JPanel panel_graph;
 	private Viewer viewer;
+	
+	private Master master;
+	private File currentProjectDir;
 	
 	public void close(){
 		Platform.exit();
@@ -95,30 +100,25 @@ public class Controller {
 			ExceptionDialog.showException(e);
 			setDisableApplication(true);
 		}
+		
+		setDisableApplicationProject(true);
 	}
 	
 	@FXML
 	void open(){
-		File dirProject = DirectoryChooserUtil.createDirectoryChooser(
+		this.currentProjectDir = DirectoryChooserUtil.createDirectoryChooser(
 				this.parent.getScene().getWindow(), "Select javacard project", null, "");
-		if(dirProject == null){
-			return;
-		}
-		File fileConf = new File(dirProject, PROJECT_FILE_CONFIG);
-		if(!fileConf.exists()){
-			log.info("Project file configuration not found.");
-			return;
-		}
-		try {
-			loadProjectConfiguration(dirProject, fileConf);
-		} catch (IOException e) {
-			log.error("Can't load project configuration.", e);
-			ExceptionDialog.showException(e);
+		if(this.currentProjectDir == null){
 			return;
 		}
 		
-		this.master.execute(Paths.get(Config.getZ3BuildPath()));
-		createAutomaton();
+		setDisableApplicationProject(false);
+		
+		File fileConf = new File(this.currentProjectDir, PROJECT_FILE_CONFIG);
+		if(!fileConf.exists()){
+			log.info("Project file configuration not found.");
+			properties();
+		}
 	}
 	
 	@FXML
@@ -145,15 +145,52 @@ public class Controller {
 		setDisableApplication(!controller.isOkClicked());
 	}
 	
+	@FXML
+	private void startGeneration(){
+		try {
+			loadProjectConfiguration(currentProjectDir, new File( currentProjectDir, PROJECT_FILE_CONFIG));
+		} catch (IOException e) {
+			log.error("Can't read properties file", e);
+			ExceptionDialog.showException(e);
+			return;
+		}
+		this.master.execute(Paths.get(Config.getZ3BuildPath()));
+		createAutomaton();
+	}
+	
+	@FXML
+	private void properties(){
+		FXMLLoader loader = new FXMLLoader(Controller.class.getResource("properties.fxml"));
+		Pane pane = null;
+		try {
+			pane = loader.load();
+		} catch (IOException e1) {
+			log.error("Error when loading properties.fxml", e1);
+			return;
+		}
+		Stage dialogStage = new Stage();
+		dialogStage.setTitle("Properties");
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.initOwner(this.parent.getScene().getWindow());
+		Scene scene = new Scene(pane);
+		dialogStage.setScene(scene);
+
+		ControllerProperties controller = loader.getController();
+		controller.loadProperties(new File(this.currentProjectDir, PROJECT_FILE_CONFIG));
+		controller.setDialogStage(dialogStage);
+
+		dialogStage.showAndWait();
+	}
+	
 	private void loadProjectConfiguration(File project, File configPath) throws IOException{
 		Properties prop = new Properties();
 		FileInputStream input = new FileInputStream(configPath);
 		prop.load(input);
 		
 		this.master = new Master(
-				Paths.get(project.toString(), prop.getProperty(NAME_PROJECT_SRC)), 
-				prop.getProperty(NAME_PROJECT_APPLET),
-				prop.getProperty(NAME_PROJECT_PKG)
+				Paths.get(project.toString(), prop.getProperty(ControllerProperties.NAME_PROJECT_SRC)), 
+				prop.getProperty(ControllerProperties.NAME_PROJECT_APPLET),
+				prop.getProperty(ControllerProperties.NAME_PROJECT_PKG)
 		);
 	}
 	
@@ -210,6 +247,10 @@ public class Controller {
 	
 	private void setDisableApplication(boolean disable){
 		im_open.setDisable(disable);
+	}
+	
+	private void setDisableApplicationProject(boolean disable){
+		m_project.setDisable(disable);
 	}
 	
 	public void setParent(Parent parent) {
