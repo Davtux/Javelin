@@ -2,6 +2,7 @@ package fr.unilim.application.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -60,9 +61,17 @@ public class Controller {
 	@FXML
 	private Pane p_graph;
 	private JPanel panel_graph;
+	private Viewer viewer;
 	
 	public void close(){
 		Platform.exit();
+	}
+	
+	public void stop(){
+		log.debug("Stop app.");
+		if(viewer != null){
+			viewer.close();
+		}
 	}
 
 	@FXML
@@ -166,7 +175,9 @@ public class Controller {
 			Graph g = a.getGraph();
 			g.setAttribute("layout.quality", 4);
 			g.setAttribute("layout.weight", 0);
-			Viewer viewer = new Viewer(g, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+			
+			
+			viewer = new Viewer(g, Viewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
 			viewer.enableAutoLayout();
 			JPanel view = viewer.addDefaultView(false);
 			panel_graph = new JPanel();
@@ -176,15 +187,6 @@ public class Controller {
 			SwingNode graphViewer = new SwingNode();
 			graphViewer.setContent(panel_graph);
 			p_graph.getChildren().add(graphViewer);
-			/*
-			v.enableAutoLayout();
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				return;
-			}
-			v.disableAutoLayout();**/
-		
 		} catch (ParseException e) {
 			log.error("Error during parsing", e);
 			ExceptionDialog.showException(e);
