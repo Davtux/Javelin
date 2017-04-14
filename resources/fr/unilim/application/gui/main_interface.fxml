@@ -20,7 +20,7 @@
               <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
             </items>
           </Menu>
-          <Menu fx:id="m_project" mnemonicParsing="false" text="Project">
+          <Menu fx:id="m_project" disable="true" mnemonicParsing="false" text="Project">
             <items>
                   <MenuItem fx:id="im_start_generation" mnemonicParsing="false" onAction="#startGeneration" text="Start generation" />
               <MenuItem fx:id="im_properties" mnemonicParsing="false" onAction="#properties" text="Properties" />
