@@ -38,7 +38,6 @@ public class MainUI extends Application{
 		
 		Scene scene = new Scene(root, 650, 650);
 		
-
         primaryStage.setTitle("Javelin");
         primaryStage.setScene(scene);
         primaryStage.show();

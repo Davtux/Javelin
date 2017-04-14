@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 import javax.swing.JPanel;
+import javax.swing.plaf.ViewportUI;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.ui.view.Viewer;
@@ -18,6 +19,7 @@ import org.json.simple.parser.ParseException;
 import org.slf4j.LoggerFactory;
 
 import fr.unilim.Config;
+import fr.unilim.application.gui.tasks.MasterTask;
 import fr.unilim.application.gui.util.DirectoryChooserUtil;
 import fr.unilim.application.gui.util.ExceptionDialog;
 import fr.unilim.automaton.algorithms.AutomatonCreator;
@@ -27,15 +29,24 @@ import fr.unilim.concolic.Master;
 import fr.unilim.tree.IBinaryTree;
 import fr.unilim.tree.adapter.BinaryTreeJSON;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.embed.swing.SwingNode;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -64,6 +75,12 @@ public class Controller {
 	private Pane p_graph;
 	private JPanel panel_graph;
 	private Viewer viewer;
+	private Graph graph;
+	
+	@FXML
+	private Label statusBarEtat;
+	@FXML
+	private ProgressBar statusBarProgressBar;
 	
 	private Master master;
 	private File currentProjectDir;
@@ -102,6 +119,7 @@ public class Controller {
 		}
 		
 		setDisableApplicationProject(true);
+		statusBarProgressBar.setVisible(false);
 	}
 	
 	@FXML
@@ -154,8 +172,22 @@ public class Controller {
 			ExceptionDialog.showException(e);
 			return;
 		}
-		this.master.execute(Paths.get(Config.getZ3BuildPath()));
-		createAutomaton();
+		MasterTask masterTask = new MasterTask();
+		masterTask.setMaster(master);
+		masterTask.setOnSucceeded(
+			(WorkerStateEvent event) -> {
+				createAutomaton();
+				statusBarProgressBar.setVisible(false);
+				createGraphView(graph);
+			}
+		);
+		masterTask.setOnRunning(
+			(WorkerStateEvent event) -> {
+				statusBarProgressBar.setVisible(true);
+			}
+		);
+		statusBarEtat.textProperty().bind(masterTask.messageProperty());
+		new Thread(masterTask).start();
 	}
 	
 	@FXML
@@ -209,21 +241,11 @@ public class Controller {
 		try {		
 			IBinaryTree tree = new BinaryTreeJSON(f);
 			AutomatonGraphml a = (AutomatonGraphml) ac.parse(tree, new AutomatonGraphml("automaton"));
-			Graph g = a.getGraph();
-			g.setAttribute("layout.quality", 4);
-			g.setAttribute("layout.weight", 0);
+			graph = a.getGraph();
+			graph.setAttribute("layout.quality", 4);
+			graph.setAttribute("layout.weight", 0);
 			
 			
-			viewer = new Viewer(g, Viewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
-			viewer.enableAutoLayout();
-			JPanel view = viewer.addDefaultView(false);
-			panel_graph = new JPanel();
-			panel_graph.setLayout(new BorderLayout());
-			panel_graph.add(view);
-			panel_graph.setPreferredSize(new Dimension((int)p_graph.getWidth(), (int)p_graph.getHeight()));
-			SwingNode graphViewer = new SwingNode();
-			graphViewer.setContent(panel_graph);
-			p_graph.getChildren().add(graphViewer);
 		} catch (ParseException e) {
 			log.error("Error during parsing", e);
 			ExceptionDialog.showException(e);
@@ -245,6 +267,26 @@ public class Controller {
 		}
 	}
 	
+	private void createGraphView(Graph graph){
+		if(viewer != null){
+			viewer = null;
+		}
+		if(panel_graph != null){
+			p_graph.getChildren().remove(0);
+		}
+		
+		viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
+		viewer.enableAutoLayout();
+		JPanel view = viewer.addDefaultView(false);
+		panel_graph = new JPanel();
+		panel_graph.setLayout(new BorderLayout());
+		panel_graph.add(view);
+		panel_graph.setPreferredSize(new Dimension((int)p_graph.getWidth(), (int)p_graph.getHeight()));
+		SwingNode graphViewer = new SwingNode();
+		graphViewer.setContent(panel_graph);
+		p_graph.getChildren().add(graphViewer);
+	}
+	
 	private void setDisableApplication(boolean disable){
 		im_open.setDisable(disable);
 	}
@@ -255,5 +297,10 @@ public class Controller {
 	
 	public void setParent(Parent parent) {
 		this.parent = parent;
+	}
+	
+	public void finishAction(String message){
+		statusBarEtat.setText(message);
+		statusBarProgressBar.setVisible(false);
 	}
 }
