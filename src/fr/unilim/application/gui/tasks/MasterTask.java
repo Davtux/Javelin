@@ -17,6 +17,12 @@ public class MasterTask extends Task<Void> {
 		updateMessage("Done");
 		return null;
 	}
+	
+	@Override
+	protected void failed(){
+		super.failed();
+		updateMessage("Error");
+	}
 
 	public void setMaster(Master master){
 		this.master = master;

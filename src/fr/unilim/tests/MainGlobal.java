@@ -14,6 +14,7 @@ import fr.unilim.Config;
 import fr.unilim.automaton.algorithms.AutomatonCreator;
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
 import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
+import fr.unilim.concolic.ConcolicExecutionException;
 import fr.unilim.concolic.Master;
 import fr.unilim.tree.IBinaryTree;
 import fr.unilim.tree.adapter.BinaryTreeJSON;
@@ -30,7 +31,12 @@ public class MainGlobal {
 				Paths.get("test/resources/PorteMonnaie/src/"), 
 				"PorteMonnaie", 
 				"fr.unilim");
-		master.execute(Paths.get(Config.getZ3BuildPath()));
+		try {
+			master.execute(Paths.get(Config.getZ3BuildPath()));
+		} catch (ConcolicExecutionException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		System.out.println("Generated successfully");
 		
 		System.setProperty("org.graphstream.ui.rendere", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");

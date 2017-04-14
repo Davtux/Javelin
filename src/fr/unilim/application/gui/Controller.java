@@ -186,6 +186,12 @@ public class Controller {
 				statusBarProgressBar.setVisible(true);
 			}
 		);
+		masterTask.setOnFailed(
+			(WorkerStateEvent event) -> {
+				statusBarProgressBar.setVisible(false);
+				ExceptionDialog.showException((Exception) masterTask.getException());
+			}
+		);
 		statusBarEtat.textProperty().bind(masterTask.messageProperty());
 		new Thread(masterTask).start();
 	}
