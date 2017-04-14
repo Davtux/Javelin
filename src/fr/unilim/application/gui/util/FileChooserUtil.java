@@ -27,7 +27,7 @@ public class FileChooserUtil {
 		chooser.setTitle(title);
 		boolean initialSet = false;
 		
-		if(tf != null && !tf.getText().isEmpty()){
+		if(tf != null && tf.getText() != null && !tf.getText().isEmpty()){
 			File f = new File(tf.getText());
 			if(f.exists()){
 				if(f.isFile()){

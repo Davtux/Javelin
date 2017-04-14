@@ -48,7 +48,7 @@
         </rowConstraints>
          <children>
             <Label fx:id="statusBarEtat" />
-            <ProgressBar fx:id="statusBarProgressBar" prefWidth="200.0" GridPane.columnIndex="1" />
+            <ProgressBar fx:id="statusBarProgressBar" prefWidth="200.0" visible="false" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </bottom>

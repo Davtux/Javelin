@@ -104,7 +104,7 @@ public class Controller {
 			alert.setTitle("Information");
 			alert.setHeaderText("Configuration");
 			alert.setContentText("No configuation file found (" + APP_FILE_CONFIG + ")\n"
-					+ "You can configure application in File > Configuation");
+					+ "You can configure application in File > Configuration");
 			alert.showAndWait();
 			setDisableApplication(true);
 			return;
@@ -119,7 +119,6 @@ public class Controller {
 		}
 		
 		setDisableApplicationProject(true);
-		statusBarProgressBar.setVisible(false);
 	}
 	
 	@FXML

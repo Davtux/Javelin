@@ -44,6 +44,8 @@ public class ControllerConfiguration implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		tfAPI.setText("");
+		tfZ3.setText("");
 		okClicked = false;
 		loadSessionData();
 		
