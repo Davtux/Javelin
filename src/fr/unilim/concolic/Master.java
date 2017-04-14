@@ -58,34 +58,44 @@ public class Master {
 	 * Instantiate JPFRunner class in order to execute JPF
 	 * @param pathToJPF The path to the JPF executable on the host system
 	 * @param z3Path the build folder of the z3 constraint solver
+	 * 
+	 * @return returns true if no error detected otherwise false with a log error and an exception
 	 */
-	public void execute(Path z3Path){
+	public boolean execute(Path z3Path) throws ConcolicExecutionException{
 		String jDart = JPFConfigFileReader.getJDartPath();
 		Path jDartPath = Paths.get(jDart);
 		SUTIntegrator integrator = new SUTIntegrator(jDartPath);
 		if(generate() && integrator.getSrc(projectPath)){
 			try {
 				boolean compilationState = JavaCardProjectCompiler.compile(Paths.get(Config.TALOS_SRC_FOLDER+"MainTester.java"), Paths.get(Config.SUT_BIN_FOLDER), Paths.get("SUT", "src"));
-				if(compilationState)
+				if(compilationState){
 					l.info("SUT compiled successfully.");
-				else
-					l.warn("Errors occured while compiling the SUT.");
+					if(jDart != null){
+						if(integrator.integrate(Paths.get("SUT", "src"), Paths.get("SUT", "build"))){
+							JPFRunner jpfRunner = new JPFRunner();
+							jpfRunner.runJPF(Paths.get(Config.JPF_CONF_NAME), z3Path);	
+							l.info("JPF running...");
+						}else{
+							l.error("Failed to integrate the SUT into JDart structor.");
+							throw new ConcolicExecutionException("Failed to integrate the SUT into JDart structor.");
+						}
+					}else{
+						l.error("Cannot find JDart path.");
+						throw new ConcolicExecutionException("Cannot find JDart path.");
+					}
+				}else{
+					l.error("Errors occured while compiling the SUT.");
+					throw new ConcolicExecutionException("Errors occured while compiling the SUT.");
+				}
 			} catch (IOException | NoJDKException e) {
 				l.error("Cannot compile SUT.", e);
-			}
-			if(jDart != null){
-				if(integrator.integrate(Paths.get("SUT", "src"), Paths.get("SUT", "build"))){
-					JPFRunner jpfRunner = new JPFRunner();
-					jpfRunner.runJPF(Paths.get(Config.JPF_CONF_NAME), z3Path);		
-				}else{
-					l.error("Failed to integrate the SUT into JDart structor.");
-				}
-			}else{
-				l.error("Cannot find JDart path.");
+				throw new ConcolicExecutionException("Cannot compile SUT : "+e);
 			}
 		}else{
 			l.error("Failed when generating files.");
+			throw new ConcolicExecutionException("Cannot generate files");
 		}
+		return true;
 	}
 
 	public Path getProjectPath() {
