@@ -1,5 +1,5 @@
 #
-#Fri Apr 14 15:40:17 CEST 2017
-APPLET=PorteMonnai
+#Tue Apr 18 12:16:56 CEST 2017
+APPLET=PorteMonnaie
 PACKAGE=fr.unilim
 SRC_DIR=src/

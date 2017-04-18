@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.unilim.Config;
+import fr.unilim.concolic.exception.CompileException;
+import fr.unilim.concolic.exception.ConcolicExecutionException;
+import fr.unilim.concolic.exception.NoJDKException;
 
 /**
  * Master class delegating file generation and running JPF to other classes
@@ -67,29 +70,27 @@ public class Master {
 		SUTIntegrator integrator = new SUTIntegrator(jDartPath);
 		if(generate() && integrator.getSrc(projectPath)){
 			try {
-				boolean compilationState = JavaCardProjectCompiler.compile(Paths.get(Config.TALOS_SRC_FOLDER+"MainTester.java"), Paths.get(Config.SUT_BIN_FOLDER), Paths.get("SUT", "src"));
-				if(compilationState){
-					l.info("SUT compiled successfully.");
-					if(jDart != null){
-						if(integrator.integrate(Paths.get("SUT", "src"), Paths.get("SUT", "build"))){
-							JPFRunner jpfRunner = new JPFRunner();
-							jpfRunner.runJPF(Paths.get(Config.JPF_CONF_NAME), z3Path);	
-							l.info("JPF running...");
-						}else{
-							l.error("Failed to integrate the SUT into JDart structor.");
-							throw new ConcolicExecutionException("Failed to integrate the SUT into JDart structor.");
-						}
+				JavaCardProjectCompiler.compile(Paths.get(Config.TALOS_SRC_FOLDER+"MainTester.java"), Paths.get(Config.SUT_BIN_FOLDER), Paths.get("SUT", "src"));
+				l.info("SUT compiled successfully.");
+				if(jDart != null){
+					if(integrator.integrate(Paths.get("SUT", "src"), Paths.get("SUT", "build"))){
+						JPFRunner jpfRunner = new JPFRunner();
+						jpfRunner.runJPF(Paths.get(Config.JPF_CONF_NAME), z3Path);	
+						l.info("JPF running...");
 					}else{
-						l.error("Cannot find JDart path.");
-						throw new ConcolicExecutionException("Cannot find JDart path.");
+						l.error("Failed to integrate the SUT into JDart structor.");
+						throw new ConcolicExecutionException("Failed to integrate the SUT into JDart structor.");
 					}
 				}else{
-					l.error("Errors occured while compiling the SUT.");
-					throw new ConcolicExecutionException("Errors occured while compiling the SUT.");
+					l.error("Cannot find JDart path.");
+					throw new ConcolicExecutionException("Cannot find JDart path.");
 				}
+			} catch(CompileException e){
+					l.error("Errors occured while compiling the SUT.", e);
+					throw new ConcolicExecutionException("Errors occured while compiling the SUT.", e);
 			} catch (IOException | NoJDKException e) {
 				l.error("Cannot compile SUT.", e);
-				throw new ConcolicExecutionException("Cannot compile SUT : "+e);
+				throw new ConcolicExecutionException("Cannot compile SUT : " + e.getMessage(), e);
 			}
 		}else{
 			l.error("Failed when generating files.");

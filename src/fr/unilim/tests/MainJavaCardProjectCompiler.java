@@ -6,7 +6,8 @@ import java.nio.file.Paths;
 import fr.unilim.Config;
 import fr.unilim.concolic.JPFConfigFileReader;
 import fr.unilim.concolic.JavaCardProjectCompiler;
-import fr.unilim.concolic.NoJDKException;
+import fr.unilim.concolic.exception.CompileException;
+import fr.unilim.concolic.exception.NoJDKException;
 
 public class MainJavaCardProjectCompiler {
 
@@ -17,21 +18,18 @@ public class MainJavaCardProjectCompiler {
 			e1.printStackTrace();
 			return;
 		}
-		boolean result;
 		try {
-			result = JavaCardProjectCompiler.compile(
+			JavaCardProjectCompiler.compile(
 					Paths.get("test/resources/PorteMonnaie/src/fr/unilim/PorteMonnaie.java"), 
 					Paths.get("/tmp/"), 
 					Paths.get(JPFConfigFileReader.getJDartPath() + "/src/examples/"));
-			if (result) {
-				System.out.println("Generated successfully");	
-			} else {
-				System.out.println("Error compiling");
-			}
+
+			System.out.println("Generated successfully");	
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoJDKException e) {
+			e.printStackTrace();
+		} catch (CompileException e) {
 			e.printStackTrace();
 		}
 	}

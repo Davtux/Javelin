@@ -5,16 +5,23 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
+import javax.tools.Diagnostic;
+import javax.tools.DiagnosticCollector;
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
 import fr.unilim.Config;
+import fr.unilim.concolic.exception.CompileException;
+import fr.unilim.concolic.exception.NoJDKException;
 
 
 public class JavaCardProjectCompiler {
+	
+	private JavaCardProjectCompiler(){}
 
 	/**
 	 * Compiles a given Java file using the system JDK
@@ -24,8 +31,9 @@ public class JavaCardProjectCompiler {
 	 * @return True if the compilation was successful, False otherwise
 	 * @throws IOException If a file cannot be found
 	 * @throws NoJDKException If we can't find a JDK on the system
+	 * @throws CompileException If errors occured while compiling
 	 */
-	public static boolean compile(Path mainClassPath, Path outputPath, Path packageTopLevel) throws IOException, NoJDKException {
+	public static void compile(Path mainClassPath, Path outputPath, Path packageTopLevel) throws IOException, NoJDKException, CompileException {
 		File[] files = { mainClassPath.toFile() };
 
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
@@ -44,12 +52,22 @@ public class JavaCardProjectCompiler {
 			"-sourcepath", sourcepathParam
 		};
 		
+		DiagnosticCollector<JavaFileObject> diagnosticsCollector = new DiagnosticCollector<>();
 		Iterable<? extends JavaFileObject> compilationUnit = fileManager.getJavaFileObjectsFromFiles(Arrays.asList(files));
-		boolean ok = compiler.getTask(null, fileManager, null, Arrays.asList(params), null, compilationUnit).call();
+		boolean ok = compiler.getTask(null, fileManager, diagnosticsCollector, Arrays.asList(params), null, compilationUnit).call();
+		
+		System.out.println(ok);
+		if (!ok) {
+			StringBuilder errorStr = new StringBuilder();
+	        List<Diagnostic<? extends JavaFileObject>> diagnostics = diagnosticsCollector.getDiagnostics();
+	        for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics) {
+	            errorStr.append(diagnostic.getMessage(null) + "\n");
+	        }
+	        fileManager.close();
+	        throw new CompileException(errorStr.toString());
+	    }
 		
 		fileManager.close();
-		
-		return ok;
 	}
 
 }

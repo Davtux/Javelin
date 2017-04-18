@@ -1,4 +1,4 @@
-package fr.unilim.concolic;
+package fr.unilim.concolic.exception;
 
 public class ConcolicExecutionException extends Exception {
 	/**
@@ -8,5 +8,9 @@ public class ConcolicExecutionException extends Exception {
 
 	public ConcolicExecutionException(String msg) {
 		super(msg);
+	}
+	
+	public ConcolicExecutionException(String msg, Throwable th) {
+		super(msg, th);
 	}
 }

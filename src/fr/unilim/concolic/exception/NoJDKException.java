@@ -1,4 +1,4 @@
-package fr.unilim.concolic;
+package fr.unilim.concolic.exception;
 
 public class NoJDKException extends Exception {
 	/**

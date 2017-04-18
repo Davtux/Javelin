@@ -152,7 +152,12 @@ public class Controller {
 		controller.setDialogStage(dialogStage);
 
 		dialogStage.showAndWait();
-		setDisableApplication(!controller.isOkClicked());
+		
+		im_properties.setDisable(
+				im_properties.isDisable() 
+				? !controller.isOkClicked()
+				: false
+		);
 	}
 	
 	@FXML

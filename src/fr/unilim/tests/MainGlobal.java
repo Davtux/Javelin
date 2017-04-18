@@ -14,8 +14,8 @@ import fr.unilim.Config;
 import fr.unilim.automaton.algorithms.AutomatonCreator;
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
 import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
-import fr.unilim.concolic.ConcolicExecutionException;
 import fr.unilim.concolic.Master;
+import fr.unilim.concolic.exception.ConcolicExecutionException;
 import fr.unilim.tree.IBinaryTree;
 import fr.unilim.tree.adapter.BinaryTreeJSON;
 

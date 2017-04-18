@@ -5,24 +5,23 @@ import java.nio.file.Paths;
 
 import fr.unilim.concolic.JavaCardProjectCompiler;
 import fr.unilim.concolic.Master;
-import fr.unilim.concolic.NoJDKException;
+import fr.unilim.concolic.exception.CompileException;
+import fr.unilim.concolic.exception.NoJDKException;
 
 public class MainTester {
 
 	public static void main(String[] args) {
-		boolean result;
 		try {
-			result = JavaCardProjectCompiler.compile(Paths.get("/home/simon/dev/jdart-all/jdart/src/examples/fr/inria/lhs/tests/MyFutureApplet.java"), Paths.get("/tmp/"), Paths.get("/home/simon/dev/jdart-all/jdart/src/examples/"));
-			if (result) {
-				System.out.println("Generated successfully");	
-			} else {
-				System.out.println("Error compiling");
-			}
+			JavaCardProjectCompiler.compile(Paths.get("/home/simon/dev/jdart-all/jdart/src/examples/fr/inria/lhs/tests/MyFutureApplet.java"), Paths.get("/tmp/"), Paths.get("/home/simon/dev/jdart-all/jdart/src/examples/"));
+			System.out.println("Generated successfully");	
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoJDKException e) {
 			
+		} catch (CompileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
