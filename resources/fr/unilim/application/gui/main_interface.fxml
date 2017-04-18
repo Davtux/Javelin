@@ -25,6 +25,7 @@
                   <MenuItem fx:id="im_start_generation" mnemonicParsing="false" onAction="#startGeneration" text="Start generation" />
                   <Menu mnemonicParsing="false" text="Export">
                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exportGML" text="GML" />
                       <MenuItem mnemonicParsing="false" onAction="#exportGraphML" text="GraphML" />
                     </items>
                   </Menu>

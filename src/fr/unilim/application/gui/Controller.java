@@ -13,6 +13,7 @@ import java.util.Properties;
 import javax.swing.JPanel;
 
 import org.graphstream.graph.Graph;
+import org.graphstream.stream.file.FileSinkGML;
 import org.graphstream.ui.view.Viewer;
 import org.json.simple.parser.ParseException;
 import org.slf4j.LoggerFactory;
@@ -197,13 +198,12 @@ public class Controller {
 	}
 	
 	@FXML
-	private void exportGraphML(){
-		log.debug("Start handler exportGraphML");
+	private void exportGML(){
 		if(graph == null){
 			startGeneration();
 		}
-		File f = selectSaveFile("Export GraphML", currentProjectDir, new FileChooser.ExtensionFilter[]{
-			new FileChooser.ExtensionFilter("GraphML", "*.gml"),
+		File f = selectSaveFile("Export GML", currentProjectDir, new FileChooser.ExtensionFilter[]{
+				new FileChooser.ExtensionFilter("GML", "*.gml"),
 			new FileChooser.ExtensionFilter("XML", "*.xml")
 		});
 		
@@ -212,7 +212,29 @@ public class Controller {
 		}
 		
 		try {
-			OutputGraphStream.exportGraph(f.toString(), graph);
+			OutputGraphStream.exportGraph(f.toString(), graph, new FileSinkGML());
+		} catch (IOException e) {
+			log.error("Error, can't export graph.", e);
+			ExceptionDialog.showException(e);
+		}
+	}
+	
+	@FXML
+	private void exportGraphML(){
+		if(graph == null){
+			startGeneration();
+		}
+		File f = selectSaveFile("Export GraphML", currentProjectDir, new FileChooser.ExtensionFilter[]{
+			new FileChooser.ExtensionFilter("XML", "*.xml"),
+			new FileChooser.ExtensionFilter("GML", "*.gml")
+		});
+		
+		if(f == null){
+			return;
+		}
+		
+		try {
+			OutputGraphStream.exportGraphToGraphML(f.toString(), graph);
 		} catch (IOException e) {
 			log.error("Error, can't export graph.", e);
 			ExceptionDialog.showException(e);
