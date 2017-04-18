@@ -8,6 +8,8 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 
 public class DirectoryChooserUtil {
+	
+	private DirectoryChooserUtil(){}
 
 	/**
 	 * Create DirectoryChooser with title.

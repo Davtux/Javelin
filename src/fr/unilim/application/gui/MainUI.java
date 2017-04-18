@@ -14,7 +14,7 @@ import javafx.stage.WindowEvent;
 
 public class MainUI extends Application{
 	
-	public final static org.slf4j.Logger log = LoggerFactory.getLogger(MainUI.class);
+	public static final org.slf4j.Logger log = LoggerFactory.getLogger(MainUI.class);
 
 	@Override
     public void start(Stage primaryStage) throws Exception {
@@ -25,12 +25,11 @@ public class MainUI extends Application{
 			final Controller controller = (Controller) loader.getController();
 			controller.setParent(root);
 			
-			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-				@Override
-				public void handle(WindowEvent event) {
+			primaryStage.setOnCloseRequest(
+				(WindowEvent event) -> {
 					controller.stop();
 				}
-			});
+			);
 		}catch(IOException ioe){
 			log.error("Can't load main_interface.fxml", ioe);
 			return;

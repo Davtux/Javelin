@@ -8,6 +8,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 public class FileChooserUtil {
+	
+	private FileChooserUtil(){}
 
 	/**
 	 * Create FileChooser with title.

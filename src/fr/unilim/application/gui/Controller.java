@@ -24,9 +24,11 @@ import fr.unilim.application.gui.util.ExceptionDialog;
 import fr.unilim.automaton.algorithms.AutomatonCreator;
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
 import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
+import fr.unilim.automaton.graphstream.io.OutputGraphStream;
 import fr.unilim.concolic.Master;
 import fr.unilim.tree.IBinaryTree;
 import fr.unilim.tree.adapter.BinaryTreeJSON;
+import fr.unilim.utils.FileUtil;
 import javafx.application.Platform;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.embed.swing.SwingNode;
@@ -41,6 +43,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -194,6 +197,29 @@ public class Controller {
 	}
 	
 	@FXML
+	private void exportGraphML(){
+		log.debug("Start handler exportGraphML");
+		if(graph == null){
+			startGeneration();
+		}
+		File f = selectSaveFile("Export GraphML", currentProjectDir, new FileChooser.ExtensionFilter[]{
+			new FileChooser.ExtensionFilter("GraphML", "*.gml"),
+			new FileChooser.ExtensionFilter("XML", "*.xml")
+		});
+		
+		if(f == null){
+			return;
+		}
+		
+		try {
+			OutputGraphStream.exportGraph(f.toString(), graph);
+		} catch (IOException e) {
+			log.error("Error, can't export graph.", e);
+			ExceptionDialog.showException(e);
+		}
+	}
+	
+	@FXML
 	private void properties(){
 		FXMLLoader loader = new FXMLLoader(Controller.class.getResource("properties.fxml"));
 		Pane pane = null;
@@ -262,11 +288,7 @@ public class Controller {
 			log.error("Error io", e);
 			ExceptionDialog.showException(e);
 		}finally {
-			try {
-				f.close();
-			} catch (IOException e) {
-				log.error("Can't close file", e);
-			}
+			FileUtil.closeFile(f);
 		}
 	}
 	
@@ -305,5 +327,35 @@ public class Controller {
 	public void finishAction(String message){
 		statusBarEtat.setText(message);
 		statusBarProgressBar.setVisible(false);
+	}
+	
+	private File selectSaveFile(String title, File initial, FileChooser.ExtensionFilter[] filters){
+		FileChooser chooser = new FileChooser();
+		chooser.setTitle(title);
+		String nameAllFile = "All files";
+		
+		if(initial == null){
+			initial = new File(System.getProperty("user.dir"));
+		}
+		chooser.setInitialDirectory(initial);
+		chooser.getExtensionFilters().add(
+				new FileChooser.ExtensionFilter(nameAllFile, "*.*"));
+		chooser.getExtensionFilters().addAll(filters);
+		if(filters.length != 0){
+			chooser.setSelectedExtensionFilter(filters[0]);			
+			chooser.setInitialFileName("export" + filters[0].getExtensions().get(0).split("\\*")[1]);
+		}
+		
+		File f = chooser.showSaveDialog(parent.getScene().getWindow());
+		
+		if(f != null && FileUtil.getFileExtension(f).isEmpty() 
+				&& chooser.getExtensionFilters().get(0).getDescription().equals(nameAllFile)){
+			f = new File(
+					f.getAbsolutePath() + 
+					chooser.getSelectedExtensionFilter().getExtensions().get(0).split("\\*")[1]
+			);
+		}
+		
+		return f;
 	}
 }

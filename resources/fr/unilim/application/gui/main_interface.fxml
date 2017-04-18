@@ -23,6 +23,11 @@
           <Menu fx:id="m_project" disable="true" mnemonicParsing="false" text="Project">
             <items>
                   <MenuItem fx:id="im_start_generation" mnemonicParsing="false" onAction="#startGeneration" text="Start generation" />
+                  <Menu mnemonicParsing="false" text="Export">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#exportGraphML" text="GraphML" />
+                    </items>
+                  </Menu>
               <MenuItem fx:id="im_properties" mnemonicParsing="false" onAction="#properties" text="Properties" />
             </items>
           </Menu>
