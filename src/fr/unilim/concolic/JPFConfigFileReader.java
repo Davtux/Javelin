@@ -6,14 +6,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class JPFConfigFileReader {
 	
-	private final static Path SITE_PROPERTIES = Paths.get(System.getProperty("user.home"), ".jpf", "site.properties");
+	private static final Logger log = LoggerFactory.getLogger(JPFConfigFileReader.class);
+	
+	private static final Path SITE_PROPERTIES = Paths.get(System.getProperty("user.home"), ".jpf", "site.properties");
+	
+	private JPFConfigFileReader(){}
 	
 	public static String getJPFPath() {
-		Scanner in = null;
-		try {
-			in = new Scanner(new FileReader(SITE_PROPERTIES.toString()));
+		try(Scanner in = new Scanner(new FileReader(SITE_PROPERTIES.toString()));) {
+			
 			while (in.hasNextLine()) {
 				String line = in.nextLine();
 				String result = getProperty("jpf-core", line);
@@ -22,20 +28,15 @@ public class JPFConfigFileReader {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} finally {
-			if (in != null) {
-				in.close();
-			}
+			log.error("Not found file", e);
 		}
 		
 		return null;
 	}
 	
 	public static String getJDartPath() {
-		Scanner in = null;
-		try {
-			in = new Scanner(new FileReader(SITE_PROPERTIES.toString()));
+		try(Scanner in = new Scanner(new FileReader(SITE_PROPERTIES.toString()));) {
+			
 			while (in.hasNextLine()) {
 				String line = in.nextLine();
 				String result = getProperty("jpf-jdart", line);
@@ -44,11 +45,7 @@ public class JPFConfigFileReader {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} finally {
-			if (in != null) {
-				in.close();
-			}
+			log.error("Not found file", e);
 		}
 		
 		return null;

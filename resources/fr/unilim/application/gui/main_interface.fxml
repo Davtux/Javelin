@@ -13,23 +13,23 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem fx:id="im_open" mnemonicParsing="false" onAction="#open" text="Open project" />
+                  <MenuItem fx:id="imOpen" mnemonicParsing="false" onAction="#open" text="Open project" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="im_configuration" mnemonicParsing="false" onAction="#configuration" text="Configuration" />
+                  <MenuItem fx:id="imConfiguration" mnemonicParsing="false" onAction="#configuration" text="Configuration" />
                   <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
             </items>
           </Menu>
-          <Menu fx:id="m_project" disable="true" mnemonicParsing="false" text="Project">
+          <Menu fx:id="mProject" disable="true" mnemonicParsing="false" text="Project">
             <items>
-                  <MenuItem fx:id="im_start_generation" mnemonicParsing="false" onAction="#startGeneration" text="Start generation" />
+                  <MenuItem fx:id="imStartGeneration" mnemonicParsing="false" onAction="#startGeneration" text="Start generation" />
                   <Menu mnemonicParsing="false" text="Export">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#exportGML" text="GML" />
                       <MenuItem mnemonicParsing="false" onAction="#exportGraphML" text="GraphML" />
                     </items>
                   </Menu>
-              <MenuItem fx:id="im_properties" mnemonicParsing="false" onAction="#properties" text="Properties" />
+              <MenuItem fx:id="imProperties" mnemonicParsing="false" onAction="#properties" text="Properties" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -41,7 +41,7 @@
       </MenuBar>
    </top>
    <center>
-      <Pane fx:id="p_graph" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <Pane fx:id="pGraph" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
       <GridPane prefHeight="24.0" prefWidth="600.0" BorderPane.alignment="CENTER">

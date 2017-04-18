@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.unilim.Config;
 import fr.unilim.application.gui.util.ExceptionDialog;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,13 +28,13 @@ public class ControllerProperties implements Initializable {
 	public static final String NAME_PROJECT_APPLET = "APPLET";
 	
 	@FXML
-	private TextField tf_src;
+	private TextField tfSrc;
 	
 	@FXML
-	private TextField tf_pkg;
+	private TextField tfPkg;
 	
 	@FXML
-	private TextField tf_name;
+	private TextField tfName;
 	
 	@FXML
 	private Button btnDone;
@@ -50,8 +49,8 @@ public class ControllerProperties implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		okClicked = false;
 		
-		if(tf_src.getText().isEmpty()){
-			tf_src.setText("src/");
+		if(tfSrc.getText().isEmpty()){
+			tfSrc.setText("src/");
 		}
 	}
 	
@@ -63,9 +62,9 @@ public class ControllerProperties implements Initializable {
 		Properties prop = new Properties();
 		try(FileInputStream input = new FileInputStream(this.propFile)) {
 			prop.load(input);
-			tf_src.setText(prop.getProperty(NAME_PROJECT_SRC, tf_src.getText()));
-			tf_pkg.setText(prop.getProperty(NAME_PROJECT_PKG, tf_pkg.getText()));
-			tf_name.setText(prop.getProperty(NAME_PROJECT_APPLET, tf_name.getText()));
+			tfSrc.setText(prop.getProperty(NAME_PROJECT_SRC, tfSrc.getText()));
+			tfPkg.setText(prop.getProperty(NAME_PROJECT_PKG, tfPkg.getText()));
+			tfName.setText(prop.getProperty(NAME_PROJECT_APPLET, tfName.getText()));
 		} catch (FileNotFoundException e) {
 			log.warn("Can't read properties file {}.", this.propFile.toString(), e);
 			ExceptionDialog.showException(e);
@@ -81,9 +80,9 @@ public class ControllerProperties implements Initializable {
 	public void done(){
 		Properties prop = new Properties();
 		try(FileOutputStream output = new FileOutputStream(propFile)) {
-			prop.setProperty(NAME_PROJECT_SRC, tf_src.getText());
-			prop.setProperty(NAME_PROJECT_PKG, tf_pkg.getText());
-			prop.setProperty(NAME_PROJECT_APPLET, tf_name.getText());
+			prop.setProperty(NAME_PROJECT_SRC, tfSrc.getText());
+			prop.setProperty(NAME_PROJECT_PKG, tfPkg.getText());
+			prop.setProperty(NAME_PROJECT_APPLET, tfName.getText());
 			prop.store(output, "");
 		} catch (IOException e) {
 			log.error("Can't save properties file ({}).", propFile.toString(), e);

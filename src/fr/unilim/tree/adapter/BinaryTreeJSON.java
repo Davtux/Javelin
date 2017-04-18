@@ -19,7 +19,7 @@ public class BinaryTreeJSON implements IBinaryTree {
 	
 	public static final String CHARSET = "utf-8";
 	
-	public static final String[] nameValues = {"decision", "result"};
+	protected static final String[] nameValues = {"decision", "result"};
 	
 	private JSONParser jsonParser;
 	

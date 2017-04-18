@@ -45,7 +45,7 @@ public class Master {
 		this.projectPath = projectPath;
 		this.aPDUClassName = aPDUClassName;
 		this.packageName = packageName;
-		l.info("Start: "+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+		l.info("Start: {}", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
 	}
 	
 	/**
@@ -75,8 +75,8 @@ public class Master {
 				if(jDart != null){
 					if(integrator.integrate(Paths.get("SUT", "src"), Paths.get("SUT", "build"))){
 						JPFRunner jpfRunner = new JPFRunner();
-						jpfRunner.runJPF(Paths.get(Config.JPF_CONF_NAME), z3Path);	
 						l.info("JPF running...");
+						jpfRunner.runJPF(Paths.get(Config.JPF_CONF_NAME), z3Path);	
 					}else{
 						l.error("Failed to integrate the SUT into JDart structor.");
 						throw new ConcolicExecutionException("Failed to integrate the SUT into JDart structor.");

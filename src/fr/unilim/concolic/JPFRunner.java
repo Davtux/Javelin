@@ -64,9 +64,9 @@ public class JPFRunner {
 
 			proc.waitFor();
 		} catch (IOException e) {
-			l.error("Error launching JPF: " + e);
+			l.error("Error launching JPF: ", e);
 		} catch (InterruptedException e) {
-			l.error("Thread has been interrupted: " + e);
+			l.error("Thread has been interrupted: ", e);
 		}
 	}
 	

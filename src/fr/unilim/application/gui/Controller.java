@@ -59,18 +59,18 @@ public class Controller {
 	private Parent parent;
 
 	@FXML
-	private MenuItem im_open;
+	private MenuItem imOpen;
 	@FXML
-	private MenuItem im_configuration;
+	private MenuItem imConfiguration;
 	@FXML
-	private Menu m_project;
+	private Menu mProject;
 	@FXML
-	private MenuItem im_start_generation;
+	private MenuItem imStartGeneration;
 	@FXML
-	private MenuItem im_properties;
+	private MenuItem imProperties;
 	@FXML
-	private Pane p_graph;
-	private JPanel panel_graph;
+	private Pane pGraph;
+	private JPanel panelGraph;
 	private Viewer viewer;
 	private Graph graph;
 	
@@ -157,8 +157,8 @@ public class Controller {
 
 		dialogStage.showAndWait();
 		
-		im_properties.setDisable(
-				im_properties.isDisable() 
+		imProperties.setDisable(
+				imProperties.isDisable() 
 				? !controller.isOkClicked()
 				: false
 		);
@@ -183,9 +183,8 @@ public class Controller {
 			}
 		);
 		masterTask.setOnRunning(
-			(WorkerStateEvent event) -> {
-				statusBarProgressBar.setVisible(true);
-			}
+			(WorkerStateEvent event) ->
+				statusBarProgressBar.setVisible(true)
 		);
 		masterTask.setOnFailed(
 			(WorkerStateEvent event) -> {
@@ -318,28 +317,28 @@ public class Controller {
 		if(viewer != null){
 			viewer = null;
 		}
-		if(panel_graph != null){
-			p_graph.getChildren().remove(0);
+		if(panelGraph != null){
+			pGraph.getChildren().remove(0);
 		}
 		
 		viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
 		viewer.enableAutoLayout();
 		JPanel view = viewer.addDefaultView(false);
-		panel_graph = new JPanel();
-		panel_graph.setLayout(new BorderLayout());
-		panel_graph.add(view);
-		panel_graph.setPreferredSize(new Dimension((int)p_graph.getWidth(), (int)p_graph.getHeight()));
+		panelGraph = new JPanel();
+		panelGraph.setLayout(new BorderLayout());
+		panelGraph.add(view);
+		panelGraph.setPreferredSize(new Dimension((int)pGraph.getWidth(), (int)pGraph.getHeight()));
 		SwingNode graphViewer = new SwingNode();
-		graphViewer.setContent(panel_graph);
-		p_graph.getChildren().add(graphViewer);
+		graphViewer.setContent(panelGraph);
+		pGraph.getChildren().add(graphViewer);
 	}
 	
 	private void setDisableApplication(boolean disable){
-		im_open.setDisable(disable);
+		imOpen.setDisable(disable);
 	}
 	
 	private void setDisableApplicationProject(boolean disable){
-		m_project.setDisable(disable);
+		mProject.setDisable(disable);
 	}
 	
 	public void setParent(Parent parent) {
@@ -356,10 +355,11 @@ public class Controller {
 		chooser.setTitle(title);
 		String nameAllFile = "All files";
 		
-		if(initial == null){
-			initial = new File(System.getProperty("user.dir"));
+		File fileInitial = initial;
+		if(fileInitial == null){
+			fileInitial = new File(System.getProperty("user.dir"));
 		}
-		chooser.setInitialDirectory(initial);
+		chooser.setInitialDirectory(fileInitial);
 		chooser.getExtensionFilters().add(
 				new FileChooser.ExtensionFilter(nameAllFile, "*.*"));
 		chooser.getExtensionFilters().addAll(filters);

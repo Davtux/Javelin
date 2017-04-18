@@ -21,6 +21,8 @@ import freemarker.template.TemplateException;
 public class FileGenerator {
 	
 	private static final Logger l = LoggerFactory.getLogger(FileGenerator.class);
+	private static final String ENCODING = "UTF-8";
+	
 	private String appletClsName;
 	private String packageName;
 	
@@ -32,12 +34,11 @@ public class FileGenerator {
 		this.packageName = packageName;
 		
 		conf = new Configuration(Configuration.VERSION_2_3_25);
-		conf.setDefaultEncoding("UTF-8");
+		conf.setDefaultEncoding(ENCODING);
 		try {
 			conf.setDirectoryForTemplateLoading(new File("templates/"));
 		} catch (IOException e) {
-			e.printStackTrace();
-			l.error("Could not set templates directory: " + e.getMessage());
+			l.error("Could not set templates directory: " + e.getMessage(), e);
 		}
 	}
 	
@@ -47,31 +48,24 @@ public class FileGenerator {
 	 * @return true if the generation was successful, false otherwise
 	 */
 	public boolean generateConfigFile(){
-		try{
-		    PrintWriter writer = new PrintWriter(Config.JPF_CONF_NAME, "UTF-8");
+	
+		try(PrintWriter writer = new PrintWriter(Config.JPF_CONF_NAME, ENCODING)) {
+			Template tmpl = conf.getTemplate("jpf.properties");
+		   	Map<String, Object> root = new HashMap<>();
+		   	root.put("main_conf_name", "../"+Config.JPF_MAIN_CONF_NAME);
+		   	root.put("packageName", packageName);
+		   	root.put("appletClsName", appletClsName);
 		    	
-		    Template tmpl = conf.getTemplate("jpf.properties");
-		    try {
-		    	Map<String, Object> root = new HashMap<String, Object>();
-		    	root.put("main_conf_name", "../"+Config.JPF_MAIN_CONF_NAME);
-		    	root.put("packageName", packageName);
-		    	root.put("appletClsName", appletClsName);
-		    	
-				tmpl.process(root, writer);
-			} catch (TemplateException e) {
-				e.printStackTrace();
-				l.error("An error occured while expanding the template: " + e.getMessage());
-			} finally {
-				writer.close();
-			}
-		    
-		    l.info("File config.jpf created!");
-		    
-		    return true;
+			tmpl.process(root, writer);
+			
+		} catch (TemplateException e) {
+			l.error("An error occured while expanding the template: " + e.getMessage(), e);
 		} catch (IOException e) {
-			l.error("Could not create file config.jpf!");
+			l.error("Could not create file config.jpf!", e);
 		   return false;
 		}
+		l.info("File config.jpf created!");
+		return true;
 	}
 	
 	/**
@@ -79,30 +73,24 @@ public class FileGenerator {
 	 * @return true if the generation was successful, false otherwise
 	 */
 	public boolean generateMainFile(){
-		try{
-		    PrintWriter writer = new PrintWriter(Config.TALOS_SRC_FOLDER+"MainTester.java", "UTF-8");
+		try(PrintWriter writer = new PrintWriter(Config.TALOS_SRC_FOLDER+"MainTester.java", ENCODING);){
 		    
 		    Template tpl = conf.getTemplate("MainTester.java");
 		    
-		    try {
-		    	Map<String, Object> root = new HashMap<String, Object>();
+		    	Map<String, Object> root = new HashMap<>();
 		    	root.put("packageName", packageName);
 		    	root.put("appletClsName", appletClsName);
 		    	
 		    	tpl.process(root, writer);
-		    } catch (TemplateException te) {
-		    	te.printStackTrace();
-		    	l.error("An error occured while expanding the template: " + te.getMessage());
-		    }
-		    
-		    writer.close();
-		    l.info("File MainTester.java created!");
-		    
-		    return true;
+		} catch (TemplateException te) {
+		    l.error("An error occured while expanding the template: " + te.getMessage(), te);
 		} catch (IOException e) {
 			l.error("Could not create file MainTester.java!", e);
 		   return false;
 		}
+		l.info("File MainTester.java created!");
+	    
+	    return true;
 	}
 
 	public String getAppletClsName() {

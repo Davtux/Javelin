@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import fr.unilim.concolic.JavaCardProjectCompiler;
-import fr.unilim.concolic.Master;
 import fr.unilim.concolic.exception.CompileException;
 import fr.unilim.concolic.exception.NoJDKException;
 

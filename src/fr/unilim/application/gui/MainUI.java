@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.slf4j.LoggerFactory;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,9 +25,7 @@ public class MainUI extends Application{
 			controller.setParent(root);
 			
 			primaryStage.setOnCloseRequest(
-				(WindowEvent event) -> {
-					controller.stop();
-				}
+				(WindowEvent event) -> controller.stop()
 			);
 		}catch(IOException ioe){
 			log.error("Can't load main_interface.fxml", ioe);

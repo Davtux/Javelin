@@ -56,7 +56,6 @@ public class JavaCardProjectCompiler {
 		Iterable<? extends JavaFileObject> compilationUnit = fileManager.getJavaFileObjectsFromFiles(Arrays.asList(files));
 		boolean ok = compiler.getTask(null, fileManager, diagnosticsCollector, Arrays.asList(params), null, compilationUnit).call();
 		
-		System.out.println(ok);
 		if (!ok) {
 			StringBuilder errorStr = new StringBuilder();
 	        List<Diagnostic<? extends JavaFileObject>> diagnostics = diagnosticsCollector.getDiagnostics();

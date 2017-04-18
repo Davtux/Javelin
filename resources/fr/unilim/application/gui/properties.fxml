@@ -18,11 +18,11 @@
         </rowConstraints>
          <children>
             <Label prefHeight="17.0" prefWidth="114.0" text="Source folder" />
-            <TextField fx:id="tf_src" GridPane.columnIndex="1" />
+            <TextField fx:id="tfSrc" GridPane.columnIndex="1" />
             <Label prefHeight="10.0" prefWidth="110.0" text="Package applet" GridPane.rowIndex="1" />
-            <TextField fx:id="tf_pkg" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="tfPkg" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Applet name" GridPane.rowIndex="2" />
-            <TextField fx:id="tf_name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="tfName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="482.0">

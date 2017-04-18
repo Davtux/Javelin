@@ -155,7 +155,7 @@ public class AutomatonGraphml implements IAutomaton {
 			return;
 		}
 		if(e == null){
-			log.debug("addEdge return null, name = " + name + " origin = " + origin + " dest = " + dest);
+			log.debug("addEdge return null, name = {} origin = {} dest = {}", name, origin, dest);
 			return;
 		}
 		
