@@ -5,6 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.Closeable;
 import java.io.File;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,5 +58,15 @@ public class FileUtil {
         if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
         	return fileName.substring(fileName.lastIndexOf(".")+1);
         else return "";
+    }
+	
+	public static String fileToString(File file) {
+		try{
+			byte[] encoded = Files.readAllBytes(file.toPath());
+			return new String(encoded, StandardCharsets.UTF_8);
+		}catch(final Exception e){
+			log.warn("Can't open file : {}", e.getMessage(), e);
+			return null;
+		}
     }
 }
