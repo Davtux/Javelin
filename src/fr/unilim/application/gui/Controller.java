@@ -24,6 +24,7 @@ import org.json.simple.parser.ParseException;
 import org.slf4j.LoggerFactory;
 
 import fr.unilim.Config;
+import fr.unilim.application.gui.tasks.GenerateJCCCTestsTask;
 import fr.unilim.application.gui.tasks.MasterTask;
 import fr.unilim.application.gui.util.DirectoryChooserUtil;
 import fr.unilim.application.gui.util.ExceptionDialog;
@@ -67,8 +68,8 @@ public class Controller {
 	private static final org.slf4j.Logger log = LoggerFactory.getLogger(Controller.class);
 	
 	public static final String APP_FILE_CONFIG = "Javelin.conf";
-	
 	public static final String PROJECT_FILE_CONFIG = ".javelin";
+	public static final String VALUES_FILE = "SUT/values.txt";
 	
 	private static final String PROPERTY_PREVIOUS = "PREVIOUS";
 	
@@ -324,6 +325,46 @@ public class Controller {
 			log.error("Error, can't export graph.", e);
 			ExceptionDialog.showException(e);
 		}
+	}
+	
+	@FXML
+	private void generateJacacocoTests(){
+		if(graph == null){
+			startGeneration();
+		}
+		File valuesFile = new File(VALUES_FILE);
+		if(!valuesFile.exists()){
+			Alert a = new Alert(Alert.AlertType.ERROR);
+			a.setTitle("Error");
+			a.setHeaderText(null);
+			a.setContentText("File " + VALUES_FILE + " not exist.");
+			return;
+		}
+		
+		File f = selectSaveFile("JaCaCoCo tests", currentProjectDir, new FileChooser.ExtensionFilter[]{
+				new FileChooser.ExtensionFilter("XML", "*.xml")
+		});
+		
+		GenerateJCCCTestsTask task = new GenerateJCCCTestsTask();
+		task.setDestFile(f);
+		task.setValuesFile(valuesFile);
+		task.setOnSucceeded(
+			(WorkerStateEvent event) -> {
+				statusBarProgressBar.setVisible(false);
+			}
+		);
+		task.setOnRunning(
+			(WorkerStateEvent event) ->
+				statusBarProgressBar.setVisible(true)
+		);
+		task.setOnFailed(
+			(WorkerStateEvent event) -> {
+				statusBarProgressBar.setVisible(false);
+				ExceptionDialog.showException((Exception) task.getException());
+			}
+		);
+		statusBarEtat.textProperty().bind(task.messageProperty());
+		new Thread(task).start();
 	}
 	
 	@FXML

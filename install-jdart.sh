@@ -135,7 +135,7 @@ echo "##############################"
 echo "Install jdart ..."
 echo ""
 
-git clone https://github.com/psycopaths/jdart.git
+git clone https://github.com/Ithrynluin/jdart.git
 
 cd jdart || exit 6
 

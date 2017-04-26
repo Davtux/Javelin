@@ -85,3 +85,9 @@ generatedsrc/
 ProjetM1.conf
 Javelin.conf
 SUT/
+values.txt
+coveragereport/
+bin-instr/
+deployed/
+jacacoco.conf
+test/resources/PorteMonnaie/test*.xml

@@ -23,8 +23,8 @@ public class PorteMonnaie extends Applet {
 		
 		//if(selectingApplet()){ return; }
 		
-		/*if(buffer[ISO7816.OFFSET_CLA] != (byte) 0x80) 
-			ISOException.throwIt(ISO7816.SW_CLA_NOT_SUPPORTED);*/
+		if(buffer[ISO7816.OFFSET_CLA] != (byte) 0x80) 
+			ISOException.throwIt(ISO7816.SW_CLA_NOT_SUPPORTED);
 		
 		short octetsLus;
 		
@@ -36,6 +36,7 @@ public class PorteMonnaie extends Applet {
 			if(buffer[ISO7816.OFFSET_P1] != (byte) 0x00 && buffer[ISO7816.OFFSET_P2] != (byte) 0x00 )
 				ISOException.throwIt(ISO7816.SW_INCORRECT_P1P2);
 			Util.setShort(buffer, (short) 0, balance);
+			if (apdu.setOutgoing() < (short)0x10) ISOException.throwIt( ISO7816.SW_WRONG_LENGTH );
 			apdu.setOutgoingAndSend((short)0 , (short)2);
 			return;
 		case (byte) 0x36:
@@ -45,6 +46,8 @@ public class PorteMonnaie extends Applet {
 			short amont = Util.getShort(buffer, (short)5);
 			if(buffer[ISO7816.OFFSET_P1] != (byte) 0x00 && buffer[ISO7816.OFFSET_P2] != (byte) 0x00 )
 				ISOException.throwIt(ISO7816.SW_INCORRECT_P1P2);
+			if(amont == 0)
+				ISOException.throwIt(ISO7816.SW_DATA_INVALID);
 			balance += amont;
 			return;
 		case (byte) 0x38:

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<applet>
+    <test CLA="80" INS="34" name="Test-0" P1="00" P2="00" data="" lenght="0"/>
+    <test CLA="80" INS="34" name="Test-1" P1="01" P2="00" data="" lenght="0"/>
+    <test CLA="80" INS="34" name="Test-2" P1="01" P2="01" data="" lenght="0"/>
+    <test CLA="80" INS="34" name="Test-3" P1="00" P2="00" data="00 00" lenght="0"/>
+    <test CLA="80" INS="34" name="Test-4" P1="00" P2="00" data="00 00 00 00 00 00 00 00 00 00 00 00 00 00" lenght="0"/>
+    <test CLA="80" INS="34" name="Test-5" P1="00" P2="00" data="" lenght="0"/>
+    <test CLA="80" INS="35" name="Test-6" P1="00" P2="00" data="" lenght="0"/>
+    <test CLA="80" INS="36" name="Test-7" P1="00" P2="00" data="01 00" lenght="0"/>
+    <test CLA="80" INS="36" name="Test-8" P1="00" P2="00" data="00 00" lenght="0"/>
+    <test CLA="80" INS="36" name="Test-9" P1="02" P2="00" data="01 00" lenght="0"/>
+    <test CLA="80" INS="36" name="Test-10" P1="02" P2="00" data="00 00" lenght="0"/>
+    <test CLA="80" INS="36" name="Test-11" P1="02" P2="01" data="00 00" lenght="0"/>
+    <test CLA="80" INS="36" name="Test-12" P1="00" P2="00" data="" lenght="0"/>
+    <test CLA="80" INS="36" name="Test-13" P1="00" P2="00" data="00 00 00 00 00 00 00 00 00 00 00 00 00 00" lenght="0"/>
+    <test CLA="80" INS="36" name="Test-14" P1="00" P2="00" data="" lenght="0"/>
+    <test CLA="80" INS="37" name="Test-15" P1="00" P2="00" data="" lenght="0"/>
+    <test CLA="80" INS="38" name="Test-16" P1="00" P2="00" data="00 00" lenght="0"/>
+    <test CLA="80" INS="38" name="Test-17" P1="00" P2="00" data="01 00" lenght="0"/>
+    <test CLA="80" INS="38" name="Test-18" P1="02" P2="00" data="00 00" lenght="0"/>
+    <test CLA="80" INS="38" name="Test-19" P1="02" P2="00" data="01 00" lenght="0"/>
+    <test CLA="80" INS="38" name="Test-20" P1="02" P2="01" data="00 00" lenght="0"/>
+    <test CLA="80" INS="38" name="Test-21" P1="00" P2="00" data="" lenght="0"/>
+    <test CLA="80" INS="38" name="Test-22" P1="00" P2="00" data="00 00 00 00 00 00 00 00 00 00 00 00 00 00" lenght="0"/>
+    <test CLA="80" INS="38" name="Test-23" P1="00" P2="00" data="" lenght="0"/>
+    <test CLA="80" INS="00" name="Test-24" P1="00" P2="00" data="" lenght="0"/>
+    <test CLA="00" INS="00" name="Test-25" P1="00" P2="00" data="" lenght="0"/>
+</applet>
