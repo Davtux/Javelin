@@ -23,12 +23,15 @@
           <Menu fx:id="mProject" disable="true" mnemonicParsing="false" text="Project">
             <items>
                   <MenuItem fx:id="imStartGeneration" mnemonicParsing="false" onAction="#startGeneration" text="Start generation" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                   <Menu mnemonicParsing="false" text="Export">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#exportGML" text="GML" />
                       <MenuItem mnemonicParsing="false" onAction="#exportGraphML" text="GraphML" />
                     </items>
                   </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#generateJacacocoTests" text="Generate JaCaCoCo tests" />
+              <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem fx:id="imProperties" mnemonicParsing="false" onAction="#properties" text="Properties" />
             </items>
           </Menu>
