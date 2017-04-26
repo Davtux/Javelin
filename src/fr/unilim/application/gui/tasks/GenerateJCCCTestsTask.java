@@ -13,6 +13,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.unilim.jacacoco.application.gui.concurrent.TaskException;
 import fr.unilim.jacacoco.tests.model.AppletModel;
 import fr.unilim.tests.APDUValuesReader;
@@ -21,6 +24,8 @@ import fr.unilim.tests.exception.APDUValuesReaderException;
 import javafx.concurrent.Task;
 
 public class GenerateJCCCTestsTask extends Task<Void>{
+	
+	private final static Logger log = LoggerFactory.getLogger(GenerateJCCCTestsTask.class);
 
 	private File valuesFile;
 	private File destFile;
@@ -32,14 +37,17 @@ public class GenerateJCCCTestsTask extends Task<Void>{
 		List<byte[]> tests = new ArrayList<>();
 		try(APDUValuesReader apdureader = new APDUValuesReader(new BufferedReader(new FileReader(valuesFile)))){
 			byte[] buffer;
+			String strBuffer;
+			log.info("Read buffers");
 			while((buffer = apdureader.nextBuffer()) != null){
+				strBuffer = "";
 				for(int i = 0; i < buffer.length; ++i){
-					System.out.print(buffer[i] + " ");
+					strBuffer += buffer[i] + " ";
 				}
-				System.out.println();
+				log.info(strBuffer);
 				tests.add(buffer);
 			}
-			System.out.println("Read " + tests.size() + " buffers");
+			log.info("Read " + tests.size() + " buffers");
 			
 		} catch (FileNotFoundException e) {
 			throw new TaskException(valuesFile + " : file not found.", e);
