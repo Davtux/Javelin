@@ -95,5 +95,13 @@
 	    <artifactId>gson</artifactId>
 	    <version>2.8.0</version>
 	</dependency>
+	
+	<dependency>
+	    <groupId>fr.unilim</groupId>
+	    <artifactId>JaCaCoCo</artifactId>
+	    <version>1.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/dependencies/JaCaCoCo.jar</systemPath>
+	</dependency>
   </dependencies>
 </project>
