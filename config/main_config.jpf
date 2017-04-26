@@ -6,5 +6,3 @@ jdart.tree.json.dir=.
 
 log.finest=jdart
 log.info=constraints
-
-jdart.configs.all_fields_symbolic.symbolic.include=this.*
