@@ -22,48 +22,18 @@ public class APDUValuesReaderTester {
 
 	public static void main(String[] args) {
 		File f = new File("test/resources/values.txt");
-		int nbBuffer = 0;
 		AppletModel appModel = new AppletModel();
-		List<TestModel> tests = new ArrayList<>();
-		TestModel t;
-		Byte[] data;
-		int lc;
+		List<byte[]> tests = new ArrayList<>();
 		try(APDUValuesReader apdureader = new APDUValuesReader(new BufferedReader(new FileReader(f)))){
 			byte[] buffer;
 			while((buffer = apdureader.nextBuffer()) != null){
 				for(int i = 0; i < buffer.length; ++i){
 					System.out.print(buffer[i] + " ");
 				}
-				System.out.println(" lenght : " + buffer.length);
-				nbBuffer++;
-				t = new TestModel();
-				t.setCla(buffer[0]);
-				t.setIns(buffer[1]);
-				t.setP1(buffer[2]);
-				t.setP2(buffer[3]);
-				t.setName("Test-" + nbBuffer);
-				lc = buffer[4];
-				if(lc > 0){
-					data = new Byte[lc];
-					for(byte i = 0; i < lc; ++i){
-						if(5 + i < buffer.length){
-							data[i] = buffer[5 + i];
-						}else{
-							data[i] = 0;
-						}
-					}
-					t.setData(data);
-				}else{
-					lc = 0;
-				}
-				
-				if(5 + lc < buffer.length){
-					t.setLenght(buffer[(byte)(5 + lc)]);					
-				}
-				System.out.println(t);
-				tests.add(t);
+				System.out.println();
+				tests.add(buffer);
 			}
-			System.out.println("Read " + nbBuffer + " buffers");
+			System.out.println("Read " + tests.size() + " buffers");
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -76,13 +46,13 @@ public class APDUValuesReaderTester {
 			return;
 		}
 		
-		appModel.setTests(tests);
+		appModel = BuffersToJacacocoTests.convert(tests);
 		JAXBContext jaxbContext;
 		try {
 			jaxbContext = JAXBContext.newInstance(AppletModel.class);
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, new Boolean(true));
-			marshaller.marshal(appModel, new FileOutputStream("tests_jadart.xml"));
+			marshaller.marshal(appModel, new FileOutputStream("test/resources/tests_jdart.xml"));
 		} catch (JAXBException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
