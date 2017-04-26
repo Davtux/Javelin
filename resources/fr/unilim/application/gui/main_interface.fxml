@@ -14,6 +14,7 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
                   <MenuItem fx:id="imOpen" mnemonicParsing="false" onAction="#open" text="Open project" />
+                  <Menu fx:id="mnPreviousProject" mnemonicParsing="false" text="Previous Project" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="imConfiguration" mnemonicParsing="false" onAction="#configuration" text="Configuration" />
                   <SeparatorMenuItem mnemonicParsing="false" />
