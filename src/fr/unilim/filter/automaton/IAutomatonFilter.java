@@ -1,6 +1,7 @@
 package fr.unilim.filter.automaton;
 
 import fr.unilim.automaton.models.IAutomaton;
+import fr.unilim.filter.exception.FilterException;
 
 public interface IAutomatonFilter {
 
@@ -8,8 +9,9 @@ public interface IAutomatonFilter {
 	 * Apply filter on automaton.
 	 * @param automaton
 	 * @param result
+	 * @throws FilterException 
 	 */
-	void doFilter(IAutomaton automaton, IAutomaton result);
+	void doFilter(IAutomaton automaton, IAutomaton result) throws FilterException;
 
 	/**
 	 * Get name's filter

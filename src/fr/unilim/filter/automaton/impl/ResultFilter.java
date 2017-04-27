@@ -11,6 +11,7 @@ import fr.unilim.automaton.models.State;
 import fr.unilim.automaton.models.StateNotFoundException;
 import fr.unilim.automaton.models.Transition;
 import fr.unilim.filter.automaton.IAutomatonFilter;
+import fr.unilim.filter.exception.FilterException;
 
 public class ResultFilter implements IAutomatonFilter {
 	
@@ -23,15 +24,13 @@ public class ResultFilter implements IAutomatonFilter {
 	}
 
 	@Override
-	public void doFilter(IAutomaton automaton, IAutomaton result) {
-		List<Transition> transitions;
+	public void doFilter(IAutomaton automaton, IAutomaton result) throws FilterException {
 		result.addFinalState(automaton.getFinalState(valueResult));
 		log.debug("Add final state : {}", automaton.getFinalState(valueResult) );
 		try {
 			walk(automaton, result, automaton.getFinalState(valueResult));
 		} catch (StateNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new FilterException("Error during build automaton : " + e.getMessage(), e);
 		}
 	}
 	

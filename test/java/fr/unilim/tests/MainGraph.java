@@ -13,6 +13,7 @@ import fr.unilim.automaton.algorithms.AutomatonCreator;
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
 import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
 import fr.unilim.filter.automaton.impl.ResultFilter;
+import fr.unilim.filter.exception.FilterException;
 import fr.unilim.tree.IBinaryTree;
 import fr.unilim.tree.adapter.BinaryTreeJSON;
 
@@ -123,6 +124,9 @@ public class MainGraph {
 		} catch (AlgorithmStateException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FilterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
