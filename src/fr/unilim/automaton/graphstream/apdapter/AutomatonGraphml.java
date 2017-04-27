@@ -1,7 +1,9 @@
 package fr.unilim.automaton.graphstream.apdapter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.graphstream.graph.Edge;
@@ -14,7 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.unilim.automaton.models.IAutomaton;
+import fr.unilim.automaton.models.State;
 import fr.unilim.automaton.models.StateNotFoundException;
+import fr.unilim.automaton.models.Transition;
 
 /**
  * Class managing the automaton.
@@ -28,7 +32,7 @@ public class AutomatonGraphml implements IAutomaton {
 	public static final String ATTR_CLASS = "ui.class";
 	
 	private Graph graph;
-	private Set<String> finalStates;
+	private Set<Node> finalStates;
 	private Node intialState;
 	private boolean side;
 	
@@ -81,7 +85,7 @@ public class AutomatonGraphml implements IAutomaton {
 		if(null != label)
 			labelErrorTreatment(label, n);
 		
-		this.finalStates.add(name);
+		this.finalStates.add(n);
 		
 		
 		return true;
@@ -127,7 +131,6 @@ public class AutomatonGraphml implements IAutomaton {
 		if(null != label){
 			n.addAttribute(ATTR_LABEL, label);			
 		}
-		
 		return true;
 	}
 
@@ -191,12 +194,78 @@ public class AutomatonGraphml implements IAutomaton {
 
 	@Override
 	public boolean isFianlState(String name) {
-		return this.finalStates.contains(name);
+		return this.finalStates.contains(graph.getNode(name));
 	}
 
 	@Override
-	public String getIntialState() {
-		return this.intialState.getId();
+	public State getIntialState() {
+		return nodeToState(intialState);
+	}
+
+	@Override
+	public List<State> getFinalStates() {
+		List<State> states = new ArrayList<>();
+		for(Node n : this.finalStates){
+			states.add(nodeToState(n));
+		}
+		return states;
+	}
+
+	@Override
+	public List<Transition> getTransitionsByDest(String dest) {
+		List<Transition> result = new ArrayList<>();
+		Node destNode = graph.getNode(dest);
+		if(destNode == null){
+			return result;
+		}
+		for(Edge e : destNode.getEachEnteringEdge()){
+			result.add(new Transition(nodeToState(e.getSourceNode()), nodeToState(destNode), e.getId(), e.getAttribute(ATTR_LABEL)));
+		}
+		return result;
+	}
+
+	@Override
+	public List<Transition> getTransitionsByOrigin(String origin) {
+		List<Transition> result = new ArrayList<>();
+		Node originNode = graph.getNode(origin);
+		if(originNode == null){
+			return result;
+		}
+		for(Edge e : originNode.getEachLeavingEdge()){
+			result.add(new Transition(nodeToState(originNode), nodeToState(e.getTargetNode()), e.getId(), e.getAttribute(ATTR_LABEL)));
+		}
+		return result;
+	}
+
+	@Override
+	public State getFinalState(String name) {
+		if(! isFianlState(name)){
+			return null;
+		}
+		
+		return nodeToState(graph.getNode(name));
+	}
+	
+	private State nodeToState(Node n){
+		if(n == null){
+			return null;
+		}
+		return new State(n.getId(), n.getAttribute(ATTR_LABEL));
+	}
+
+	@Override
+	public boolean addFinalState(State state) {
+		return addFinalState(state.getName(), state.getLabel());
+	}
+
+	@Override
+	public boolean addState(State state) {
+		return addState(state.getName(), state.getLabel());
+	}
+
+	@Override
+	public void addTransition(Transition transition) throws StateNotFoundException {
+		addTransition(transition.getOrigin().getName(), transition.getName(), transition.getLabel(), transition.getDest().getName());
 	}
 
 }
