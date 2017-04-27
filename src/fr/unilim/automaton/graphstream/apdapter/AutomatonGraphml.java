@@ -53,7 +53,7 @@ public class AutomatonGraphml implements IAutomaton {
 	/**
 	 * Enable anti-aliasing and HD
 	 */
-	private void enableHQ() {
+	public void enableHQ() {
 		this.graph.addAttribute("ui.quality", true);
 		this.graph.addAttribute("ui.antialias", true);
 	}
@@ -78,7 +78,7 @@ public class AutomatonGraphml implements IAutomaton {
 		try {
 			n = graph.addNode(name);
 		} catch(IdAlreadyInUseException iAiUe){
-			log.warn("Node already use : {} : {}", name, iAiUe.getMessage(), iAiUe);
+			log.warn("Node already use : {} : {}", name, iAiUe.getMessage());
 			return false;
 		}
 		
@@ -124,7 +124,7 @@ public class AutomatonGraphml implements IAutomaton {
 		try {
 			n = graph.addNode(name);
 		} catch(IdAlreadyInUseException iAiUe){
-			log.warn("Node already use : {} : {}", name, iAiUe.getMessage(), iAiUe);
+			log.warn("Node already use : {} : {}", name, iAiUe.getMessage());
 			return false;
 		}
 		
