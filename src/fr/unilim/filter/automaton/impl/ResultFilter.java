@@ -42,18 +42,22 @@ public class ResultFilter implements IAutomatonFilter {
 		List<Transition> transitions = automaton.getTransitionsByDest(current.getName());
 		for(Transition t : transitions){
 			try {
-				log.debug("Add state : {}", t.getOrigin());
-				result.addState(t.getOrigin());
+				if(!t.getOrigin().equals(automaton.getIntialState())){
+					log.debug("Add state : {}", t.getOrigin());
+					result.addState(t.getOrigin());
+				}
 			} catch (IdAlreadyInUseException e) {
-				log.info("State {} already exist, is ignore", t.getOrigin().getName(), e);
+				log.info("State {} already exist, ignore", t.getOrigin().getName());
+				continue;
 			}
 			try {
 				log.debug("Add transtion : {}", t);				
 				result.addTransition(t);
+				walk(automaton, result, t.getOrigin());
+
 			} catch (IdAlreadyInUseException e) {
-				log.info("Transition {} already exist, is ignore", t.getOrigin().getName(), e);
+				log.info("Transition {} already exist, ignore", t);
 			}
-			walk(automaton, result, t.getOrigin());
 		}
 	}
 

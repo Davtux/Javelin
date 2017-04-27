@@ -107,7 +107,7 @@ public class MainGraph {
 			Thread.sleep(2000);
 			v.disableAutoLayout();
 			
-			ResultFilter filter = new ResultFilter(a.getFinalStates().get(3).getName());
+			ResultFilter filter = new ResultFilter(a.getFinalStates().get(0).getName());
 			AutomatonGraphml a_filterd = new AutomatonGraphml("filter");
 			filter.doFilter(a, a_filterd);
 			
