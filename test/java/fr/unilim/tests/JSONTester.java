@@ -2,7 +2,7 @@ package fr.unilim.tests;
 
 import java.nio.file.Paths;
 
-import fr.unilim.JSON.JSONFilter;
+import fr.unilim.filter.JSON.JSONFilter;
 import fr.unilim.utils.FileUtil;
 
 public class JSONTester {

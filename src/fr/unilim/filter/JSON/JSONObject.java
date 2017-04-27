@@ -1,4 +1,4 @@
-package fr.unilim.JSON;
+package fr.unilim.filter.JSON;
 
 import java.util.ArrayList;
 
