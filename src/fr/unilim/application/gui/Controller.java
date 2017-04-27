@@ -184,7 +184,13 @@ public class Controller {
         			);
         			statusBarEtat.textProperty().bind(filterTask.messageProperty());
         			new Thread(filterTask).start();
-            });
+        });
+        pGraph.widthProperty().addListener(
+        		(ObservableValue<? extends Number> ov, 
+                    Number old_val, Number new_val) -> {
+                    	if(graph != null)
+                    		createGraphView(graph);
+        });
 	}
 	
 	@FXML
