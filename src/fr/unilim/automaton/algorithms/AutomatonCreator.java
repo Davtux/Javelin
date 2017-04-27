@@ -39,7 +39,7 @@ public class AutomatonCreator {
 	public IAutomaton parse(IBinaryTree binaryTree, IAutomaton automaton) throws IOException, ParseException, AlgorithmStateException {
 		this.counter.reset();
 		try {
-			constructAutomaton(binaryTree, automaton.getIntialState(), automaton);
+			constructAutomaton(binaryTree, automaton.getIntialState().getName(), automaton);
 		} catch (StateNotFoundException e) {
 			throw new AlgorithmStateException("Eorro when construct automaton.", e);
 		}

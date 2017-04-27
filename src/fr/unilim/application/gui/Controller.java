@@ -1,6 +1,7 @@
 package fr.unilim.application.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,20 +27,25 @@ import org.slf4j.LoggerFactory;
 import fr.unilim.Config;
 import fr.unilim.application.gui.tasks.GenerateJCCCTestsTask;
 import fr.unilim.application.gui.tasks.MasterTask;
+import fr.unilim.application.gui.tasks.ResultFilterTask;
 import fr.unilim.application.gui.util.DirectoryChooserUtil;
 import fr.unilim.application.gui.util.ExceptionDialog;
+import fr.unilim.application.gui.util.PropertiesUtil;
 import fr.unilim.automaton.algorithms.AutomatonCreator;
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
 import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
 import fr.unilim.automaton.graphstream.io.OutputGraphStream;
+import fr.unilim.automaton.models.IAutomaton;
+import fr.unilim.automaton.models.State;
 import fr.unilim.concolic.Master;
-import fr.unilim.application.gui.util.PropertiesUtil;
 import fr.unilim.tree.IBinaryTree;
 import fr.unilim.tree.adapter.BinaryTreeJSON;
 import fr.unilim.utils.FileUtil;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
@@ -51,17 +57,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 public class Controller {
 	
@@ -98,82 +103,20 @@ public class Controller {
 	private JPanel panelGraph;
 	private Viewer viewer;
 	private Graph graph;
+	private AutomatonGraphml automaton;
+	
+	@FXML
+	private ListView<String> lFinalStates;
+	private ObservableList<String> itemsFinalStates;
 	
 	@FXML
 	private Label statusBarEtat;
 	@FXML
 	private ProgressBar statusBarProgressBar;
 	
+	
 	private Master master;
 	private File currentProjectDir;
-	
-	public void close(){
-		Platform.exit();
-	}
-	
-	public void stop(){
-		Properties prop = new Properties();
-		try {
-			FileOutputStream out = new FileOutputStream(Controller.class.getResource("previousProject.prop").getFile());
-			PropertiesUtil.setPropertyStringList(prop, PROPERTY_PREVIOUS, previousProjects);
-			
-			out.write(32);
-			prop.store(out, null);
-		} catch (FileNotFoundException e) {
-			log.error("Can't load previousProject.prop : ", e.getMessage(), e);
-		} catch (IOException e) {
-			log.error("Can't write previous project", e);
-		}
-		log.debug("Stop app.");
-		if(viewer != null){
-			viewer.close();
-		}
-	}
-	
-	private void updatePreviousProjects(File dir) {
-		if(!previousProjects.contains(dir.toString())) {
-            if(previousProjects.size() >= MAX_PREVIOUS_PROJECT){
-                previousProjects.remove(MAX_PREVIOUS_PROJECT-1);
-            }
-            previousProjects.add(0,dir.toString());
-        }else{
-            int end = previousProjects.indexOf(dir.toString());
-            for(int i = end; i > 0; i--){
-                Collections.swap(previousProjects, i, i-1);
-            }
-        }
-		updateMenuPreviousProjects();
-	}
-	
-	private void updateMenuPreviousProjects() {
-		mnPreviousProject.getItems().remove(0, mnPreviousProject.getItems().size());
-		MenuItem itemPrevious;
-		for(final String f : previousProjects){
-			itemPrevious = new MenuItem(f);
-			mnPreviousProject.getItems().add(itemPrevious);
-			itemPrevious.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					currentProjectDir = new File(f);
-					loadProject();
-				}
-			});
-		}
-	}
-
-	private void loadPreviousProjects() {
-		Properties previousProjectProp = new Properties();
-		InputStream fileProp = Controller.class.getResourceAsStream("previousProject.prop");
-		if(fileProp == null)
-			return;
-		try {
-			previousProjectProp.load(fileProp);
-			previousProjects = PropertiesUtil.getPropertyStringList(previousProjectProp, PROPERTY_PREVIOUS);
-			
-		} catch (IOException e) {
-			log.error("Can't load previousProject.prop : ", e.getMessage(), e);
-		}
-	}
 
 	@FXML
 	void initialize() {
@@ -199,6 +142,52 @@ public class Controller {
 		loadPreviousProjects();
 		updateMenuPreviousProjects();
 		setDisableApplicationProject(true);
+		
+		itemsFinalStates = FXCollections.observableArrayList();
+		lFinalStates.setItems(itemsFinalStates);
+		lFinalStates.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        lFinalStates.getSelectionModel().selectedItemProperty().addListener(
+        	(ObservableValue<? extends String> ov, 
+                    String old_val, String new_val) -> {
+                    List<String> listResults = new ArrayList<>();
+            		for(String s : lFinalStates.getSelectionModel().getSelectedItems()){
+            			if(s != null){
+            				listResults.add(s);            				
+            			}
+            		}
+            		if(listResults.isEmpty()){
+            			graph = automaton.getGraph();
+    					createGraphView(graph);
+            			return;
+            		}
+        			ResultFilterTask filterTask = new ResultFilterTask();
+        			AutomatonGraphml dest = new AutomatonGraphml("filtered_graph");
+        			filterTask.setResults(listResults);
+        			filterTask.setDestination(dest);
+        			filterTask.setOrigin(automaton);
+        			
+        			filterTask.setOnSucceeded(
+        				(WorkerStateEvent event) -> {
+        					statusBarProgressBar.setVisible(false);
+        					graph = dest.getGraph();
+        					createGraphView(graph);
+        				}
+        			);
+        			filterTask.setOnRunning(
+        				(WorkerStateEvent event) -> {
+        					statusBarProgressBar.setVisible(true);
+        				}
+        			);
+        			filterTask.setOnFailed(
+        				(WorkerStateEvent event) -> {
+        					statusBarProgressBar.setVisible(false);
+        					log.error("Error during filter task,", filterTask.getException());
+        					ExceptionDialog.showException((Exception) filterTask.getException());
+        				}
+        			);
+        			statusBarEtat.textProperty().bind(filterTask.messageProperty());
+        			new Thread(filterTask).start();
+            });
 	}
 	
 	@FXML
@@ -270,8 +259,9 @@ public class Controller {
 			}
 		);
 		masterTask.setOnRunning(
-			(WorkerStateEvent event) ->
-				statusBarProgressBar.setVisible(true)
+			(WorkerStateEvent event) ->{
+				statusBarProgressBar.setVisible(true);
+			}
 		);
 		masterTask.setOnFailed(
 			(WorkerStateEvent event) -> {
@@ -403,6 +393,30 @@ public class Controller {
 		);
 	}
 	
+	@FXML
+	public void close(){
+		Platform.exit();
+	}
+	
+	public void stop(){
+		Properties prop = new Properties();
+		try {
+			FileOutputStream out = new FileOutputStream(Controller.class.getResource("previousProject.prop").getFile());
+			PropertiesUtil.setPropertyStringList(prop, PROPERTY_PREVIOUS, previousProjects);
+			
+			out.write(32);
+			prop.store(out, null);
+		} catch (FileNotFoundException e) {
+			log.error("Can't load previousProject.prop : ", e.getMessage(), e);
+		} catch (IOException e) {
+			log.error("Can't write previous project", e);
+		}
+		log.debug("Stop app.");
+		if(viewer != null){
+			viewer.close();
+		}
+	}
+	
 	private void createAutomaton(){
 		AutomatonCreator ac = new AutomatonCreator();
 		
@@ -417,12 +431,13 @@ public class Controller {
 		
 		try {		
 			IBinaryTree tree = new BinaryTreeJSON(f);
-			AutomatonGraphml a = (AutomatonGraphml) ac.parse(tree, new AutomatonGraphml("automaton"));
-			graph = a.getGraph();
-			graph.setAttribute("layout.quality", 4);
-			graph.setAttribute("layout.weight", 0);
+			automaton = (AutomatonGraphml) ac.parse(tree, new AutomatonGraphml("automaton"));
+			graph = automaton.getGraph();
 			
-			
+			itemsFinalStates.clear();
+			for(State fs : automaton.getFinalStates()){
+				itemsFinalStates.add(fs.getName());
+			}
 		} catch (ParseException e) {
 			log.error("Error during parsing", e);
 			ExceptionDialog.showException(e);
@@ -458,6 +473,51 @@ public class Controller {
 		SwingNode graphViewer = new SwingNode();
 		graphViewer.setContent(panelGraph);
 		pGraph.getChildren().add(graphViewer);
+	}
+	
+	private void updatePreviousProjects(File dir) {
+		if(!previousProjects.contains(dir.toString())) {
+            if(previousProjects.size() >= MAX_PREVIOUS_PROJECT){
+                previousProjects.remove(MAX_PREVIOUS_PROJECT-1);
+            }
+            previousProjects.add(0,dir.toString());
+        }else{
+            int end = previousProjects.indexOf(dir.toString());
+            for(int i = end; i > 0; i--){
+                Collections.swap(previousProjects, i, i-1);
+            }
+        }
+		updateMenuPreviousProjects();
+	}
+	
+	private void updateMenuPreviousProjects() {
+		mnPreviousProject.getItems().remove(0, mnPreviousProject.getItems().size());
+		MenuItem itemPrevious;
+		for(final String f : previousProjects){
+			itemPrevious = new MenuItem(f);
+			mnPreviousProject.getItems().add(itemPrevious);
+			itemPrevious.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					currentProjectDir = new File(f);
+					loadProject();
+				}
+			});
+		}
+	}
+
+	private void loadPreviousProjects() {
+		Properties previousProjectProp = new Properties();
+		InputStream fileProp = Controller.class.getResourceAsStream("previousProject.prop");
+		if(fileProp == null)
+			return;
+		try {
+			previousProjectProp.load(fileProp);
+			previousProjects = PropertiesUtil.getPropertyStringList(previousProjectProp, PROPERTY_PREVIOUS);
+			
+		} catch (IOException e) {
+			log.error("Can't load previousProject.prop : ", e.getMessage(), e);
+		}
 	}
 	
 	private void setDisableApplication(boolean disable){

@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import fr.unilim.automaton.algorithms.AutomatonCreator;
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
 import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
+import fr.unilim.filter.automaton.impl.ResultFilter;
+import fr.unilim.filter.exception.FilterException;
 import fr.unilim.tree.IBinaryTree;
 import fr.unilim.tree.adapter.BinaryTreeJSON;
 
@@ -97,10 +99,23 @@ public class MainGraph {
 		try {
 			IBinaryTree tree = new BinaryTreeJSON(f);
 			AutomatonGraphml a = (AutomatonGraphml) ac.parse(tree, new AutomatonGraphml("automaton"));
+			
 			Graph g = a.getGraph();
 			g.setAttribute("layout.quality", 4);
 			g.setAttribute("layout.weight", 0);
 			Viewer v = g.display();
+			v.enableAutoLayout();
+			Thread.sleep(2000);
+			v.disableAutoLayout();
+			
+			ResultFilter filter = new ResultFilter(a.getFinalStates().get(0).getName());
+			AutomatonGraphml a_filterd = new AutomatonGraphml("filter");
+			filter.doFilter(a, a_filterd);
+			
+			g = a_filterd.getGraph();
+			g.setAttribute("layout.quality", 4);
+			g.setAttribute("layout.weight", 0);
+			v = g.display();
 			v.enableAutoLayout();
 			Thread.sleep(2000);
 			v.disableAutoLayout();
@@ -109,6 +124,9 @@ public class MainGraph {
 		} catch (AlgorithmStateException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FilterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

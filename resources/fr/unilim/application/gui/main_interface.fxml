@@ -45,7 +45,21 @@
       </MenuBar>
    </top>
    <center>
-      <Pane fx:id="pGraph" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <SplitPane dividerPositions="0.5">
+         <items>
+            <Pane fx:id="pGraph" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="345.0" prefWidth="259.0" />
+            <VBox fx:id="vbRight" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+               <children>
+                  <Label text="Final States">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="lFinalStates" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+               </children>
+            </VBox>
+         </items>
+      </SplitPane>
    </center>
    <bottom>
       <GridPane prefHeight="24.0" prefWidth="600.0" BorderPane.alignment="CENTER">
