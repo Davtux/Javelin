@@ -80,6 +80,8 @@ local.properties
 # Code Recommenders
 .recommenders/
 
+# Eclipse ClassPath
+.classpath
 generatedsrc/
 /target/
 ProjetM1.conf
