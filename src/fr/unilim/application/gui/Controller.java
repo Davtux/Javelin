@@ -1,7 +1,6 @@
 package fr.unilim.application.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,21 +34,18 @@ import fr.unilim.automaton.algorithms.AutomatonCreator;
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
 import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
 import fr.unilim.automaton.graphstream.io.OutputGraphStream;
-import fr.unilim.automaton.models.IAutomaton;
 import fr.unilim.automaton.models.State;
 import fr.unilim.concolic.Master;
 import fr.unilim.tree.IBinaryTree;
 import fr.unilim.tree.adapter.BinaryTreeJSON;
 import fr.unilim.utils.FileUtil;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -83,13 +79,13 @@ public class Controller {
 	private Parent parent;
 	
 	@FXML
-	private Menu mnPreviousProject;
-	private List<String> previousProjects = new ArrayList<>();
-	@FXML
 	private TextField tfProject;
 
 	@FXML
 	private MenuItem imOpen;
+	@FXML
+	private Menu mnPreviousProject;
+	private List<String> previousProjects = new ArrayList<>();
 	@FXML
 	private MenuItem imConfiguration;
 	@FXML
@@ -127,21 +123,22 @@ public class Controller {
 			alert.setHeaderText("Configuration");
 			alert.setContentText("No configuation file found (" + APP_FILE_CONFIG + ")\n"
 					+ "You can configure application in File > Configuration");
+			alert.setResizable(true);
+			alert.getDialogPane().setMinWidth(450.0);
 			alert.showAndWait();
 			setDisableApplication(true);
-			return;
+		}else{
+			try {
+				Config.loadConfigFile(APP_FILE_CONFIG);
+			} catch (IOException e) {
+				log.error("Can't load configuration ({})", APP_FILE_CONFIG, e);
+				ExceptionDialog.showException(e);
+				setDisableApplication(true);
+			}
+			loadPreviousProjects();
+			updateMenuPreviousProjects();
+			setDisableApplicationProject(true);
 		}
-		
-		try {
-			Config.loadConfigFile(APP_FILE_CONFIG);
-		} catch (IOException e) {
-			log.error("Can't load configuration ({})", APP_FILE_CONFIG, e);
-			ExceptionDialog.showException(e);
-			setDisableApplication(true);
-		}
-		loadPreviousProjects();
-		updateMenuPreviousProjects();
-		setDisableApplicationProject(true);
 		
 		itemsFinalStates = FXCollections.observableArrayList();
 		lFinalStates.setItems(itemsFinalStates);
@@ -187,7 +184,13 @@ public class Controller {
         			);
         			statusBarEtat.textProperty().bind(filterTask.messageProperty());
         			new Thread(filterTask).start();
-            });
+        });
+        pGraph.widthProperty().addListener(
+        		(ObservableValue<? extends Number> ov, 
+                    Number old_val, Number new_val) -> {
+                    	if(graph != null)
+                    		createGraphView(graph);
+        });
 	}
 	
 	@FXML
@@ -232,12 +235,10 @@ public class Controller {
 		controller.setDialogStage(dialogStage);
 
 		dialogStage.showAndWait();
-		
-		imProperties.setDisable(
-				imProperties.isDisable() 
+		setDisableApplication(
+				imOpen.isDisable()
 				? !controller.isOkClicked()
-				: false
-		);
+				: true);
 	}
 	
 	@FXML
@@ -379,6 +380,12 @@ public class Controller {
 		controller.setDialogStage(dialogStage);
 
 		dialogStage.showAndWait();
+		
+		imProperties.setDisable(
+				imProperties.isDisable() 
+				? !controller.isOkClicked()
+				: false
+		);
 	}
 	
 	private void loadProjectConfiguration(File project, File configPath) throws IOException{
@@ -400,11 +407,9 @@ public class Controller {
 	
 	public void stop(){
 		Properties prop = new Properties();
-		try {
-			FileOutputStream out = new FileOutputStream(Controller.class.getResource("previousProject.prop").getFile());
+		try(FileOutputStream out = new FileOutputStream(Controller.class.getResource("previousProject.prop").getFile());
+			) {
 			PropertiesUtil.setPropertyStringList(prop, PROPERTY_PREVIOUS, previousProjects);
-			
-			out.write(32);
 			prop.store(out, null);
 		} catch (FileNotFoundException e) {
 			log.error("Can't load previousProject.prop : ", e.getMessage(), e);
@@ -496,12 +501,9 @@ public class Controller {
 		for(final String f : previousProjects){
 			itemPrevious = new MenuItem(f);
 			mnPreviousProject.getItems().add(itemPrevious);
-			itemPrevious.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
+			itemPrevious.setOnAction((ActionEvent event) -> {
 					currentProjectDir = new File(f);
 					loadProject();
-				}
 			});
 		}
 	}
@@ -522,6 +524,7 @@ public class Controller {
 	
 	private void setDisableApplication(boolean disable){
 		imOpen.setDisable(disable);
+		mnPreviousProject.setDisable(disable);
 	}
 	
 	private void setDisableApplicationProject(boolean disable){
