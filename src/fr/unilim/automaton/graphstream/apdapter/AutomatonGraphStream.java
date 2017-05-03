@@ -24,7 +24,7 @@ import fr.unilim.automaton.models.Transition;
  * Class managing the automaton.
  *
  */
-public class AutomatonGrapStream implements IAutomaton {
+public class AutomatonGraphStream implements IAutomaton {
 	
 	private Logger log = LoggerFactory.getLogger(getClass());
 
@@ -40,7 +40,7 @@ public class AutomatonGrapStream implements IAutomaton {
 	 * Automaton builder 
 	 * @param name : name of the automaton
 	 */
-	public AutomatonGrapStream(String name){
+	public AutomatonGraphStream(String name){
 		this.graph = new SingleGraph(name); // MutliGraph for prevent EdgeRejetedException
 		this.enableHQ();
 		this.side = true;
