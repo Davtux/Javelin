@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.unilim.automaton.algorithms.AutomatonCreator;
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
-import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
+import fr.unilim.automaton.graphstream.apdapter.AutomatonGrapStream;
 import fr.unilim.filter.automaton.impl.ResultFilter;
 import fr.unilim.filter.exception.FilterException;
 import fr.unilim.tree.IBinaryTree;
@@ -98,7 +98,7 @@ public class MainGraph {
 		FileInputStream f = new FileInputStream("test/resources/test_arrays_m4.json");
 		try {
 			IBinaryTree tree = new BinaryTreeJSON(f);
-			AutomatonGraphml a = (AutomatonGraphml) ac.parse(tree, new AutomatonGraphml("automaton"));
+			AutomatonGrapStream a = (AutomatonGrapStream) ac.parse(tree, new AutomatonGrapStream("automaton"));
 			
 			Graph g = a.getGraph();
 			g.setAttribute("layout.quality", 4);
@@ -109,7 +109,7 @@ public class MainGraph {
 			v.disableAutoLayout();
 			
 			ResultFilter filter = new ResultFilter(a.getFinalStates().get(0).getName());
-			AutomatonGraphml a_filterd = new AutomatonGraphml("filter");
+			AutomatonGrapStream a_filterd = new AutomatonGrapStream("filter");
 			filter.doFilter(a, a_filterd);
 			
 			g = a_filterd.getGraph();

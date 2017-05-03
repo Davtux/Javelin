@@ -13,7 +13,7 @@ import org.json.simple.parser.ParseException;
 import fr.unilim.Config;
 import fr.unilim.automaton.algorithms.AutomatonCreator;
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
-import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
+import fr.unilim.automaton.graphstream.apdapter.AutomatonGrapStream;
 import fr.unilim.concolic.Master;
 import fr.unilim.concolic.exception.ConcolicExecutionException;
 import fr.unilim.tree.IBinaryTree;
@@ -54,7 +54,7 @@ public class MainGlobal {
 		try {
 			
 			IBinaryTree tree = new BinaryTreeJSON(f);
-			AutomatonGraphml a = (AutomatonGraphml) ac.parse(tree, new AutomatonGraphml("automaton"));
+			AutomatonGrapStream a = (AutomatonGrapStream) ac.parse(tree, new AutomatonGrapStream("automaton"));
 			Graph g = a.getGraph();
 			g.setAttribute("layout.quality", 4);
 			g.setAttribute("layout.weight", 0);

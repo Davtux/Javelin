@@ -32,7 +32,7 @@ import fr.unilim.application.gui.util.ExceptionDialog;
 import fr.unilim.application.gui.util.PropertiesUtil;
 import fr.unilim.automaton.algorithms.AutomatonCreator;
 import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
-import fr.unilim.automaton.graphstream.apdapter.AutomatonGraphml;
+import fr.unilim.automaton.graphstream.apdapter.AutomatonGrapStream;
 import fr.unilim.automaton.graphstream.io.OutputGraphStream;
 import fr.unilim.automaton.models.State;
 import fr.unilim.concolic.Master;
@@ -99,7 +99,7 @@ public class Controller {
 	private JPanel panelGraph;
 	private Viewer viewer;
 	private Graph graph;
-	private AutomatonGraphml automaton;
+	private AutomatonGrapStream automaton;
 	
 	@FXML
 	private ListView<String> lFinalStates;
@@ -158,7 +158,7 @@ public class Controller {
             			return;
             		}
         			ResultFilterTask filterTask = new ResultFilterTask();
-        			AutomatonGraphml dest = new AutomatonGraphml("filtered_graph");
+        			AutomatonGrapStream dest = new AutomatonGrapStream("filtered_graph");
         			filterTask.setResults(listResults);
         			filterTask.setDestination(dest);
         			filterTask.setOrigin(automaton);
@@ -436,7 +436,7 @@ public class Controller {
 		
 		try {		
 			IBinaryTree tree = new BinaryTreeJSON(f);
-			automaton = (AutomatonGraphml) ac.parse(tree, new AutomatonGraphml("automaton"));
+			automaton = (AutomatonGrapStream) ac.parse(tree, new AutomatonGrapStream("automaton"));
 			graph = automaton.getGraph();
 			
 			itemsFinalStates.clear();
