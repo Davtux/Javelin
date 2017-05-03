@@ -56,6 +56,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -94,6 +95,10 @@ public class Controller {
 	private MenuItem imStartGeneration;
 	@FXML
 	private MenuItem imProperties;
+	@FXML
+	private MenuItem mDisplay;
+	@FXML
+	private CheckMenuItem imAutoLayout;
 	@FXML
 	private Pane pGraph;
 	private JPanel panelGraph;
@@ -243,6 +248,7 @@ public class Controller {
 	
 	@FXML
 	private void startGeneration(){
+		mDisplay.setDisable(true);
 		try {
 			loadProjectConfiguration(currentProjectDir, new File( currentProjectDir, PROJECT_FILE_CONFIG));
 		} catch (IOException e) {
@@ -388,6 +394,19 @@ public class Controller {
 		);
 	}
 	
+	@FXML
+	public void autoLayout(ActionEvent event){
+		if(viewer == null){
+			return;
+		}
+		CheckMenuItem menuItem = (CheckMenuItem) event.getSource();
+		if(menuItem.isSelected()){
+			viewer.enableAutoLayout();
+		}else{
+			viewer.disableAutoLayout();
+		}
+	}
+	
 	private void loadProjectConfiguration(File project, File configPath) throws IOException{
 		Properties prop = new Properties();
 		FileInputStream input = new FileInputStream(configPath);
@@ -478,6 +497,9 @@ public class Controller {
 		SwingNode graphViewer = new SwingNode();
 		graphViewer.setContent(panelGraph);
 		pGraph.getChildren().add(graphViewer);
+		
+		mDisplay.setDisable(false);
+		imAutoLayout.setSelected(true);
 	}
 	
 	private void updatePreviousProjects(File dir) {

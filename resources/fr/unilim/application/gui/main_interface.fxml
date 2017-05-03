@@ -36,6 +36,11 @@
               <MenuItem fx:id="imProperties" mnemonicParsing="false" onAction="#properties" text="Properties" />
             </items>
           </Menu>
+            <Menu fx:id="mDisplay" disable="true" mnemonicParsing="false" text="Display">
+               <items>
+                  <CheckMenuItem fx:id="imAutoLayout" mnemonicParsing="false" onAction="#autoLayout" selected="true" text="Auto layout" />
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
