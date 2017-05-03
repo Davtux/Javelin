@@ -238,7 +238,7 @@ public class Controller {
 		setDisableApplication(
 				imOpen.isDisable()
 				? !controller.isOkClicked()
-				: true);
+				: false);
 	}
 	
 	@FXML
