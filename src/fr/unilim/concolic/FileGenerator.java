@@ -55,6 +55,7 @@ public class FileGenerator {
 		   	root.put("main_conf_name", "../"+Config.JPF_MAIN_CONF_NAME);
 		   	root.put("packageName", packageName);
 		   	root.put("appletClsName", appletClsName);
+		   	root.put("apiJarPath", Config.getJavacardApiJarPath());
 		    	
 			tmpl.process(root, writer);
 			
