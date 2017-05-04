@@ -16,7 +16,7 @@ public class Config {
 	
 	private static final Logger log = LoggerFactory.getLogger(Config.class);
 
-	public static final String TALOS_SRC_FOLDER = "SUT/src/fr/unilim/talos/";
+	public static final String TALOS_SRC_FOLDER = "SUT/src/fr/unilim/javelin/";
 	public static final String SUT_SRC_FOLDER = "SUT/src/";
 	public static final String SUT_BIN_FOLDER = "SUT/build/";
 	public static final String LOG_DIR ="logs";

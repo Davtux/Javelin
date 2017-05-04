@@ -1,4 +1,4 @@
- package fr.unilim.talos;
+ package fr.unilim.javelin;
 
 import ${packageName}.${appletClsName};
 import javacard.framework.ISOException;
