@@ -12,7 +12,8 @@ Use ```install-jdart.sh```
 See [Jdart's README.md](https://github.com/psycopaths/jdart/blob/master/README.md)
 
 ## Step 2
-Start Javelin.
+Start Javelin (The main class is fr.unilim.application.gui.MainUI).
+
 Go to File -> Configuration.
 
 - In "Javacard api.jar" put api_modify.jar path.
