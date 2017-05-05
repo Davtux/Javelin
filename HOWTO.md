@@ -2,7 +2,7 @@
 Javelin - HOW TO
 ==================
 
-## Step 1 :
+## Step 1
 Install Jdart
 
 ### Linux
@@ -20,6 +20,7 @@ Go to File -> Configuration.
 
 ## Step 3
 Open a Javacard project (File -> Open)
+
 In project properties (Project -> Properties):
 
   - In "Source folder" put name of source folder (ex: src/)
@@ -30,4 +31,4 @@ In project properties (Project -> Properties):
 ## Step 4
 Run automaton generation : Projet -> Start generation
 
-Enjoy !!!
+Enjoy!
