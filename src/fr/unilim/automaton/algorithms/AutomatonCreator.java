@@ -8,6 +8,7 @@ import fr.unilim.automaton.algorithms.exception.AlgorithmStateException;
 import fr.unilim.automaton.models.IAutomaton;
 import fr.unilim.automaton.models.StateNotFoundException;
 import fr.unilim.automaton.utils.ConditionInverter;
+import fr.unilim.automaton.utils.ConditionValueToHex;
 import fr.unilim.counter.Counter;
 import fr.unilim.tree.IBinaryTree;
 
@@ -66,7 +67,8 @@ public class AutomatonCreator {
 		}
 		
 		String decision = tree.getValues().get(NAME_DECISION);
-		automaton.addTransition(currentState, counter.nextString(), decision, newState);
+		automaton.addTransition(currentState, counter.nextString(), 
+				ConditionValueToHex.transform(decision), newState);
 		constructAutomaton(trueChild, newState, automaton);
 		
 		IBinaryTree falseChild = tree.getRight();
@@ -81,7 +83,8 @@ public class AutomatonCreator {
 			automaton.addState(newState, "");
 		}
 		
-		automaton.addTransition(currentState, counter.nextString(), ConditionInverter.invertCondition(decision), newState); 
+		automaton.addTransition(currentState, counter.nextString(), 
+				ConditionValueToHex.transform(ConditionInverter.invertCondition(decision)), newState); 
 		constructAutomaton(falseChild, newState, automaton);
 		
 	}
