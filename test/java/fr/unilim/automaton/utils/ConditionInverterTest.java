@@ -13,10 +13,25 @@ public class ConditionInverterTest {
 		String expected = "!a || !b";
 		assertEquals(expected, ConditionInverter.invertCondition(test));		
 	}
+	
 	@Test
 	public void testOR() {
 		String test = "a || b";
 		String expected = "!a && !b";
+		assertEquals(expected, ConditionInverter.invertCondition(test));		
+	}
+	
+	@Test
+	public void testDoubleInf() {
+		String test = "b < a << 8";
+		String expected = "b >= a << 8";
+		assertEquals(expected, ConditionInverter.invertCondition(test));		
+	}
+	
+	@Test
+	public void testDoubleSup() {
+		String test = "b > a >> 8";
+		String expected = "b <= a >> 8";
 		assertEquals(expected, ConditionInverter.invertCondition(test));		
 	}
 	

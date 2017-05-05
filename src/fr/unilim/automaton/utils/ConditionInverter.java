@@ -67,7 +67,7 @@ public class ConditionInverter {
 	private static String invertAtomicCondition(String conditionToInvert){
 		String converted;
 		for(Entry<String, String> entry : INVERSE.entrySet()){
-			converted = conditionToInvert.replaceAll(entry.getKey(), entry.getValue());
+			converted = conditionToInvert.replaceFirst(entry.getKey(), entry.getValue());
 			if(!converted.equals(conditionToInvert))
 				return converted;
 		}
