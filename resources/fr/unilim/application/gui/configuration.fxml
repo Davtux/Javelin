@@ -20,7 +20,7 @@
             <Label prefHeight="17.0" prefWidth="114.0" text="Javacard api.jar" />
             <TextField fx:id="tfAPI" disable="true" editable="false" GridPane.columnIndex="1" />
             <Button fx:id="btnAPI" mnemonicParsing="false" onAction="#selectAPI" text="..." GridPane.columnIndex="2" />
-            <Label text="Path z3" GridPane.rowIndex="1" />
+            <Label text="Path z3/build" GridPane.rowIndex="1" />
             <TextField fx:id="tfZ3" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button fx:id="btnZ3" mnemonicParsing="false" onAction="#selectZ3" text="..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
