@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.unilim.utils.FileUtil;
+import fr.unilim.utils.os.OSValidator;
 
 public class Config {
 	
@@ -22,7 +23,8 @@ public class Config {
 	public static final String LOG_DIR ="logs";
 	public static final String JPF_CONF_NAME ="SUT/config.jpf";
 	public static final String JPF_MAIN_CONF_NAME ="config/main_config.jpf";
-	public static final String JPF_BIN = "bin/jpf";
+	public static final String JPF_BIN = OSValidator.isWindows() ? "bin/jpf.bat" : "bin/jpf";
+
 	
 	private static final String NAME_JAVACARD_API_JAR_PATH = "JAVACARD_API_JAR_PATH";
 	private static String javacardApiJarPath = null;
