@@ -24,6 +24,7 @@ public class JPFConfigFileReader {
 				String line = in.nextLine();
 				String result = getProperty("jpf-core", line);
 				if (result != null) {
+					result = setUserHome(result);
 					return result;
 				}
 			}
@@ -41,6 +42,7 @@ public class JPFConfigFileReader {
 				String line = in.nextLine();
 				String result = getProperty("jpf-jdart", line);
 				if (result != null) {
+					result = setUserHome(result);
 					return result;
 				}
 			}
@@ -64,6 +66,15 @@ public class JPFConfigFileReader {
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * Replace in properties : ${user.home} by System.properties("user.home");
+	 * @param prop
+	 * @return properties modify.
+	 */
+	private static String setUserHome(String prop){
+		return prop.replace("${user.home}", System.getProperty("user.home"));
 	}
 	
 }
