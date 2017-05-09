@@ -41,8 +41,12 @@ public class JPFRunner {
 		try {
 			
 			//String[] cmd = buildCmd();
-			Process proc = rt.exec(new String[] { jpfExecutable.toString(), propertiesFiles.toString() }, new String[] { "LD_LIBRARY_PATH="+z3Path});
-
+			//Process proc = rt.exec(new String[] { jpfExecutable.toString(), propertiesFiles.toString() }, new String[] { "LD_LIBRARY_PATH="+z3Path});
+			Process proc = rt.exec(new String[] 
+					{"java", "-Xmx1024m", "-ea", "-jar",
+							JPFConfigFileReader.getJPFPath() + "/build/RunJPF.jar",  propertiesFiles.toString()},
+					new String[] { "LD_LIBRARY_PATH="+z3Path});
+			
 			BufferedReader stdInput = new BufferedReader(new 
 			     InputStreamReader(proc.getInputStream()));
 			
