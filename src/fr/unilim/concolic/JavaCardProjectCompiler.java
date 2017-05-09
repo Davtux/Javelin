@@ -14,12 +14,20 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
+import org.jfree.util.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.unilim.Config;
 import fr.unilim.concolic.exception.CompileException;
 import fr.unilim.concolic.exception.NoJDKException;
+import fr.unilim.utils.os.OSValidator;
+import fr.unilim.utils.os.UnsupportedOS;
 
 
 public class JavaCardProjectCompiler {
+	
+	private final static Logger log = LoggerFactory.getLogger(JavaCardProjectCompiler.class);
 	
 	private JavaCardProjectCompiler(){}
 
@@ -32,8 +40,9 @@ public class JavaCardProjectCompiler {
 	 * @throws IOException If a file cannot be found
 	 * @throws NoJDKException If we can't find a JDK on the system
 	 * @throws CompileException If errors occured while compiling
+	 * @throws UnsupportedOS  If os is unknowned
 	 */
-	public static void compile(Path mainClassPath, Path outputPath, Path packageTopLevel) throws IOException, NoJDKException, CompileException {
+	public static void compile(Path mainClassPath, Path outputPath, Path packageTopLevel) throws IOException, NoJDKException, CompileException, UnsupportedOS {
 		File[] files = { mainClassPath.toFile() };
 
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
@@ -44,7 +53,7 @@ public class JavaCardProjectCompiler {
 		
 		String apiJar = Config.getJavacardApiJarPath();
 		String annotationPath = Paths.get(JPFConfigFileReader.getJDartPath(), "src", "annotations").toString();
-		String sourcepathParam = String.join(":", packageTopLevel.toString(), annotationPath);
+		String sourcepathParam = String.join(getClasspathSeparator(), packageTopLevel.toString(), annotationPath);
 		
 		String[] params = {
 			"-d", outputPath.toString(),
@@ -67,6 +76,18 @@ public class JavaCardProjectCompiler {
 	    }
 		
 		fileManager.close();
+	}
+	
+	private static String getClasspathSeparator() throws UnsupportedOS{
+		if(OSValidator.isUnix()){
+			log.info("Detected os : is Unix");
+			return ":";
+		}
+		if(OSValidator.isWindows()){
+			log.info("Detected os : is Windows");
+			return ";";
+		}
+		throw new UnsupportedOS("Unknown classpath séparator for os : " + OSValidator.OS);
 	}
 
 }

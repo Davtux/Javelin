@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import fr.unilim.concolic.JavaCardProjectCompiler;
 import fr.unilim.concolic.exception.CompileException;
 import fr.unilim.concolic.exception.NoJDKException;
+import fr.unilim.utils.os.UnsupportedOS;
 
 public class MainTester {
 
@@ -19,7 +20,8 @@ public class MainTester {
 		} catch (NoJDKException e) {
 			
 		} catch (CompileException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedOS e) {
 			e.printStackTrace();
 		}
 	}

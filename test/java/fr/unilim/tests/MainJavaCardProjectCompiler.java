@@ -8,6 +8,7 @@ import fr.unilim.concolic.JPFConfigFileReader;
 import fr.unilim.concolic.JavaCardProjectCompiler;
 import fr.unilim.concolic.exception.CompileException;
 import fr.unilim.concolic.exception.NoJDKException;
+import fr.unilim.utils.os.UnsupportedOS;
 
 public class MainJavaCardProjectCompiler {
 
@@ -30,6 +31,8 @@ public class MainJavaCardProjectCompiler {
 		} catch (NoJDKException e) {
 			e.printStackTrace();
 		} catch (CompileException e) {
+			e.printStackTrace();
+		} catch (UnsupportedOS e) {
 			e.printStackTrace();
 		}
 	}

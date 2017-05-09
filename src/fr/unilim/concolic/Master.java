@@ -13,6 +13,7 @@ import fr.unilim.Config;
 import fr.unilim.concolic.exception.CompileException;
 import fr.unilim.concolic.exception.ConcolicExecutionException;
 import fr.unilim.concolic.exception.NoJDKException;
+import fr.unilim.utils.os.UnsupportedOS;
 
 /**
  * Master class delegating file generation and running JPF to other classes
@@ -90,6 +91,9 @@ public class Master {
 					throw new ConcolicExecutionException("Errors occured while compiling the SUT.", e);
 			} catch (IOException | NoJDKException e) {
 				l.error("Cannot compile SUT.", e);
+				throw new ConcolicExecutionException("Cannot compile SUT : " + e.getMessage(), e);
+			} catch (UnsupportedOS e) {
+				l.error(e.getMessage(), e);
 				throw new ConcolicExecutionException("Cannot compile SUT : " + e.getMessage(), e);
 			}
 		}else{
