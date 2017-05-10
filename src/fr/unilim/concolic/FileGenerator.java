@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.unilim.Config;
+import fr.unilim.utils.os.OSValidator;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -55,7 +56,10 @@ public class FileGenerator {
 		   	root.put("main_conf_name", "../"+Config.JPF_MAIN_CONF_NAME);
 		   	root.put("packageName", packageName);
 		   	root.put("appletClsName", appletClsName);
-		   	root.put("apiJarPath", "${jpf-core.classpath};\\\n" + Config.getJavacardApiJarPath());
+		   	root.put("apiJarPath", "${jpf-core.classpath};\\\n" + 
+		   			(OSValidator.isUnix() 
+		   					? Config.getJavacardApiJarPath() 
+		   							: Config.getJavacardApiJarPath().replace("\\", "\\\\")));
 		    	
 			tmpl.process(root, writer);
 			
