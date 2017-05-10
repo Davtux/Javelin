@@ -4,6 +4,7 @@ import java.nio.file.Paths;
 
 import fr.unilim.Config;
 import fr.unilim.concolic.Master;
+import fr.unilim.jacacoco.application.gui.concurrent.TaskException;
 import javafx.concurrent.Task;
 
 public class MasterTask extends Task<Void> {
@@ -13,7 +14,9 @@ public class MasterTask extends Task<Void> {
 	@Override
 	protected Void call() throws Exception {
 		updateMessage("Running...");
-		this.master.execute(Paths.get(Config.getZ3BuildPath()));
+		if(! this.master.execute(Paths.get(Config.getZ3BuildPath()))){
+			throw new TaskException("Error during generation.");
+		}
 		updateMessage("Done");
 		return null;
 	}
