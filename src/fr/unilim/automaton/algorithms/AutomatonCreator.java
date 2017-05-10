@@ -55,6 +55,9 @@ public class AutomatonCreator {
 		
 		String newState;
 		IBinaryTree trueChild = tree.getLeft();
+		if(trueChild == null){
+			return;
+		}
 		
 		if(trueChild.containsKey(NAME_RESULT)){
 			newState = trueChild.getValues().get(NAME_RESULT);
@@ -72,6 +75,10 @@ public class AutomatonCreator {
 		constructAutomaton(trueChild, newState, automaton);
 		
 		IBinaryTree falseChild = tree.getRight();
+		
+		if(falseChild == null){
+			return;
+		}
 		
 		if(falseChild.containsKey(NAME_RESULT)){
 			newState = falseChild.getValues().get(NAME_RESULT);
