@@ -71,7 +71,7 @@ public class Controller {
 	
 	public static final String APP_FILE_CONFIG = "Javelin.conf";
 	public static final String PROJECT_FILE_CONFIG = ".javelin";
-	public static final String VALUES_FILE = "SUT/values.txt";
+	public static final String VALUES_FILE = Paths.get("SUT", "values.txt").toString();
 	
 	private static final String PROPERTY_PREVIOUS = "PREVIOUS";
 	
@@ -446,7 +446,7 @@ public class Controller {
 		
 		FileInputStream f = null;
 		try {
-			f = new FileInputStream("SUT/config.jpf.json");
+			f = new FileInputStream(Paths.get("SUT", "config.jpf.json").toFile());
 		} catch (FileNotFoundException e1) {
 			log.error("Can't load generated file.", e1);
 			ExceptionDialog.showException(e1);
