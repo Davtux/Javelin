@@ -54,16 +54,16 @@ public class JPFRunner {
 			     InputStreamReader(proc.getErrorStream()));
 			
 			// read the output from the command
-			System.out.println("Here is the standard output of JPF:\n");
+			l.info("Here is the standard output of JPF:\n");
 			String s = null;
 			while ((s = stdInput.readLine()) != null) {
-			    System.out.println(s);
+			    l.info(s);
 			}
 			
 			// read any errors from the attempted command
-			System.out.println("Here is the standard error of JPF (if any):\n");
+			l.info("Here is the standard error of JPF (if any):\n");
 			while ((s = stdError.readLine()) != null) {
-			    System.out.println(s);
+			    l.error(s);
 			}
 
 			proc.waitFor();
