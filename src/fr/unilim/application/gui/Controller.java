@@ -506,8 +506,12 @@ public class Controller {
 	}
 	
 	private void createGraphView(){
-		if(viewer != null){
+		if(pGraph != null){
 			pGraph.getChildren().clear();
+		}
+		if(panelGraph != null){
+			panelGraph.removeAll();
+			panelGraph = null;
 		}
 		
 		final SwingNode graphViewer = new SwingNode();
@@ -528,8 +532,10 @@ public class Controller {
 						return;
 					}
 					
-					viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
-					viewer.enableAutoLayout();
+					if(viewer == null){
+						viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+						viewer.enableAutoLayout();
+					}
 					View view = viewer.addDefaultView(false);
 					panelGraph = new JPanel();
 					panelGraph.setLayout(new BorderLayout());
