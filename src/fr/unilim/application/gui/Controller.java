@@ -211,6 +211,17 @@ public class Controller {
                     		}
                     	}
         });
+        pGraph.heightProperty().addListener(
+        		(ObservableValue<? extends Number> ov, 
+                    Number old_val, Number new_val) -> {
+                    	if(graph != null){
+                    		if(new_val.doubleValue() > 100.0){
+                    			callCreateGraphView();                    			
+                    		}else{
+                    			this.timelineCreateGraphView.stop();
+                    		}
+                    	}
+        });
 	}
 	
 	@FXML
