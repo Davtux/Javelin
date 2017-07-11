@@ -17,6 +17,8 @@ public class MainUI extends Application{
 
 	@Override
     public void start(Stage primaryStage) throws Exception {
+		System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+		
 		Parent root = null;
 		try{
 			FXMLLoader loader = new FXMLLoader(Controller.class.getResource("main_interface.fxml"));
