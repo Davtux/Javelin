@@ -1,7 +1,6 @@
 package fr.unilim.application.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,11 +16,9 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.stream.file.FileSinkGML;
-import org.graphstream.ui.view.View;
 import org.graphstream.ui.view.Viewer;
 import org.json.simple.parser.ParseException;
 import org.slf4j.LoggerFactory;
@@ -42,9 +39,6 @@ import fr.unilim.concolic.Master;
 import fr.unilim.tree.IBinaryTree;
 import fr.unilim.tree.adapter.BinaryTreeJSON;
 import fr.unilim.utils.FileUtil;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -58,11 +52,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -70,7 +64,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class Controller {
 	
@@ -112,7 +105,6 @@ public class Controller {
 	private Viewer viewer;
 	private Graph graph;
 	private AutomatonGraphStream automaton;
-	private Timeline timelineCreateGraphView;
 	
 	@FXML
 	private ListView<String> lFinalStates;
@@ -167,7 +159,7 @@ public class Controller {
             		}
             		if(listResults.isEmpty()){
             			graph = automaton.getGraph();
-    					createGraphView();
+    					createGraphView(graph);
             			return;
             		}
         			ResultFilterTask filterTask = new ResultFilterTask();
@@ -180,7 +172,7 @@ public class Controller {
         				(WorkerStateEvent event) -> {
         					statusBarProgressBar.setVisible(false);
         					graph = dest.getGraph();
-        					createGraphView();
+        					createGraphView(graph);
         				}
         			);
         			filterTask.setOnRunning(
@@ -198,29 +190,11 @@ public class Controller {
         			statusBarEtat.textProperty().bind(filterTask.messageProperty());
         			new Thread(filterTask).start();
         });
-
-        
         pGraph.widthProperty().addListener(
         		(ObservableValue<? extends Number> ov, 
                     Number old_val, Number new_val) -> {
-                    	if(graph != null){
-                    		if(new_val.doubleValue() > 100.0){
-                    			callCreateGraphView();                    			
-                    		}else{
-                    			this.timelineCreateGraphView.stop();
-                    		}
-                    	}
-        });
-        pGraph.heightProperty().addListener(
-        		(ObservableValue<? extends Number> ov, 
-                    Number old_val, Number new_val) -> {
-                    	if(graph != null){
-                    		if(new_val.doubleValue() > 100.0){
-                    			callCreateGraphView();                    			
-                    		}else{
-                    			this.timelineCreateGraphView.stop();
-                    		}
-                    	}
+                    	if(graph != null)
+                    		createGraphView(graph);
         });
 	}
 	
@@ -288,7 +262,7 @@ public class Controller {
 			(WorkerStateEvent event) -> {
 				createAutomaton();
 				statusBarProgressBar.setVisible(false);
-				createGraphView();
+				createGraphView(graph);
 			}
 		);
 		masterTask.setOnRunning(
@@ -505,62 +479,27 @@ public class Controller {
 		}
 	}
 	
-	private void createGraphView(){
-		if(pGraph != null){
-			pGraph.getChildren().clear();
+	private void createGraphView(Graph graph){
+		if(viewer != null){
+			viewer = null;
 		}
 		if(panelGraph != null){
-			panelGraph.removeAll();
-			panelGraph = null;
+			pGraph.getChildren().remove(0);
 		}
 		
-		final SwingNode graphViewer = new SwingNode();
-		createSwingComponents(graphViewer);
+		viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
+		viewer.enableAutoLayout();
+		JPanel view = viewer.addDefaultView(false);
+		panelGraph = new JPanel();
+		panelGraph.setLayout(new BorderLayout());
+		panelGraph.add(view);
+		panelGraph.setPreferredSize(new Dimension((int)pGraph.getWidth(), (int)pGraph.getHeight()));
+		SwingNode graphViewer = new SwingNode();
+		graphViewer.setContent(panelGraph);
 		pGraph.getChildren().add(graphViewer);
 		
 		mDisplay.setDisable(false);
 		imAutoLayout.setSelected(true);
-	}
-	
-	private void createSwingComponents(final SwingNode graphViewer){
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				try{
-					if(graph == null){
-						return;
-					}
-					
-					if(viewer == null){
-						viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
-						viewer.enableAutoLayout();
-					}
-					View view = viewer.addDefaultView(false);
-					panelGraph = new JPanel();
-					panelGraph.setLayout(new BorderLayout());
-					panelGraph.add((Component)view);
-					panelGraph.setSize(new Dimension((int)pGraph.getWidth(), (int)pGraph.getHeight()));
-					((JPanel)view).setPreferredSize(new Dimension((int)pGraph.getWidth(), (int)pGraph.getHeight()));
-					graphViewer.setContent(panelGraph);
-				} catch(Exception e) {
-					log.info("Swing is bad !", e);
-				}
-			}
-		});
-	}
-	
-	private synchronized void callCreateGraphView() {
-		if(this.timelineCreateGraphView == null){
-			this.timelineCreateGraphView = new Timeline(new KeyFrame(
-					Duration.millis(250),
-					ae -> createGraphView()));
-		}
-		if(this.timelineCreateGraphView.getStatus() == Animation.Status.RUNNING){
-			return;
-		}
-		
-		this.timelineCreateGraphView.play();
 	}
 	
 	private void updatePreviousProjects(File dir) {
