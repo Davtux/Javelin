@@ -1,7 +1,14 @@
-
-Javelin - HOW TO
-==================
-
+# Javelin
+**Keywords:**  Java Card, Testing, Concolic execution, Symbolic execution, JDart, JPF.
+## Overview
+Javelin is a Java based tool that helps testers to perform advanced analyses on Java Card applets, by providing a **concolic execution** environment and an awesome graph representing the program's path tree.
+Javelin is based on [JDart](https://github.com/psycopaths/jdart) a tool for performing concolic execution on a Java program.
+## Motivation
+This project was created as a Master degree project at University of Limoges. While working on Java Card applets, we quickly discovered the lack of an efficient testing tool on that environment.
+We will maintain this project by providing updates when needed. So please feel free to contribute.
+## Build status
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=flat-square)]()
+# Install & Run
 ## Step 1
 Install Jdart
 
@@ -33,3 +40,6 @@ In project properties (Project -> Properties):
 Run automaton generation : Projet -> Start generation
 
 Enjoy!
+
+## Contribute
+ This project is under an Open Source licence, please don't hesitate to contribute. We will do out best in order to fix all issues reported.
