@@ -39,8 +39,8 @@ public class JavaCardProjectCompiler {
 	 * @return True if the compilation was successful, False otherwise
 	 * @throws IOException If a file cannot be found
 	 * @throws NoJDKException If we can't find a JDK on the system
-	 * @throws CompileException If errors occured while compiling
-	 * @throws UnsupportedOS  If os is unknowned
+	 * @throws CompileException If errors occurred while compiling
+	 * @throws UnsupportedOS  If os is unknown
 	 */
 	public static void compile(Path mainClassPath, Path outputPath, Path packageTopLevel) throws IOException, NoJDKException, CompileException, UnsupportedOS {
 		File[] files = { mainClassPath.toFile() };
@@ -87,7 +87,7 @@ public class JavaCardProjectCompiler {
 			log.info("Detected os : is Windows");
 			return ";";
 		}
-		throw new UnsupportedOS("Unknown classpath séparator for os : " + OSValidator.OS);
+		throw new UnsupportedOS("Unknown classpath sÃ©parator for os : " + OSValidator.OS);
 	}
 
 }
