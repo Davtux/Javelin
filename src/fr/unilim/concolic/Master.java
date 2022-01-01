@@ -28,7 +28,7 @@ public class Master {
 	private static final Logger l = LoggerFactory.getLogger(Master.class);
 	
 	/**
-	 * The Path were the project under test is located
+	 * The Path where the project under test is located
 	 */
 	private Path projectPath;
 	
