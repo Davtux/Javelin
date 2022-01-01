@@ -42,4 +42,4 @@ Run automaton generation : Projet -> Start generation
 Enjoy!
 
 ## Contribute
- This project is under an Open Source licence, please don't hesitate to contribute. We will do out best in order to fix all issues reported.
+ This project is under an Open Source licence, please don't hesitate to contribute. We will do our best in order to fix all issues reported.
